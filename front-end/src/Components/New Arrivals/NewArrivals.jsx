@@ -5,8 +5,8 @@ import NewArrivalsCard from '../Cards/NewArrivalsCard';
 
 const NewArrivals = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [imageIndex, setImageIndex] = useState(New_Arrivals.map(() => 0)); // Track image index for each item
     const [direction, setDirection] = useState('');
-    const [isFlipped, setIsFlipped] = useState(false);
     const cardsToShow = 4;
     const handleNext = (e) => {
         e.preventDefault();
@@ -21,6 +21,21 @@ const NewArrivals = () => {
             setCurrentIndex(currentIndex - 1)
         }
     }
+
+
+    const nextPicture = (itemIndex) => {
+        setImageIndex((prev) =>
+            prev.map((index, i) => (i === itemIndex ? (index + 1) % New_Arrivals[itemIndex].images.length : index))
+        );
+        console.log(imageIndex)
+    };
+
+    const prevPicture = (itemIndex) => {
+        setImageIndex((prev) =>
+            prev.map((index, i) => (i === itemIndex ? (index - 1 + New_Arrivals[itemIndex].images.length) % New_Arrivals[itemIndex].images.length : index))
+        );
+        console.log(imageIndex)
+    };
 
     return (
         <section className='px-4 sm:px-[5vw] md:px-[7cw] gl:px=[9vw] '>
@@ -38,27 +53,32 @@ const NewArrivals = () => {
                                 />
                             </span>
                         </div>
-                        <p className='text-center text-darkColor mt-0 mb-2 underline'> View All</p>
+                        <p className='text-center text-darkColor mt-0 mb-2 underline cursor-pointer hover:text-yellow-300 transition-colors duration-200 '> View All</p>
                     </div>
                 </div>
 
                 <div className="flex flex-wrap justify-center">
-                    <div className="md:columns-4 ">
-                        {New_Arrivals.slice(currentIndex, currentIndex + cardsToShow).map((item) => (
-                            <div key={item.id} className="carousel-item bordered">
+                    <div className="md:grid md:grid-cols-4 gap-4">
+                        {New_Arrivals.slice(currentIndex, currentIndex + cardsToShow).map((item, itemIndex) => (
+                            <div className="carousel-item bg-white shadow-sm rounded-lg overflow-hidden relative group">
                                 <NewArrivalsCard
-                                    image={item.images[0]}
+                                    image={item.images[imageIndex[itemIndex]]}
                                     title={item.name}
-                                    classes={"bg-white shadow-sm rounded-lg overflow-hidden gap-0"}
+                                    classes={"bg-white shadow-sm rounded-lg overflow-hidden"}
                                 />
-                                <div className='buttons bordered'>
-                                    <GoChevronLeft className='py-2 px-3 gap-2 rounded-sm cursor-pointer left' />
-                                    <GoChevronRight className='py-2 px-3 gap-2 rounded-sm cursor-pointer right' />
+                                <div className="hidden group-hover:flex justify-between items-center absolute inset-0 transition-opacity duration-500">
+                                    <GoChevronLeft
+                                        className="text-2xl cursor-pointer absolute left-0 top-[45%] bg-[#D4D2D2] w-7 h-7 text-black"
+                                        onClick={() => prevPicture(currentIndex + itemIndex)} // Replace with appropriate function
+                                    />
+                                    <GoChevronRight
+                                        className="text-2xl cursor-pointer absolute right-0 top-[45%] bg-[#D4D2D2] w-7 h-7 text-black"
+                                        onClick={() => nextPicture(currentIndex + itemIndex)} // Replace with appropriate function
+                                    />
                                 </div>
                             </div>
                         ))}
                     </div>
-
                 </div>
             </div>
         </section>
