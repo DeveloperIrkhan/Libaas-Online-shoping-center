@@ -71,7 +71,7 @@ const navigate = useNavigate()
                         <p className='main-heading block md:hidden'>Libaas</p>
                     </div>
                     <ul className='flex items-center gap-2 text-small text-blackColor uppercase'>
-                        <NavLink to={"/login"} className='flex items-center gap-1' >
+                        <NavLink to={"/auth"} className='flex items-center gap-1' >
                             <p className='hidden md:block'>Account</p>
                             <img className='block md:hidden' src={images.AccountIcon} style={{ width: "25px" }} alt="" />
                         </NavLink>

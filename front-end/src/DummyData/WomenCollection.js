@@ -2,7 +2,7 @@ import { images } from "../assets/Images";
 
 export const WomenCollection = [
   {
-    id: 1,
+    _id: 1,
     name: "Women's Butterfly Printed Hoodie - Light Purple",
     images: [
       images.WomenButterflyPrintedHoodie_1,
@@ -13,7 +13,7 @@ export const WomenCollection = [
     OrigionalPrice: 3850
   },
   {
-    id: 2,
+    _id: 2,
     name: "Women's Polka dot Exclusive Hoodie - Red",
     images: [
       images.WomenPOLKADOTHoodieRED_1,
@@ -24,7 +24,7 @@ export const WomenCollection = [
     OrigionalPrice: 3450
   },
   {
-    id: 3,
+    _id: 3,
     name: "Women's Polka dot Exclusive Hoodie - Navy",
     images: [
       images.WomenPOLKADOTHoodieBlue_1,
@@ -35,21 +35,21 @@ export const WomenCollection = [
     OrigionalPrice: 2850
   },
   {
-    id: 4,
+    _id: 4,
     name: "Women's High Waist Boot Cut Flare Jeans - Black",
     images: [images.JeansBlack_1, images.JeansBlack_2, images.JeansBlack_3],
     price: 1250,  
     OrigionalPrice: 2200
   },
   {
-    id: 5,
+    _id: 5,
     name: "Women's High Waist Boot Cut Flare Jeans - White",
     images: [images.JeansWhite_1, images.JeansWhite_2, images.JeansWhite_3],
     price: 1900,
     OrigionalPrice: 2940
   },
   {
-    id: 6,
+    _id: 6,
     name: "Women's Exclusive Printed Pull Over Fleece Hoodie - Black",
     images: [
       images.WomenPrintedFleeceHoodieBlack_1,
@@ -61,7 +61,7 @@ export const WomenCollection = [
   },
 
   {
-    id: 7,
+    _id: 7,
     name: "Women's High Waist Flare Cut Jeans - Black",
     images: [
       images.WomenHighWaistFlareCutJeansBlack_1,
@@ -72,7 +72,7 @@ export const WomenCollection = [
     OrigionalPrice: 3150
   },
   {
-    id: 8,
+    _id: 8,
     name: "Women's High Waist Flare Cut Jeans - Black",
     images: [
       images.WomenHighWaistFlareCutJeansBlack_1,

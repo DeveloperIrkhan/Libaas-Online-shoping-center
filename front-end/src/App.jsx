@@ -5,7 +5,6 @@ import Collection from './Pages/Collection'
 import About from './Pages/About'
 import Cart from './Pages/Cart'
 import Contact from './Pages/Contact'
-import Login from './Pages/Login'
 import MyOrders from './Pages/MyOrders'
 import PlaceOrder from './Pages/PlaceOrder'
 import Product from './Pages/Product'
@@ -17,6 +16,7 @@ import BestSellers from "./Pages/BestSellers"
 import Clothing from "./Pages/Clothing"
 import Accessories from "./Pages/Accessories"
 import Activewear from "./Pages/Activewear"
+import Auth from './Pages/Auth'
 function App() {
 
 
@@ -38,7 +38,7 @@ function App() {
           <Route path='/cart' element={<Cart />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/my-orders' element={<MyOrders />} />
-          <Route path='/login' element={<Login />} />
+          <Route path='/auth' element={<Auth />} />
           <Route path='/products' element={<Product />} />
         </Route>
       </>

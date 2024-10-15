@@ -30,6 +30,8 @@ body {
   --white-color: #ffffff; /* Corrected white color */
 }
 
+
+
 .bordered {
   border: 1px solid red;
 }
@@ -81,12 +83,12 @@ body {
 }
 .small-card {
   width: 170px;
-  height: 300px;
+  height: 320px;
   position: absolute;
   background-color: #ffffff;
   border-radius: 5px;
   right: 80px;
-  bottom: 15%;
+  bottom: 12%;
   transition: transform 0.5s ease, z-index 0.5s ease;
 }
 
@@ -208,4 +210,34 @@ body {
   word-spacing: 0px;
 }
 
+
+.carousel-container {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.carousel-item {
+  /* flex: 0 0 auto; */
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide-next {
+  /* transform: translateX(-100%); */
+  animation: hideandShow 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+.slide-prev {
+  animation: hideandShow 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  /* transform: translateX(100%); */
+}
+@keyframes hideandShow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 /* kids section home page */

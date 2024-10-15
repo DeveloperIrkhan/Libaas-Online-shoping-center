@@ -87,14 +87,14 @@ const KidsShop = () => {
                             <div className="flex flex-col md:flex-row md:columns-2  transition-transform duration-700 ease-in-out">
                                 {
                                     KidsCollection.slice(currentIndexNo, currentIndexNo + ShowItems).map((item) => (
-                                        <div key={item.id}>
+                                        <div key={item._id}>
                                             <KidsShopCard
                                                 classes={''}
-                                                onmouseEnter={() => setHoveredIndex(item.id)}
+                                                onmouseEnter={() => setHoveredIndex(item._id)}
                                                 onmouseOut={() => setHoveredIndex(null)}
-                                                image={hoveredIndex === item.id ? item.images[1] : item.images[0]}
-                                                title={item.name}
-                                                price={item.price}
+                                                image={hoveredIndex === item._id ? item.images[1] : item.images[0]}
+                                            title={item.name}
+                                            price={item.price}
                                             />
                                         </div>
                                     ))

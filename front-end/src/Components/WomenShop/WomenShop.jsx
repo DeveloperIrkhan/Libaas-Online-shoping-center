@@ -10,26 +10,26 @@ const WomenShop = () => {
     const sections = document.querySelectorAll('.scroll-item');
     const triggerOffset = window.innerHeight / 2 * 4; // Adjust the trigger point
     sections.forEach(section => {
-      const textContent = section.querySelector('.text-content');
       const imageContent = section.querySelector('.image-content');
       const sectionTop = section.getBoundingClientRect().top;
-
-      if (sectionTop < triggerOffset) {
-        imageContent.classList.add('opacity-100');
-        imageContent.classList.remove('opacity-0');
-      } else {
-        imageContent.classList.add('opacity-0');
-        imageContent.classList.remove('opacity-100');
+      if (imageContent) {
+        if (sectionTop < triggerOffset) {
+          imageContent.classList.add('opacity-100');
+          imageContent.classList.remove('opacity-0');
+        } else {
+          imageContent.classList.add('opacity-0');
+          imageContent.classList.remove('opacity-100');
+        }
       }
     });
   });
 
   return (
     <div>
-      <div className="scroll-item text-middum text-center wonderland-fonts my-10">Women Shop</div>
+      <div className="scroll-item text-middum text-center wonderland-fonts my-4 md:my-10">Women Shop</div>
       <div className="relative h-full md:h-[800px] md:overflow-scroll py-20 md:py-52 ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-5">
-          <div className="text-center p-20 xl:p-44">
+          <div className="text-center p-3 md:p-16 xl:p-44">
             <div className="text-content
             scroll-auto fa-[18px] font-bold leading-[23px]  align-baseline
              text-blackColor tracking-extra-spacing not-italic uppercase text-center indent-0">
@@ -49,7 +49,7 @@ const WomenShop = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-5">
 
-          <div className="text-center p-20 xl:p-44">
+          <div className="text-center p-3 md:p-16 xl:p-44">
             <div className="text-content
             scroll-auto fa-[18px] font-bold leading-[23px]  align-baseline
              text-blackColor tracking-extra-spacing not-italic uppercase text-center indent-0">
@@ -68,7 +68,7 @@ const WomenShop = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-5">
 
-          <div className="text-center p-20 xl:p-44">
+          <div className="text-center p-3 md:p-16 xl:p-44">
             <div className="text-content
             scroll-auto fa-[18px] font-bold leading-[23px]  align-baseline
              text-blackColor tracking-extra-spacing not-italic uppercase text-center indent-0">

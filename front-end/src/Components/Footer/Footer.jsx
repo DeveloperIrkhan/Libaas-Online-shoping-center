@@ -30,7 +30,7 @@ const Footer = () => {
 
                     <div className='my-4 group'>
                         <div className="group-hover:border-yellow-500 duration-200 flex items-center border-b border-gray-500 py-2">
-                            <input class="appearance-none bg-transparent border-none w-full
+                            <input className="appearance-none bg-transparent border-none w-full
                              text-gray-700 mr-3 py-1 px-2 leading-tight 
                              focus:outline-none" 
                              type="text" 

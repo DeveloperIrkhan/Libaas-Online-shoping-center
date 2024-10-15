@@ -56,7 +56,7 @@ const NewArrivals = () => {
                 </div>
 
                 <div className="flex flex-wrap justify-center">
-                    <div className="md:grid md:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {New_Arrivals.slice(currentIndex, currentIndex + cardsToShow).map((item, itemIndex) => (
                             <div key={`${item.name}-${itemIndex}`} className="carousel-item bg-white shadow-sm rounded-lg overflow-hidden relative group">
                                 <NewArrivalsCard
