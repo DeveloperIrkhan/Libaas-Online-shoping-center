@@ -7,6 +7,9 @@ import SmallCard from '../Components/Cards/SmallCard';
 import { useNavigate } from 'react-router-dom';
 import TextEffect from '../Components/TextEffect';
 import NewArrivals from '../Components/New Arrivals/NewArrivals';
+import KidsShop from '../Components/KidsShop/KidsShop';
+import WomenShop from '../Components/WomenShop/WomenShop';
+import ExtraSection from '../Components/ExtraSection/ExtraSection';
 const Home = () => {
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -57,7 +60,7 @@ const Home = () => {
           <div className="md:columns-3">
             {Collection.slice(currentIndex, currentIndex + cardsToShow).map((item) => (
               <div key={item.id} className="carousel-item">
-                <HomeCard image={item.image} title={item.name} classes={"card max-w-md relative bg-white shadow-lg rounded-sm overflow-hidden gap-2 my-2 md:my-0"}/>
+                <HomeCard image={item.image} title={item.name} classes={"card max-w-md relative bg-white shadow-lg rounded-sm overflow-hidden gap-2 my-2 md:my-0"} />
               </div>
             ))}
           </div>
@@ -88,7 +91,16 @@ const Home = () => {
         <TextEffect />
       </section>
       <section>
-              <NewArrivals/>
+        <NewArrivals />
+      </section>
+      <section>
+        <KidsShop />
+      </section>
+      <section>
+        <WomenShop />
+      </section>
+      <section>
+        <ExtraSection />
       </section>
     </>
   )

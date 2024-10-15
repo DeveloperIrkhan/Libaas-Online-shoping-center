@@ -27,14 +27,12 @@ const NewArrivals = () => {
         setImageIndex((prev) =>
             prev.map((index, i) => (i === itemIndex ? (index + 1) % New_Arrivals[itemIndex].images.length : index))
         );
-        console.log(imageIndex)
     };
 
     const prevPicture = (itemIndex) => {
         setImageIndex((prev) =>
             prev.map((index, i) => (i === itemIndex ? (index - 1 + New_Arrivals[itemIndex].images.length) % New_Arrivals[itemIndex].images.length : index))
         );
-        console.log(imageIndex)
     };
 
     return (
@@ -60,7 +58,7 @@ const NewArrivals = () => {
                 <div className="flex flex-wrap justify-center">
                     <div className="md:grid md:grid-cols-4 gap-4">
                         {New_Arrivals.slice(currentIndex, currentIndex + cardsToShow).map((item, itemIndex) => (
-                            <div className="carousel-item bg-white shadow-sm rounded-lg overflow-hidden relative group">
+                            <div key={`${item.name}-${itemIndex}`} className="carousel-item bg-white shadow-sm rounded-lg overflow-hidden relative group">
                                 <NewArrivalsCard
                                     image={item.images[imageIndex[itemIndex]]}
                                     title={item.name}

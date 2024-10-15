@@ -5,8 +5,8 @@ const SmallCard = ({ image, text, className, description}) => {
         <div className={`small-card ${className}`}>
             <img src={image} alt={text} className="small-card-img" />
             <div className="">
-                <p className='text-darkColor text-center'>{text}</p>
-                <p className='text-darkColor text-center'>{description}</p>
+                <p className='text-darkColor text-center card-sm-title'>{text}</p>
+                <p className='text-darkColor text-center card-sm-title'>{description}</p>
             </div>
         </div>
     );

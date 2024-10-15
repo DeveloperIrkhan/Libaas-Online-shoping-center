@@ -42,7 +42,15 @@ body {
   line-height: 20px;
   letter-spacing: 1px;
 }
+.card-sm-title {
+  font-size: 1rem;
+  font-family: "Noto Sans", serif;
 
+  line-height: 20.4px;
+  vertical-align: baseline;
+  letter-spacing: 2.16px;
+  word-spacing: 0px;
+}
 .text-middum-extended {
   font-size: 13px;
   font-weight: 400;
@@ -160,39 +168,44 @@ body {
     transform: translateX(-100%);
   }
 }
-/* new Arrivals css */
-.carousel-item {
-  transition: 0.4s ease-in-out;
-  position: relative;
+/* kids section home page */
+.kidimg {
+  height: 50vmin;
+  width: 40vmin;
 }
-.arrow-buttons {
-  display: none;
-  cursor: pointer;
+.kidimg-1 {
+  /* position: absolute; */
+  transform: rotate(15deg);
+  right: 10%;
+  z-index: 10;
+  top: 80%;
 }
-.carousel-item:hover .arrow-buttons{
-  display: block;
-  transition: 0.4s all;
+.kidimg-2 {
+  /* position: absolute;  */
+  left: 10%;
+  top: 80%;
+  transform: rotate(-15deg);
 }
-.arrow-buttons .left {
+.imagination-fonts {
+  line-height: 20.4px;
+  vertical-align: baseline;
+  letter-spacing: 2.16px;
+  word-spacing: 0px;
+}
+.wonderland-fonts {
+  line-height: 33px;
+  font-size: 22px;
   font-weight: 500;
-  position: absolute;
-  top: 45%;
-  left: 0;
-  font-size: 2rem;
-  color: #000;
-  padding: 3px 4px;
-  background-color: #D4D2D2;
-
+  vertical-align: baseline;
+  letter-spacing: 3.96px;
+  text-transform: uppercase;
+  word-spacing: 0px;
+}
+.wonderland-small-fonts {
+  line-height: 23.8px;
+  vertical-align: baseline;
+  letter-spacing: 2.52px;
+  word-spacing: 0px;
 }
 
-.arrow-buttons .right {
-  font-weight: 500;
-  position: absolute;
-  top: 45%;
-  right: 0;
-  font-size: 2rem;
-  color: #000;
-  padding: 3px 4px;
-  background-color: #D4D2D2;
-}
-/* new Arrivals end css */
+/* kids section home page */

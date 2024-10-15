@@ -27,7 +27,6 @@ const navigate = useNavigate()
             </div>
             <div className="banner">
                 <div className='px-4 sm:px-[5vw] md:px-[7cw] lg:px=[9vw] flex items-center justify-between py-5 font-medium border-2 border-hoverColor'>
-
                     <div
                         className={`fixed top-0 left-0 w-screen h-full bg-white z-40 transition-transform duration-300 ease-in-out ${isMenuOpen ? 'menu-open' : 'menu-close'}`}>
                         <div className="flex flex-col px-16 mt-20">
@@ -67,7 +66,7 @@ const navigate = useNavigate()
                         <FontAwesomeIcon className='md:text-sm text-lg' icon={faSearch} />
                         <p className='hidden md:block'>Search</p>
                     </div>
-                    <div className="logo m-auto" style={{cursor:"pointer"}} onClick={()=> navigate("/")}>
+                    <div className="  h-[10vmin] w-[12vmin] m-auto" style={{cursor:"pointer"}} onClick={()=> navigate("/")}>
                         <img className='hidden md:block' src={images.Logo} alt="" />
                         <p className='main-heading block md:hidden'>Libaas</p>
                     </div>

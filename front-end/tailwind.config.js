@@ -8,9 +8,12 @@ export default {
         secondColor: "#FFD200",
         darkColor: "#808080",
         hoverColor: "#F4F6F8",
-        whiteColor: "#ffffff",
+        whiteColor: "#ffffff"
       },
-    },
+      letterSpacing: {
+        "extra-spacing": "3.9px", // Custom negative tracking value
+      }
+    }
   },
-  plugins: [],
+  plugins: []
 };

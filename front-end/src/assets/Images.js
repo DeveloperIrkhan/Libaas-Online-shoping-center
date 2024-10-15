@@ -36,10 +36,121 @@ import WCap_3 from "./WCap_3.webp";
 import YCap_1 from "./YCap_1.webp";
 import YCap_2 from "./YCap_2.webp";
 import YCap_3 from "./YCap_3.webp";
-
+import Kids from "./Kids.webp";
+import KidsCloths from "./KidsCloths.webp";
 import Logo from "./Logo.png";
+import AttractivePrintedKid_1 from "./AttractivePrintedKid_1.webp";
+import AttractivePrintedKid_2 from "./AttractivePrintedKid_2.webp";
+import AttractivePrintedKid_3 from "./AttractivePrintedKid_3.webp";
+import GirlPOLKADOT_1 from "./GirlPOLKADOT_1.webp";
+import GirlPOLKADOT_2 from "./GirlPOLKADOT_2.webp";
+import GirlPOLKADOTRED_1 from "./GirlPOLKADOTRED_1.webp";
+import GirlPOLKADOTRED_2 from "./GirlPOLKADOTRED_2.webp";
+import HangingWithDad_1 from "./HangingWithDad_1.webp";
+import HangingWithDad_2 from "./HangingWithDad_2.webp";
+import HangingWithDad_3 from "./HangingWithDad_3.webp";
+import GirlAlloverFloralPrintedNavy_1 from "./GirlAlloverFloralPrintedNavy_1.webp";
+import GirlAlloverFloralPrintedNavy_2 from "./GirlAlloverFloralPrintedNavy_2.webp";
+import GirlAlloverFloralPrintedNavy_3 from "./GirlAlloverFloralPrintedNavy_3.webp";
+import GirlAlloverFloralPrintedNavy_4 from "./GirlAlloverFloralPrintedNavy_4.webp";
+import GirlAlloverNavy_1 from "./GirlAlloverNavy_1.webp";
+import GirlAlloverNavy_2 from "./GirlAlloverNavy_2.webp";
+import GirlAlloverNavy_3 from "./GirlAlloverNavy_3.webp";
+import GirlsAlloverRed_1 from "./GirlsAlloverRed_1.webp";
+import GirlsAlloverRed_2 from "./GirlsAlloverRed_2.webp";
+import GirlsAlloverRed_3 from "./GirlsAlloverRed_3.webp";
+import GirlsAlloverRed_4 from "./GirlsAlloverRed_4.webp";
+import GoldLionPrintedSweatShirtNavy_1 from "./GoldLionPrintedSweatShirtNavy_1.webp";
+import GoldLionPrintedSweatShirtNavy_2 from "./GoldLionPrintedSweatShirtNavy_2.webp";
+import GoldLionPrintedSweatShirtNavy_3 from "./GoldLionPrintedSweatShirtNavy_3.webp";
+
+import WomenPrintedFleeceHoodieBlack_1 from "./WomenPrintedFleeceHoodieBlack_1.webp";
+import WomenPrintedFleeceHoodieBlack_2 from "./WomenPrintedFleeceHoodieBlack_2.webp";
+import WomenPrintedFleeceHoodieBlack_3 from "./WomenPrintedFleeceHoodieBlack_3.webp";
+import WomenPOLKADOTHoodieRED_1 from "./WomenPOLKADOTHoodieRED_1.webp";
+import WomenPOLKADOTHoodieRED_2 from "./WomenPOLKADOTHoodieRED_2.webp";
+import WomenPOLKADOTHoodieRED_3 from "./WomenPOLKADOTHoodieRED_3.webp";
+import WomenPOLKADOTHoodieBlue_1 from "./WomenPOLKADOTHoodieBlue_1.webp";
+import WomenPOLKADOTHoodieBlue_2 from "./WomenPOLKADOTHoodieBlue_2.webp";
+import WomenPOLKADOTHoodieBlue_3 from "./WomenPOLKADOTHoodieBlue_3.webp";
+import WomenHighWaistFlareCutJeansBlack_1 from "./WomenHighWaistFlareCutJeansBlack_1.webp";
+import WomenHighWaistFlareCutJeansBlack_2 from "./WomenHighWaistFlareCutJeansBlack_2.webp";
+import WomenHighWaistFlareCutJeansBlack_3 from "./WomenHighWaistFlareCutJeansBlack_3.webp";
+import WomenButterflyPrintedHoodie_1 from "./WomenButterflyPrintedHoodie_1.webp";
+import WomenButterflyPrintedHoodie_2 from "./WomenButterflyPrintedHoodie_2.webp";
+import WomenButterflyPrintedHoodie_3 from "./WomenButterflyPrintedHoodie_3.webp";
+import JeansWhite_1 from "./JeansWhite_1.webp";
+import JeansWhite_2 from "./JeansWhite_2.webp";
+import JeansWhite_3 from "./JeansWhite_3.webp";
+import JeansBlack_1 from "./JeansBlack_1.webp";
+import JeansBlack_2 from "./JeansBlack_2.webp";
+import JeansBlack_3 from "./JeansBlack_3.webp";
+
+import WomenCollection1 from "./WomenCollection1.jpg";
+import WomenCollection2 from "./WomenCollection2.webp";
+import WomenCollection3 from "./WomenCollection3.jpg";
+
+import SunGlassess from "./SunGlassess.webp";
+import Fragrances from "./Fragrances.webp";
+import CubanShirt from "./CubanShirt.webp";
+import Activeware from "./Activeware.webp";
 export const images = {
+  SunGlassess,
+  Fragrances,
+  CubanShirt,
+  Activeware,
+  WomenCollection1,
+  WomenCollection2,
+  WomenCollection3,
+  WomenPrintedFleeceHoodieBlack_1,
+  WomenPrintedFleeceHoodieBlack_2,
+  WomenPrintedFleeceHoodieBlack_3,
+  WomenPOLKADOTHoodieRED_1,
+  WomenPOLKADOTHoodieRED_2,
+  WomenPOLKADOTHoodieRED_3,
+  WomenPOLKADOTHoodieBlue_1,
+  WomenPOLKADOTHoodieBlue_2,
+  WomenPOLKADOTHoodieBlue_3,
+  WomenHighWaistFlareCutJeansBlack_1,
+  WomenHighWaistFlareCutJeansBlack_2,
+  WomenHighWaistFlareCutJeansBlack_3,
+  JeansWhite_1,
+  JeansWhite_2,
+  JeansWhite_3,
+  JeansBlack_1,
+  JeansBlack_2,
+  JeansBlack_3,
+  WomenButterflyPrintedHoodie_1,
+  WomenButterflyPrintedHoodie_2,
+  WomenButterflyPrintedHoodie_3,
+
+  GirlAlloverFloralPrintedNavy_1,
+  GirlAlloverFloralPrintedNavy_2,
+  GirlAlloverFloralPrintedNavy_3,
+  GirlAlloverFloralPrintedNavy_4,
+  GirlAlloverNavy_1,
+  GirlAlloverNavy_2,
+  GirlAlloverNavy_3,
+  GirlsAlloverRed_1,
+  GirlsAlloverRed_2,
+  GirlsAlloverRed_3,
+  GirlsAlloverRed_4,
+  GoldLionPrintedSweatShirtNavy_1,
+  GoldLionPrintedSweatShirtNavy_2,
+  GoldLionPrintedSweatShirtNavy_3,
+  AttractivePrintedKid_1,
+  AttractivePrintedKid_2,
+  AttractivePrintedKid_3,
+  GirlPOLKADOT_1,
+  GirlPOLKADOT_2,
+  GirlPOLKADOTRED_1,
+  GirlPOLKADOTRED_2,
+  HangingWithDad_1,
+  HangingWithDad_2,
+  HangingWithDad_3,
   Cart,
+  Kids,
+  KidsCloths,
   Cap,
   Cap_1,
   Cap_2,

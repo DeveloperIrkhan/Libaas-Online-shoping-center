@@ -7,7 +7,7 @@ const NewArrivalsCard = ({ image, title, classes }) => {
                 <img src={image} alt={title} className="w-full object-cover transition-transform duration-500 ease-in-out transform group-hover:scale-110" />
             </div>
             <div className="">
-                <p className="text-center mt-4 card-title-fonts text-black">{title}</p>
+                <p className="text-center mt-4 text-black card-sm-title">{title}</p>
             </div>
 
         </div>
