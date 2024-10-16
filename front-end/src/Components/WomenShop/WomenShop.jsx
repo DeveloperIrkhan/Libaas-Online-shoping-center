@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import WomenShopCard from '../Cards/WomenShopCard'
 import CustomBtn from '../CustomBtn'
-import { WomenCollection } from '../../DummyData/WomenCollection'
 import { images } from '../../assets/Images'
+import { useShopContext } from '../../Context/Context'
 const WomenShop = () => {
-
-
+  const { products } = useShopContext()
+  const collection = products.filter(product => product.NewArrival === true && (product.category === "Women" || product.category === "Unisex"))
+  const [WomenCollection, setWomenCollection] = useState([])
+  useEffect(() => {
+    setWomenCollection(collection.slice(0, 8))
+  }, []);
   document.addEventListener('scroll', function () {
     const sections = document.querySelectorAll('.scroll-item');
     const triggerOffset = window.innerHeight / 2 * 4; // Adjust the trigger point
@@ -93,7 +97,11 @@ const WomenShop = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4" >
               {WomenCollection.map((item, index) => (
                 <div key={index} className="">
-                  <WomenShopCard classes={"gap-x-4 my-5"} image={item.images[0]} title={item.name} price={item.price} originalPrice={item.OrigionalPrice} />
+                  <WomenShopCard classes={"gap-x-4 my-5"} 
+                  image={item.image[0]} 
+                  title={item.name} 
+                  price={item.price} 
+                  originalPrice={item.OrigionalPrice} />
                 </div>))}
             </div>
           </div>

@@ -85,16 +85,45 @@ import JeansWhite_3 from "./JeansWhite_3.webp";
 import JeansBlack_1 from "./JeansBlack_1.webp";
 import JeansBlack_2 from "./JeansBlack_2.webp";
 import JeansBlack_3 from "./JeansBlack_3.webp";
-
 import WomenCollection1 from "./WomenCollection1.jpg";
 import WomenCollection2 from "./WomenCollection2.webp";
 import WomenCollection3 from "./WomenCollection3.jpg";
-
 import SunGlassess from "./SunGlassess.webp";
 import Fragrances from "./Fragrances.webp";
 import CubanShirt from "./CubanShirt.webp";
 import Activeware from "./Activeware.webp";
+import GripCoreLeggingsPink_1 from "./GripCoreLeggingsPink_1.webp";
+import GripCoreLeggingsPink_2 from "./GripCoreLeggingsPink_2.webp";
+import GripCoreLeggingsPink_3 from "./GripCoreLeggingsPink_3.webp";
+import IgniteTrouser_1 from "./IgniteTrouser_1.webp";
+import IgniteTrouser_2 from "./IgniteTrouser_2.webp";
+import IgniteTrouser_3 from "./IgniteTrouser_3.webp";
+import ExplorerFreshVibesTeeBlack_1 from "./ExplorerFreshVibesTeeBlack_1.webp";
+import ExplorerFreshVibesTeeBlack_2 from "./ExplorerFreshVibesTeeBlack_2.webp";
+import ExplorerFreshVibesTeeBlack_3 from "./ExplorerFreshVibesTeeBlack_3.webp";
+import FantasyGirlPowerTeeDarkGreen_1 from "./FantasyGirlPowerTeeDarkGreen_1.webp";
+import FantasyGirlPowerTeeDarkGreen_2 from "./FantasyGirlPowerTeeDarkGreen_2.webp";
+import FantasyGirlPowerTeeDarkGreen_3 from "./FantasyGirlPowerTeeDarkGreen_3.webp";
+import MarathonJuniorShorts_1 from "./MarathonJuniorShorts_1.webp";
+import MarathonJuniorShorts_2 from "./MarathonJuniorShorts_2.webp";
+import MarathonJuniorShorts_3 from "./MarathonJuniorShorts_3.webp";
+
 export const images = {
+  MarathonJuniorShorts_1,
+  MarathonJuniorShorts_2,
+  MarathonJuniorShorts_3,
+  FantasyGirlPowerTeeDarkGreen_1,
+  FantasyGirlPowerTeeDarkGreen_2,
+  FantasyGirlPowerTeeDarkGreen_3,
+  ExplorerFreshVibesTeeBlack_1,
+  ExplorerFreshVibesTeeBlack_2,
+  ExplorerFreshVibesTeeBlack_3,
+  GripCoreLeggingsPink_1,
+  GripCoreLeggingsPink_2,
+  GripCoreLeggingsPink_3,
+  IgniteTrouser_1,
+  IgniteTrouser_2,
+  IgniteTrouser_3,
   SunGlassess,
   Fragrances,
   CubanShirt,

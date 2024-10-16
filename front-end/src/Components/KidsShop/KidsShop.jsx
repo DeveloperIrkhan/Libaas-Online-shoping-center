@@ -1,19 +1,24 @@
 import React, { useState } from 'react'
-import { KidsCollection } from '../../DummyData/KidsCollection'
 import { images } from '../../assets/Images'
 
 import CustomBtn from '../CustomBtn'
 import { useNavigate } from 'react-router-dom'
 import KidsShopCard from '../Cards/KidsShopCard'
 import { GoChevronLeft, GoChevronRight } from 'react-icons/go'
+import { useShopContext } from '../../Context/Context'
+
+
+
 const KidsShop = () => {
 
+    const { products } = useShopContext()
+    const collection = products.filter(item => item.category === "Kids" && item.NewArrival === true)
     const ShowItems = 4;
     const [currentIndexNo, setCurrentIndexNo] = useState(0)
     const [direction, setDirection] = useState("")
     const [hoveredIndex, setHoveredIndex] = useState("");
     const nextCollection = () => {
-        if (currentIndexNo + ShowItems < KidsCollection.length) {
+        if (currentIndexNo + ShowItems < collection.length) {
             setDirection("next")
             setCurrentIndexNo(currentIndexNo + 1)
         }
@@ -67,14 +72,14 @@ const KidsShop = () => {
                         <span>
                             <GoChevronLeft style={{ cursor: "pointer" }}
                                 onClick={prevCollection}
-                                className={`${currentIndexNo === 0 ? "hidden" : ""}`}
+                                className={`text-middum mb-1 ${currentIndexNo === 0 ? "hidden" : ""}`}
                             />
                         </span>
-                        <p className='text-center m-4'> Top Kids Arrivals</p>
+                        <p className="p-3 text-middum text-center wonderland-fonts my-4 md:my-10">Kids Shop</p>
                         <span>
                             <GoChevronRight style={{ cursor: "pointer" }}
                                 onClick={nextCollection}
-                                className={`${currentIndexNo + ShowItems >= KidsCollection.length ? "hidden" : ""}`}
+                                className={`text-middum mb-1 ${currentIndexNo + ShowItems >= collection.length ? "hidden" : ""}`}
                             />
                         </span>
                     </div>
@@ -86,15 +91,15 @@ const KidsShop = () => {
                         <div className="flex flex-wrap justify-center">
                             <div className="flex flex-col md:flex-row md:columns-2  transition-transform duration-700 ease-in-out">
                                 {
-                                    KidsCollection.slice(currentIndexNo, currentIndexNo + ShowItems).map((item) => (
+                                    collection.slice(currentIndexNo, currentIndexNo + ShowItems).map((item) => (
                                         <div key={item._id}>
                                             <KidsShopCard
-                                                classes={''}
+                                                classes={'mx-3'}
                                                 onmouseEnter={() => setHoveredIndex(item._id)}
                                                 onmouseOut={() => setHoveredIndex(null)}
-                                                image={hoveredIndex === item._id ? item.images[1] : item.images[0]}
-                                            title={item.name}
-                                            price={item.price}
+                                                image={hoveredIndex === item._id ? item.image[1] : item.image[0]}
+                                                title={item.name}
+                                                price={item.price}
                                             />
                                         </div>
                                     ))

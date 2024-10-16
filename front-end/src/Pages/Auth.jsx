@@ -3,6 +3,7 @@ import CustomBtn from '../Components/CustomBtn'
 import PageTitle from '../Components/Heading/PageTitle'
 
 const Auth = () => {
+
     return (
         <div className="h-full w-full">
             <PageTitle title={"Sign Up"} />

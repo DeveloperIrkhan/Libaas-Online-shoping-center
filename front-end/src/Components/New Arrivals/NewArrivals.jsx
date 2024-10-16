@@ -1,16 +1,20 @@
 import React, { useState } from 'react'
 import { GoChevronRight, GoChevronLeft } from "react-icons/go";
-import { New_Arrivals } from '../../DummyData/NewArrivals';
 import NewArrivalsCard from '../Cards/NewArrivalsCard';
+import { useShopContext } from '../../Context/Context';
 
 const NewArrivals = () => {
+    const { products } = useShopContext();
+    const headgear = products.filter(item => item.subCategory === "Headwear" && item.NewArrival === true)
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [imageIndex, setImageIndex] = useState(New_Arrivals.map(() => 0)); // Track image index for each item
+    const [imageIndex, setImageIndex] = useState(headgear.map(() => 0)); // Track image index for each item
     const [direction, setDirection] = useState('');
     const cardsToShow = 4;
+
+
     const handleNext = (e) => {
         e.preventDefault();
-        if (currentIndex + cardsToShow < New_Arrivals.length) {
+        if (currentIndex + cardsToShow < headgear.length) {
             setDirection('next');
             setCurrentIndex(currentIndex + 1)
         }
@@ -25,13 +29,13 @@ const NewArrivals = () => {
 
     const nextPicture = (itemIndex) => {
         setImageIndex((prev) =>
-            prev.map((index, i) => (i === itemIndex ? (index + 1) % New_Arrivals[itemIndex].images.length : index))
+            prev.map((index, i) => (i === itemIndex ? (index + 1) % headgear[itemIndex].image.length : index))
         );
     };
 
     const prevPicture = (itemIndex) => {
         setImageIndex((prev) =>
-            prev.map((index, i) => (i === itemIndex ? (index - 1 + New_Arrivals[itemIndex].images.length) % New_Arrivals[itemIndex].images.length : index))
+            prev.map((index, i) => (i === itemIndex ? (index - 1 + headgear[itemIndex].image.length) % headgear[itemIndex].image.length : index))
         );
     };
 
@@ -45,9 +49,9 @@ const NewArrivals = () => {
                                 <GoChevronLeft style={{ cursor: "pointer" }} onClick={handlePrev} className={`${currentIndex === 0 ? "hidden" : ""}`}
                                 />
                             </span>
-                            <p className='text-center m-4'> Our New Arrivals</p>
+                            <p className="p-3 text-middum text-center wonderland-fonts mt-4 md:mt-10">Our New headGears</p>
                             <span>
-                                <GoChevronRight style={{ cursor: "pointer" }} onClick={handleNext} className={`${currentIndex + cardsToShow >= New_Arrivals.length ? "hidden" : ""}`}
+                                <GoChevronRight style={{ cursor: "pointer" }} onClick={handleNext} className={`${currentIndex + cardsToShow >= headgear.length ? "hidden" : ""}`}
                                 />
                             </span>
                         </div>
@@ -57,12 +61,13 @@ const NewArrivals = () => {
 
                 <div className="flex flex-wrap justify-center">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {New_Arrivals.slice(currentIndex, currentIndex + cardsToShow).map((item, itemIndex) => (
+                        {headgear.slice(currentIndex, currentIndex + cardsToShow).map((item, itemIndex) => (
                             <div key={`${item.name}-${itemIndex}`} className="carousel-item bg-white shadow-sm rounded-lg overflow-hidden relative group">
                                 <NewArrivalsCard
-                                    image={item.images[imageIndex[itemIndex]]}
+                                    image={item.image[imageIndex[itemIndex]]}
                                     title={item.name}
                                     classes={"bg-white shadow-sm rounded-lg overflow-hidden"}
+                                    description={item.description}
                                 />
                                 <div className="hidden group-hover:flex justify-between items-center absolute inset-0 transition-opacity duration-500">
                                     <GoChevronLeft

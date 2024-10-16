@@ -1,8 +1,9 @@
 import React from 'react';
+import { useShopContext } from '../../Context/Context';
 
 const WomenShopCard = ({ image, title, classes, price, onmouseEnter, onmouseOut, originalPrice }) => {
     const percentageSaved = Math.round(((originalPrice - price) / originalPrice) * 100);
-
+    const { currency } = useShopContext()
     return (
         <div className={`${classes} group w-100 relative`} onMouseEnter={onmouseEnter} onMouseLeave={onmouseOut}>
             <div className="bg-[#fddd4c] text-white px-2 py-1 rounded-md uppercase text-small  font-semibold 
@@ -18,7 +19,7 @@ const WomenShopCard = ({ image, title, classes, price, onmouseEnter, onmouseOut,
                 {title}
             </p>
             <p className="text-center mt-4 card-title-fonts text-blackColor text-sm">
-                <span className='text-secondColor mx-2'>Rs/- {price}</span>
+                <span className='text-secondColor mx-2'>{currency} {price}</span>
                 <span className='line-through'>{originalPrice}</span></p>
         </div>
     );

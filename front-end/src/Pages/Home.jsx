@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import HomeCard from '../Components/Cards/HomeCard';
-import { Collection } from '../DummyData/Collection';
 import { GoChevronRight, GoChevronLeft } from "react-icons/go";
 import { images } from '../assets/Images';
 import SmallCard from '../Components/Cards/SmallCard';
@@ -10,16 +9,23 @@ import NewArrivals from '../Components/New Arrivals/NewArrivals';
 import KidsShop from '../Components/KidsShop/KidsShop';
 import WomenShop from '../Components/WomenShop/WomenShop';
 import ExtraSection from '../Components/ExtraSection/ExtraSection';
-
+import { useShopContext } from '../Context/Context'
 const Home = () => {
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState('');
   const [isFlipped, setIsFlipped] = useState(false);
   const [cardsToShow, setCardsToShow] = useState()
+
+  const { products } = useShopContext()
+
+
+  const bestSeller = products.filter(product => product.NewArrival === true)
+  const top8BestSeller = bestSeller.slice(0, 7)
+
   const handleNext = (e) => {
     e.preventDefault();
-    if (currentIndex + cardsToShow < Collection.length) {
+    if (currentIndex + cardsToShow < top8BestSeller.length) {
       setDirection('next');
       setCurrentIndex(currentIndex + 1);
       setTimeout(() => setDirection(''), 500); // Reset direction after animation
@@ -71,7 +77,7 @@ const Home = () => {
                 <GoChevronRight
                   style={{ cursor: "pointer" }}
                   onClick={handleNext}
-                  className={`${currentIndex + cardsToShow >= Collection.length ? "hidden" : ""}`}
+                  className={`${currentIndex + cardsToShow >= top8BestSeller.length ? "hidden" : ""}`}
                 />
               </span>
             </div>
@@ -80,7 +86,7 @@ const Home = () => {
 
         <div className="flex justify-center items-center">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mx-4">
-            {Collection.slice(currentIndex, currentIndex + cardsToShow).map((item) => (
+            {top8BestSeller.slice(currentIndex, currentIndex + cardsToShow).map((item) => (
               <div
                 key={item._id}
                 className={`carousel-item ${direction === 'next' ? 'slide-next' : direction === 'prev' ? 'slide-prev' : ''}`}
@@ -88,6 +94,7 @@ const Home = () => {
                 <HomeCard
                   image={item.image}
                   title={item.name}
+                  description={item.description}
                   classes={"card max-w-md relative bg-white shadow-lg rounded-sm overflow-hidden gap-2 my-2 md:my-0"}
                 />
               </div>

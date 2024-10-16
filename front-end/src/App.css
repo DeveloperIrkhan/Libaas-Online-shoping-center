@@ -9,7 +9,7 @@ body {
   box-sizing: border-box;
 }
 ::-webkit-scrollbar {
-  width: 8px; /* Adjust the width */
+  width: 14px; /* Adjust the width */
 }
 ::-webkit-scrollbar-track {
   background: #f1f1f1; /* Optional: customize the track */
@@ -21,7 +21,7 @@ body {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Change color on hover */
+  background: #fed10f; /* Change color on hover */
 }
 :root {
   --black-color: #4e4d4d;
