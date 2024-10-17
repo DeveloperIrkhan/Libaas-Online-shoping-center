@@ -2,10 +2,10 @@ import React from 'react'
 import { FaFacebook, FaInstagram, FaTiktok, FaYoutube } from "react-icons/fa";
 const Footer = () => {
     const h_style = "fa-[18px] font-bold leading-[23px]  align-baseline text-blackColor tracking-extra-spacing not-italic uppercase indent-0 py-5"
-    const p_style = "leading-[20px] py-1 font-normal capitalize tracking-[1.5px] align-baseline text-[#7b7878]"
+    const p_style = "leading-[20px] py-1 font-normal leading-snug tracking-[1.5px] align-baseline text-[#7b7878]"
     return (
         <div className='mt-16 bg-[#f7f7f8]'>
-            <div className="flex flex-col md:grid grid-cols-2 md:grid-cols-4 gap-4 p-20 ">
+            <div className="flex flex-col md:grid grid-cols-2 md:grid-cols-4 gap-4 md:p-20 p-5">
                 <div className="">
                     <p className={`${h_style}`}> INFORMATION</p>
                     <p className={`${p_style}`}> Become Our Distributor</p>
@@ -20,8 +20,8 @@ const Footer = () => {
                     <p className={`${p_style}`}>Query/Complaints</p>
                     <p className={`${p_style}`}>Contact Us</p>
                     <p className={`${p_style}`}>FAQs</p>
-                    <p className={`${p_style}`}>📞 +92 340 0380003</p>
-                    <p className={`${p_style}`}>✉️ info@mendeez.com</p>
+                    <p className={`${p_style}`}>📞 +92 333 8988377</p>
+                    <p className={`${p_style}`}>✉️ info@libaas.com</p>
                 </div>
                 <div className="">
                     <p className={`${h_style}`}>JOIN NEWSLETTER FOR BEST OFFERS</p>
@@ -36,6 +36,7 @@ const Footer = () => {
                              type="text" 
                              placeholder="example@gmail.com" />
                         </div>
+                        <button className='bg-darkColor text-white px-4 py-2 rounded my-2 w-full'>Submit</button>
                     </div>
                 </div>
                 <div className="gap-y-3">

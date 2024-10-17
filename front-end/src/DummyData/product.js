@@ -6,7 +6,7 @@ export const product = [
     name: "Henley Shirt",
     description:
       "Comfortable cotton top with a round neck design, perfect for casual wear.",
-    price: 19,
+    price: 1900,
     OrigionalPrice: 3850,
     image: [images.Henley_T_Shirt_NB_1],
     category: "Men",
@@ -14,13 +14,14 @@ export const product = [
     sizes: ["S", "M", "L"],
     date: "12-11-2024",
     bestSeller: true,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: true
   },
   {
     _id: 2,
     name: "Striped Curved",
     description: "Soft and stylish T-shirt for everyday casual look.",
-    price: 150,
+    price: 2550,
     OrigionalPrice: 3850,
     image: [images.Striped_Curved_Hem_T_Shirt_1],
     category: "Men",
@@ -28,13 +29,14 @@ export const product = [
     sizes: ["M", "L", "XL"],
     date: "10-11-2024",
     bestSeller: false,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: false
   },
   {
     _id: 4,
     name: "v nick",
     description: "Classic denim jacket with a contemporary twist.",
-    price: 18,
+    price: 2099,
     OrigionalPrice: 3850,
     image: [images.V_Neck_T_Shirt_Black_4],
     category: "Men",
@@ -43,13 +45,13 @@ export const product = [
     date: "07-11-2024",
     bestSeller: false,
     NewArrival: true,
-    NewArrival: true
+    SaleOnProduct: true
   },
   {
     _id: 5,
     name: "Polo Shirt",
     description: "Elegant flare skirt for a chic look.",
-    price: 18,
+    price: 3599,
     OrigionalPrice: 3850,
     image: [images.V_Neck_T_Shirt_DBlack_1],
     category: "Men",
@@ -57,13 +59,14 @@ export const product = [
     sizes: ["S", "M"],
     date: "15-11-2024",
     bestSeller: true,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: false
   },
   {
     _id: 6,
     name: "V nick T-Shirt",
     description: "Cozy and stylish hoodie for cold weather.",
-    price: 220,
+    price: 3000,
     OrigionalPrice: 3850,
     image: [images.Henley_T_Shirt_NB_3],
     category: "Men",
@@ -71,14 +74,15 @@ export const product = [
     sizes: ["M", "L", "XL"],
     date: "18-11-2024",
     bestSeller: false,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: true
   },
   {
     _id: 7,
     name: "V nick Shirt",
     description:
       "Comfortable slim fit chinos perfect for work or casual outings.",
-    price: 190,
+    price: 2900,
     OrigionalPrice: 3850,
     image: [images.V_Neck_T_Shirt_DBlack_4],
     category: "Men",
@@ -86,13 +90,14 @@ export const product = [
     sizes: ["S", "M", "L", "XL"],
     date: "20-11-2024",
     bestSeller: false,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: true
   },
   {
     _id: 8,
     name: "Sky Blue Shirt",
     description: "Warm and comfortable crewneck sweatshirt.",
-    price: 160,
+    price: 2160,
     OrigionalPrice: 3850,
     image: [images.V_Neck_T_Shirt_Sky_Blue],
     category: "Men",
@@ -100,13 +105,14 @@ export const product = [
     sizes: ["S", "M", "L", "XL"],
     date: "12-11-2024",
     bestSeller: true,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: true
   },
   {
     _id: 9,
     name: "Green Shirt",
     description: "Stretchable and durable leggings for yoga and workout.",
-    price: 130,
+    price: 2130,
     OrigionalPrice: 3850,
     image: [images.V_Neck_T_Shirt_Green],
     category: "Men",
@@ -114,7 +120,8 @@ export const product = [
     sizes: ["S", "M", "L"],
     date: "10-11-2024",
     bestSeller: true,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: false
   },
   {
     _id: 10,
@@ -123,12 +130,13 @@ export const product = [
     price: 2499,
     OrigionalPrice: 3850,
     image: [images.Cap_1, images.Cap_2, images.Cap_3],
-    category: "Men",
+    category: "Unisex",
     subCategory: "Headwear",
     sizes: ["M", "L", "XL"],
     date: "25-11-2024",
     bestSeller: false,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: true
   },
   {
     _id: 11,
@@ -137,12 +145,13 @@ export const product = [
     price: 2300,
     OrigionalPrice: 3850,
     image: [images.BCap_1, images.BCap_2, images.BCap_3],
-    category: "Men",
+    category: "Unisex",
     subCategory: "Headwear",
     sizes: ["S", "M", "L"],
     date: "22-11-2024",
     bestSeller: true,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: true
   },
   {
     _id: 12,
@@ -151,12 +160,13 @@ export const product = [
     price: 3000,
     OrigionalPrice: 3850,
     image: [images.YCap_1, images.YCap_2, images.YCap_3],
-    category: "Men",
+    category: "Unisex",
     subCategory: "Headwear",
     sizes: ["M", "L", "XL"],
     date: "12-11-2024",
     bestSeller: true,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: true
   },
   {
     _id: 13,
@@ -165,12 +175,13 @@ export const product = [
     price: 2490,
     OrigionalPrice: 3850,
     image: [images.WCap_1, images.WCap_2, images.WCap_3],
-    category: "Men",
+    category: "Unisex",
     subCategory: "Headwear",
     sizes: ["S", "M", "L", "XL"],
     date: "13-11-2024",
     bestSeller: true,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: false
   },
   {
     _id: 14,
@@ -189,7 +200,8 @@ export const product = [
     sizes: ["M", "L", "XL"],
     date: "17-11-2024",
     bestSeller: false,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: true
   },
   {
     _id: 15,
@@ -207,7 +219,8 @@ export const product = [
     sizes: ["S", "M", "L", "XL"],
     date: "12-11-2024",
     bestSeller: true,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: true
   },
   {
     _id: 16,
@@ -221,7 +234,8 @@ export const product = [
     sizes: ["S", "M", "L"],
     date: "21-11-2024",
     bestSeller: false,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: true
   },
   {
     _id: 17,
@@ -235,7 +249,8 @@ export const product = [
     sizes: ["M", "L"],
     date: "14-11-2024",
     bestSeller: true,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: false
   },
   {
     _id: 18,
@@ -253,7 +268,8 @@ export const product = [
     sizes: ["S", "M", "L"],
     date: "12-11-2024",
     bestSeller: false,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: true
   },
   {
     _id: 19,
@@ -266,12 +282,13 @@ export const product = [
       images.WomenHighWaistFlareCutJeansBlack_2,
       images.WomenHighWaistFlareCutJeansBlack_3
     ],
-    category: "Men",
+    category: "Women",
     subCategory: "Activewear",
     sizes: ["M", "L", "XL"],
     date: "20-11-2024",
     bestSeller: true,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: true
   },
   {
     _id: 20,
@@ -289,7 +306,8 @@ export const product = [
     sizes: ["S", "M", "L"],
     date: "16-11-2024",
     bestSeller: false,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: false
   },
   {
     _id: 21,
@@ -308,7 +326,8 @@ export const product = [
     sizes: ["M", "L"],
     date: "14-11-2024",
     bestSeller: true,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: true
   },
   {
     _id: 22,
@@ -326,7 +345,8 @@ export const product = [
     sizes: ["S", "M", "L"],
     date: "19-11-2024",
     bestSeller: true,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: true
   },
 
   {
@@ -341,7 +361,8 @@ export const product = [
     sizes: ["M", "L", "XL"],
     date: "22-11-2024",
     bestSeller: true,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: true
   },
   {
     _id: 24,
@@ -355,7 +376,8 @@ export const product = [
     sizes: ["S", "M", "L"],
     date: "23-11-2024",
     bestSeller: false,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: false
   },
   {
     _id: 25,
@@ -373,7 +395,8 @@ export const product = [
     sizes: ["M", "L", "XL"],
     date: "24-11-2024",
     bestSeller: false,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: true
   },
   {
     _id: 26,
@@ -391,7 +414,8 @@ export const product = [
     sizes: ["S", "M"],
     date: "25-11-2024",
     bestSeller: true,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: false
   },
   {
     _id: 27,
@@ -409,7 +433,8 @@ export const product = [
     sizes: ["M", "L", "XL"],
     date: "05-12-2024",
     bestSeller: true,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: true
   },
   {
     _id: 28,
@@ -427,7 +452,8 @@ export const product = [
     sizes: ["S", "M", "L"],
     date: "28-11-2024",
     bestSeller: true,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: true
   },
   {
     _id: 29,
@@ -446,7 +472,8 @@ export const product = [
     sizes: ["M", "L", "XL"],
     date: "30-11-2024",
     bestSeller: false,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: false
   },
   {
     _id: 30,
@@ -464,7 +491,8 @@ export const product = [
     sizes: ["M", "L"],
     date: "01-12-2024",
     bestSeller: true,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: true
   },
   {
     _id: 31,
@@ -482,7 +510,8 @@ export const product = [
     sizes: ["M", "L", "XL"],
     date: "03-12-2024",
     bestSeller: false,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: false
   },
   {
     _id: 32,
@@ -500,10 +529,11 @@ export const product = [
     sizes: ["S", "M", "L"],
     date: "04-12-2024",
     bestSeller: true,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: false
   },
   {
-    _id: 27,
+    _id: 33,
     name: "Girl's Allover Floral Printed Fleece Twin Set - Red",
     description: "Warm knitted scarf for a cozy winter look.",
     price: 70,
@@ -514,245 +544,7 @@ export const product = [
     sizes: ["One Size"],
     date: "12-11-2024",
     bestSeller: false,
-    NewArrival: true
-  },
-  {
-    _id: 34,
-    name: "Women's Running Shoes",
-    description: "Lightweight running shoes for athletic performance.",
-    price: 340,
-    OrigionalPrice: 3850,
-    image: ["image34.jpg"],
-    category: "Women",
-    subCategory: "Footwear",
-    sizes: ["S", "M", "L"],
-    date: "06-12-2024",
-    bestSeller: false,
-    NewArrival: true
-  },
-  {
-    _id: 35,
-    name: "Men's Leather Wallet",
-    description: "Compact and durable leather wallet for everyday use.",
-    price: 110,
-    OrigionalPrice: 3850,
-    image: ["image35.jpg"],
-    category: "Men",
-    subCategory: "Accessories",
-    sizes: ["One Size"],
-    date: "07-12-2024",
-    bestSeller: false,
-    NewArrival: true
-  },
-  {
-    _id: 36,
-    name: "Women's Knit Beanie",
-    description: "Warm and cozy knit beanie for winter.",
-    price: 60,
-    OrigionalPrice: 3850,
-    image: ["image36.jpg"],
-    category: "Women",
-    subCategory: "Accessories",
-    sizes: ["One Size"],
-    date: "08-12-2024",
-    bestSeller: true,
-    NewArrival: true
-  },
-  {
-    _id: 37,
-    name: "Men's Cargo Shorts",
-    description:
-      "Comfortable and practical cargo shorts with multiple pockets.",
-    price: 150,
-    OrigionalPrice: 3850,
-    image: ["image37.jpg"],
-    category: "Men",
-    subCategory: "Bottomwear",
-    sizes: ["M", "L", "XL"],
-    date: "09-12-2024",
-    bestSeller: false,
-    NewArrival: true
-  },
-  {
-    _id: 38,
-    name: "Women's Button-Down Cardigan",
-    description: "Stylish cardigan for a casual and cozy look.",
-    price: 220,
-    OrigionalPrice: 3850,
-    image: ["image38.jpg"],
-    category: "Women",
-    subCategory: "Topwear",
-    sizes: ["S", "M", "L"],
-    date: "10-12-2024",
-    bestSeller: true,
-    NewArrival: true
-  },
-  {
-    _id: 39,
-    name: "Men's Wool Sweater",
-    description: "Soft and warm wool sweater for winter.",
-    price: 280,
-    OrigionalPrice: 3850,
-    image: ["image39.jpg"],
-    category: "Men",
-    subCategory: "Topwear",
-    sizes: ["M", "L", "XL"],
-    date: "11-12-2024",
-    bestSeller: false,
-    NewArrival: true
-  },
-  {
-    _id: 40,
-    name: "Women's Leather Boots",
-    description: "Stylish and durable leather boots for winter.",
-    price: 390,
-    OrigionalPrice: 3850,
-    image: ["image40.jpg"],
-    category: "Women",
-    subCategory: "Footwear",
-    sizes: ["S", "M", "L"],
-    date: "12-12-2024",
-    bestSeller: true,
-    NewArrival: true
-  },
-  {
-    _id: 41,
-    name: "Men's Cotton Trousers",
-    description: "Lightweight cotton trousers for a casual look.",
-    price: 160,
-    OrigionalPrice: 3850,
-    image: ["image41.jpg"],
-    category: "Men",
-    subCategory: "Bottomwear",
-    sizes: ["M", "L", "XL"],
-    date: "13-12-2024",
-    bestSeller: true,
-    NewArrival: true
-  },
-  {
-    _id: 42,
-    name: "Women's Cotton Scarf",
-    description: "Soft cotton scarf perfect for any outfit.",
-    price: 90,
-    OrigionalPrice: 3850,
-    image: ["image42.jpg"],
-    category: "Women",
-    subCategory: "Accessories",
-    sizes: ["One Size"],
-    date: "14-12-2024",
-    bestSeller: false,
-    NewArrival: true
-  },
-  {
-    _id: 43,
-    name: "Men's Casual Blazer",
-    description: "Sharp casual blazer for a semi-formal look.",
-    price: 310,
-    OrigionalPrice: 3850,
-    image: ["image43.jpg"],
-    category: "Men",
-    subCategory: "Formalwear",
-    sizes: ["M", "L", "XL"],
-    date: "15-12-2024",
-    bestSeller: true,
-    NewArrival: true
-  },
-  {
-    _id: 44,
-    name: "Women's Wide Leg Pants",
-    description: "Chic wide leg pants for a trendy style.",
-    price: 170,
-    OrigionalPrice: 3850,
-    image: ["image44.jpg"],
-    category: "Women",
-    subCategory: "Bottomwear",
-    sizes: ["S", "M", "L"],
-    date: "16-12-2024",
-    bestSeller: false,
-    NewArrival: true
-  },
-  {
-    _id: 45,
-    name: "Men's Running Shorts",
-    description: "Breathable shorts designed for running and training.",
-    price: 140,
-    OrigionalPrice: 3850,
-    image: ["image45.jpg"],
-    category: "Men",
-    subCategory: "Bottomwear",
-    sizes: ["M", "L", "XL"],
-    date: "17-12-2024",
-    bestSeller: true,
-    NewArrival: true
-  },
-  {
-    _id: 46,
-    name: "Women's Evening Gown",
-    description: "Elegant evening gown perfect for formal events.",
-    price: 450,
-    OrigionalPrice: 3850,
-    image: ["image46.jpg"],
-    category: "Women",
-    subCategory: "Dresses",
-    sizes: ["S", "M", "L"],
-    date: "18-12-2024",
-    bestSeller: false,
-    NewArrival: true
-  },
-  {
-    _id: 47,
-    name: "Men's Leather Belt",
-    description: "Classic leather belt for everyday wear.",
-    price: 80,
-    OrigionalPrice: 3850,
-    image: ["image47.jpg"],
-    category: "Men",
-    subCategory: "Accessories",
-    sizes: ["One Size"],
-    date: "19-12-2024",
-    bestSeller: true,
-    NewArrival: true
-  },
-  {
-    _id: 48,
-    name: "Women's Wrap Dress",
-    description: "Flattering wrap dress for a chic and versatile style.",
-    price: 280,
-    OrigionalPrice: 3850,
-    image: ["image48.jpg"],
-    category: "Women",
-    subCategory: "Dresses",
-    sizes: ["S", "M", "L"],
-    date: "20-12-2024",
-    bestSeller: false,
-    NewArrival: true
-  },
-  {
-    _id: 49,
-    name: "Men's Wool Coat",
-    description: "Sophisticated wool coat for a polished look.",
-    price: 500,
-    OrigionalPrice: 3850,
-    image: ["image49.jpg"],
-    category: "Men",
-    subCategory: "Outerwear",
-    sizes: ["M", "L", "XL"],
-    date: "21-12-2024",
-    bestSeller: false,
-    NewArrival: true
-  },
-  {
-    _id: 50,
-    name: "Women's High Heels",
-    description: "Elegant high heels for formal and casual wear.",
-    price: 230,
-    OrigionalPrice: 3850,
-    image: ["image50.jpg"],
-    category: "Headwear",
-    subCategory: "Footwear",
-    sizes: ["S", "M", "L"],
-    date: "22-12-2024",
-    bestSeller: true,
-    NewArrival: true
+    NewArrival: true,
+    SaleOnProduct: true
   }
 ];
