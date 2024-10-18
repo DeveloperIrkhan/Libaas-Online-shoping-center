@@ -107,8 +107,10 @@ import FantasyGirlPowerTeeDarkGreen_3 from "./FantasyGirlPowerTeeDarkGreen_3.web
 import MarathonJuniorShorts_1 from "./MarathonJuniorShorts_1.webp";
 import MarathonJuniorShorts_2 from "./MarathonJuniorShorts_2.webp";
 import MarathonJuniorShorts_3 from "./MarathonJuniorShorts_3.webp";
+import Measurement from "./Measurement.png";
 
 export const images = {
+  Measurement,
   MarathonJuniorShorts_1,
   MarathonJuniorShorts_2,
   MarathonJuniorShorts_3,

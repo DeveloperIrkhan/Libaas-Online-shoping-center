@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { MdOutlineKeyboardArrowDown } from "react-icons/md"
 import PageTitle from '../Components/Heading/PageTitle'
 import { useShopContext } from '../Context/Context'
-import WomenShopCard from '../Components/Cards/WomenShopCard'
+import Card from '../Components/Cards/Card'
 const Collection = () => {
   const { products, currency, delivery_Fee } = useShopContext()
   const [setshowFilter, setSetshowFilter] = useState(false)
@@ -226,10 +226,11 @@ const Collection = () => {
                 {
                   productsPerPage.length > 0 ?
                     productsPerPage.map((item) => (
-                      <WomenShopCard key={item._id} classes={"gap-x-4 my-5"}
+                      <Card key={item._id} classes={"gap-x-4 my-5"}
                         image={item.image[0]}
                         title={item.name}
                         price={item.price}
+                        to={`/product-details/${item._id}`}
                         saleOnProduct={item.SaleOnProduct}
                         originalPrice={item.OrigionalPrice} />
                     )) : <div className='flex w-full p-4 bg-red-100 rounded-xl'>No products found.....</div>
