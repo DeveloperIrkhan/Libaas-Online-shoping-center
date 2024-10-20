@@ -20,7 +20,7 @@ const RelatedProducts = ({ category, subCategory }) => {
 
     return (
         <div>
-            <div className="mt-12">
+            <div className="mt-12 text-[3vmin] font-Aclonica">
                 <PageTitle title1={"Related"} title2={"Products"} fontSize={' text-sm'}/>
             </div>
             <div className="m-4">

@@ -73,7 +73,7 @@ const Home = () => {
                   className={`${currentIndex === 0 ? "hidden" : ""}`}
                 />
               </span>
-              <p className='text-center m-4'>Our Top Categories</p>
+              <p className='text-center m-4 text-2xl'>Our Top Categories</p>
               <span>
                 <GoChevronRight
                   style={{ cursor: "pointer" }}

@@ -6,7 +6,9 @@ const Auth = () => {
 
     return (
         <div className="h-full w-full px-3 md:px-6 mt-4">
-            <PageTitle title1={"Sign"} title2={"Up"} fontSize={"text-[3vmin]"} />
+            <div className="text-[3.5vmin] font-Aclonica font-bold">
+                <PageTitle title1={"Sign"} title2={"Up"} />
+            </div>
             <div className="flex justify-center my-4 md:my-10">
                 <form className="w-full max-w-md">
                     <div className="md:flex md:items-center mb-6">

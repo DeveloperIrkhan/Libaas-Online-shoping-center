@@ -1,8 +1,13 @@
 import React from 'react'
+import { useShopContext } from '../Context/Context'
 
 const Accessories = () => {
+  const { search, openSearchBox } = useShopContext()
   return (
-    <div>Accessories</div>
+    <>
+      <span>{search}</span>
+      <span>{openSearchBox}</span>
+    </>
   )
 }
 

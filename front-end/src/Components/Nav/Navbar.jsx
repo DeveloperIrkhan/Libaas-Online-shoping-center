@@ -1,20 +1,30 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { images } from '../../assets/Images'
 import './nav.css'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import CustomBtn from '../CustomBtn'
 import { RxCross2 } from 'react-icons/rx'
+import { useShopContext } from '../../Context/Context'
 
 const Navbar = () => {
-    const [close, setClose] = useState(true)
-    const [openSearchBox, setOpenSearchBox] = useState(false)
+    const location = useLocation();
+    const { openSearchBox, setOpenSearchBox, search, setSearch } = useShopContext();
+    const [visable, setVisable] = useState(false)
     const navigate = useNavigate()
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
     }
+    useEffect(() => {
+        if (location.pathname.includes('collections')) {
+            setVisable(true)
+        }
+        else {
+            setVisable(false)
+        }
+    }, [location])
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     return (
         <div className="">
@@ -30,24 +40,28 @@ const Navbar = () => {
                     <p className='text-center text-blackColor text-small md:text-sm '>Summer Clearance Sale Is Live | UPTO 50% OFF | SHOP NOW</p>
                 </div>
             </div>
-            <div className={`absolute w-full py-4 bg-white h-auto shadow-xl z-50 transition-transform transform duration-500 ease-in-out
+
+            {visable && <div className={`absolute w-full py-4 bg-white h-auto shadow-xl z-50 transition-transform transform duration-500 ease-in-out
                 ${openSearchBox ? "top-0 left-0 translate-y-0" : "-translate-y-40"}`}>
                 <div className="flex justify-center items-center gap-4 p-3 md:p-6">
                     <div className="w-3/4 md:w-1/2">
                         <input
+                            name='search'
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
                             type="text"
                             placeholder="Search..."
                             className="bg-white appearance-none border-2 border-gray-300 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-blackColor transition-colors duration-300"
                         />
                     </div>
                     <div className="flex items-center gap-4">
-                        <button className={"btn-dark hidden md:block text-center "}>Search</button>
-                        <FontAwesomeIcon className='text-lg flex md:hidden cursor-pointer' icon={faSearch} />
-                        <RxCross2 className='absolute right-4 text-2xl cursor-pointer hover:text-secondColor transition-colors duration-300' onClick={() => setOpenSearchBox(!openSearchBox)} />
+                        <RxCross2 className='absolute right-4 text-2xl cursor-pointer hover:text-secondColor 
+                        transition-colors duration-300'
+                            onClick={() => setOpenSearchBox(!openSearchBox)} />
                     </div>
                 </div>
             </div>
-
+            }
 
             <div className="banner">
                 <div className='px-4 sm:px-[5vw] md:px-[7cw] lg:px=[9vw] flex items-center justify-between py-5 font-medium border-2 border-hoverColor'>

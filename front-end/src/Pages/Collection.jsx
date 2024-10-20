@@ -5,7 +5,7 @@ import { useShopContext } from '../Context/Context'
 import Card from '../Components/Cards/Card'
 import Spinner from '../Components/Cards/Spinner/Spinner'
 const Collection = () => {
-  const { products, currency, delivery_Fee } = useShopContext()
+  const { products, search, openSearchBox } = useShopContext()
   const [setshowFilter, setSetshowFilter] = useState(false)
   const [showFilterMenu, setShowFilterMenu] = useState(false)
   const [filterProducts, setFilterProducts] = useState([])
@@ -40,6 +40,10 @@ const Collection = () => {
 
   const applyFilter = () => {
     let productCopy = products.slice();
+    if (openSearchBox && search)
+      productCopy = productCopy.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+
+
     if (category.length > 0) {
       productCopy = productCopy.filter(item => category.includes(item.category))
     }
@@ -69,7 +73,7 @@ const Collection = () => {
   }
   useEffect(() => {
     applyFilter();
-  }, [category, setCategory, subCategory, setSubCategory]);
+  }, [category, subCategory, search, openSearchBox]);
 
   useEffect(() => {
     filterItemsByPrice();
@@ -232,7 +236,9 @@ const Collection = () => {
           </div>
           <div className="flex-1 bg-gray-50 shadow-md py-3 rounded-md">
             <div className="flex justify-between text-base mx-4">
-              <PageTitle title1={"All"} title2={"Collections"} fontSize={'text-[20px]'} />
+              <div className=" font-Aclonica text-[3vmin]">
+                <PageTitle title1={"All"} title2={"Collections"} fontSize={'text-[20px]'} />
+              </div>
               <select onChange={(e) => setSortType(e.target.value)} className='border-2 border-gray-200 text-sm px-2'>
                 <option value="Relevent">Relevent</option>
                 <option value="ByHighPrice">By Low Price </option>

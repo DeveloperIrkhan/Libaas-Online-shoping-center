@@ -3,6 +3,12 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+        Quicksand: ["Quicksand", "sans-serif"],
+        Playfair: ["Playfair Display", "serif"],
+        Aclonica: ["Aclonica", "sans-serif"]
+      },
       colors: {
         blackColor: "#4e4d4d",
         secondColor: "#FFD200",
@@ -11,7 +17,7 @@ export default {
         whiteColor: "#ffffff"
       },
       letterSpacing: {
-        "extra-spacing": "3.9px", // Custom negative tracking value
+        "extra-spacing": "3.9px" // Custom negative tracking value
       }
     }
   },

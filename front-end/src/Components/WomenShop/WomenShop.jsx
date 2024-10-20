@@ -30,7 +30,7 @@ const WomenShop = () => {
 
   return (
     <div>
-      <div className="scroll-item text-middum text-center wonderland-fonts my-4 md:my-10">Women Shop</div>
+      <div className="scroll-item text-2xl text-blackColor text-center my-4 md:my-10">Women Shop</div>
       <div className="relative h-full md:h-[800px] md:overflow-scroll py-20 md:py-52 ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-5">
           <div className="text-center p-3 md:p-16 xl:p-44">

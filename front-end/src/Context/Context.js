@@ -4,7 +4,10 @@ export const shopContext = createContext({
   currency: String,
   delivery_Fee: Number,
   products: [],
-  addNew: (items) => {}
+  search: String,
+  setSearch: () => {},
+  openSearchBox: Boolean,
+  setOpenSearchBox: () => {}
 });
 export const useShopContext = () => {
   return useContext(shopContext);

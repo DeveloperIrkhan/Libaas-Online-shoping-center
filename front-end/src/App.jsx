@@ -18,8 +18,16 @@ import Accessories from "./Pages/Accessories"
 import Auth from './Pages/Auth'
 import ProductDetails from './Pages/ProductDetails'
 import Perfumes from './Pages/Perfumes'
-function App() {
 
+import { ShopProvider } from './Context/Context'
+import { product } from "./DummyData/product.js";
+import { useState } from 'react';
+function App() {
+  const [openSearchBox, setOpenSearchBox] = useState(false)
+  const [search, setSearch] = useState("");
+  const currency = "Rs/-";
+  const delivery_Fee = 5;
+  const products = product;
 
   const routes = createBrowserRouter(
     createRoutesFromElements(
@@ -49,9 +57,11 @@ function App() {
 
 
   return (
-    <div>
-      <RouterProvider router={routes} />
-    </div>
+    <ShopProvider value={{ currency, delivery_Fee, products, search, setSearch, openSearchBox, setOpenSearchBox }}>
+      <div>
+        <RouterProvider router={routes} />
+      </div>
+    </ShopProvider>
   )
 }
 
