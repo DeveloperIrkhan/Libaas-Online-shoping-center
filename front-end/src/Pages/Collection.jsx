@@ -3,11 +3,13 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md"
 import PageTitle from '../Components/Heading/PageTitle'
 import { useShopContext } from '../Context/Context'
 import Card from '../Components/Cards/Card'
+import Spinner from '../Components/Cards/Spinner/Spinner'
 const Collection = () => {
   const { products, currency, delivery_Fee } = useShopContext()
   const [setshowFilter, setSetshowFilter] = useState(false)
   const [showFilterMenu, setShowFilterMenu] = useState(false)
   const [filterProducts, setFilterProducts] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
   const [sortType, setSortType] = useState("Relevent")
   // getting item by categorywise
   const [category, setCategory] = useState([])
@@ -45,14 +47,15 @@ const Collection = () => {
       productCopy = productCopy.filter(item => subCategory.includes(item.subCategory))
     }
     setFilterProducts(productCopy)
+
   }
   const filterItemsByPrice = () => {
     let productsCopy = filterProducts.slice()
     switch (sortType) {
-      case "High-Low":
+      case "ByHighPrice":
         setFilterProducts(productsCopy.sort((a, b) => a.price - b.price))
         break;
-      case "Low-High":
+      case "ByLowPrice":
         setFilterProducts(productsCopy.sort((a, b) => b.price - a.price))
         break;
       case "Relevent":
@@ -70,11 +73,13 @@ const Collection = () => {
 
   useEffect(() => {
     filterItemsByPrice();
-  }, [sortType, setSortType]);
+  }, [sortType, setSortType,]);
 
 
   return (
+
     <div className="w-full h-full">
+      {isLoading && <Spinner />}
       <div className="mx-0 md:mx-4">
         <div className="flex flex-col md:flex-row gap-2 sm:gap-10 pt-10">
           <div className="min-w-60 bg-gray-50 shadow-md py-3 rounded-md">
@@ -173,39 +178,54 @@ const Collection = () => {
               <div className={`pl-5 py-3`}>
                 <div className="flex flex-col text-sm md:font-medium text-gray-700 m-1 uppercase tracking-widest">Type</div>
                 <div className="flex flex-col text-sm md:font-medium text-gray-700">
-                  <p className='m-1 tracking-widest'>
-                    <input className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Headwear"} /> Headwear
-                  </p>
-                  <p className='m-1 tracking-widest'>
-                    <input className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Bottomwear"} /> Bottomwear
-                  </p>
-                  <p className='m-1 tracking-widest'>
-                    <input className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Outerwear"} /> Outerwear
-                  </p>
-                  <p className='m-1 tracking-widest'>
-                    <input className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Topwear"} /> Topwear
-                  </p>
-                  <p className='m-1 tracking-widest'>
-                    <input className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Innerwear"} /> Innerwear
-                  </p>
-                  <p className='m-1 tracking-widest'>
-                    <input className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Footwear"} /> Footwear
-                  </p>
-                  <p className='m-1 tracking-widest'>
-                    <input className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Activewear"} /> Activewear
-                  </p>
-                  <p className='m-1 tracking-widest'>
-                    <input className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Sun Glasses"} /> Sun Glasses
-                  </p>
-                  <p className='m-1 tracking-widest'>
-                    <input className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Fragrances"} /> Fragrances
-                  </p>
-                  <p className='m-1 tracking-widest'>
-                    <input className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Caban Shirt"} /> Caban Shirt
-                  </p>
-                  <p className='m-1 tracking-widest'>
-                    <input className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Accessories"} /> Accessories
-                  </p>
+                  <span className='flex my-1 flex-row items-center tracking-widest'>
+                    <input id='Headwear' className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Headwear"} />
+                    <label htmlFor='Headwear'>Headwear</label>
+                  </span>
+                  <span className='flex my-1 flex-row items-center tracking-widest'>
+                    <input id='Bottomwear' className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Bottomwear"} />
+                    <label htmlFor='Bottomwear'>Bottomwear</label>
+                  </span>
+                  <span className='flex my-1 flex-row items-center tracking-widest'>
+                    <input id='Outerwear' className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Outerwear"} />
+                    <label htmlFor='Outerwear'>Outerwear</label>
+                  </span>
+                  <span className='flex my-1 flex-row items-center tracking-widest'>
+                    <input id='Topwear' className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Topwear"} />
+                    <label htmlFor='Topwear'>Topwear</label>
+                  </span>
+                  <span className='flex my-1 flex-row items-center tracking-widest'>
+                    <input id='Innerwear' className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Innerwear"} />
+                    <label htmlFor='Innerwear'>Innerwear</label>
+                  </span>
+                  <span className='flex my-1 flex-row items-center tracking-widest'>
+                    <input id='Footwear' className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Footwear"} />
+                    <label htmlFor='Footwear'>Footwear</label>
+                  </span>
+                  <span className='flex my-1 flex-row items-center tracking-widest'>
+                    <input id='Activewear' className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Activewear"} />
+                    <label htmlFor='Activewear'>Activewear</label>
+                  </span>
+                  <span className='flex my-1 flex-row items-center tracking-widest'>
+                    <input id='SunGlasses' className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Sun Glasses"} />
+                    <label htmlFor='SunGlasses'>Sun Glasses</label>
+                  </span>
+                  <span className='flex my-1 flex-row items-center tracking-widest'>
+                    <input id='Fragrances' className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Fragrances"} />
+                    <label htmlFor='Fragrances'>Fragrances</label>
+                  </span>
+                  <span className='flex my-1 flex-row items-center tracking-widest'>
+                    <input id='CabanShirt' className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Caban Shirt"} />
+                    <label htmlFor='CabanShirt'>Caban Shirt</label>
+                  </span>
+                  <span className='flex my-1 flex-row items-center tracking-widest'>
+                    <input id='Accessories' className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Accessories"} />
+                    <label htmlFor='Accessories'>Accessories</label>
+                  </span>
+                  <span className='flex my-1 flex-row items-center tracking-widest'>
+                    <input id='clothing' className='w-5' type="checkbox" onChange={toggleSubCategory} value={"Clothing"} />
+                    <label htmlFor='clothing'>Clothing</label>
+                  </span>
                 </div>
               </div>
             </div>
@@ -215,8 +235,8 @@ const Collection = () => {
               <PageTitle title1={"All"} title2={"Collections"} fontSize={'text-[20px]'} />
               <select onChange={(e) => setSortType(e.target.value)} className='border-2 border-gray-200 text-sm px-2'>
                 <option value="Relevent">Relevent</option>
-                <option value="High-Low">By Low Price </option>
-                <option value="Low-High">By High Price</option>
+                <option value="ByHighPrice">By Low Price </option>
+                <option value="ByLowPrice">By High Price</option>
               </select>
             </div>
 

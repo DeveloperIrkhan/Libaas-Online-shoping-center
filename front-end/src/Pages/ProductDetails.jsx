@@ -82,21 +82,23 @@ const ProductDetails = () => {
                             </p>
 
                             <div className="flex  items-center mb-4">
-                                <span className="font-medium text-gray-800">Size: </span>
-                                <div className="flex space-x-2 ml-4">
-                                    {product.sizes.map((size, index) => (
-                                        <button onClick={() => setProductSize(size)} key={index}
-                                            className={`px-4 py-2 border border-gray-400 rounded duration-300 ${size === productSize ? "bg-blackColor text-white" : ""}`}>
-                                            {size}
-                                        </button>
-                                    ))}
-                                </div>
+                                {product.sizes && <>
+                                    <span className="font-medium text-gray-800">Size: </span>
+                                    <div className="flex space-x-2 ml-4">
+                                        {product.sizes.map((size, index) => (
+                                            <button onClick={() => setProductSize(size)} key={index}
+                                                className={`px-4 py-2 border border-gray-400 rounded duration-300 ${size === productSize ? "bg-blackColor text-white" : ""}`}>
+                                                {size}
+                                            </button>
+                                        ))}
+                                    </div></>}
+
                             </div>
-
-                            <p className="text-black text-sm my-3 flex flex-row items-center gap-2">
-                                <FaRegClock /> In Stock
-                            </p>
-
+                            {product.InStock &&
+                                <p className="text-black text-sm my-3 flex flex-row items-center gap-2">
+                                    <FaRegClock /> In Stock
+                                </p>
+                            }
                             <CustomBtn className={"btn-dark active:bg-orange-500"} onClickFun={() => { }} text={"Add To Cart"} />
 
 

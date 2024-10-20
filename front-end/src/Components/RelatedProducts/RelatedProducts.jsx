@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useShopContext } from '../../Context/Context'
 import Card from '../Cards/Card';
+import PageTitle from '../Heading/PageTitle';
 
 const RelatedProducts = ({ category, subCategory }) => {
 
@@ -20,7 +21,7 @@ const RelatedProducts = ({ category, subCategory }) => {
     return (
         <div>
             <div className="mt-12">
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">Related Products</h2>
+                <PageTitle title1={"Related"} title2={"Products"} fontSize={' text-sm'}/>
             </div>
             <div className="m-4">
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">

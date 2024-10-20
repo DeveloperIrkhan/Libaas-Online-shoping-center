@@ -10,6 +10,7 @@ import KidsShop from '../Components/KidsShop/KidsShop';
 import WomenShop from '../Components/WomenShop/WomenShop';
 import ExtraSection from '../Components/ExtraSection/ExtraSection';
 import { useShopContext } from '../Context/Context'
+import AboutApplication from '../Components/AboutApplication/AboutApplication';
 const Home = () => {
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -146,6 +147,9 @@ const Home = () => {
       </section>
       <section>
         <ExtraSection />
+      </section>
+      <section>
+        <AboutApplication />
       </section>
     </>
   );

@@ -5,26 +5,50 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import CustomBtn from '../CustomBtn'
+import { RxCross2 } from 'react-icons/rx'
 
 const Navbar = () => {
-const navigate = useNavigate()
+    const [close, setClose] = useState(true)
+    const [openSearchBox, setOpenSearchBox] = useState(false)
+    const navigate = useNavigate()
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
     }
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     return (
         <div className="">
-            <div className="px-4 sm:px-[5vw] md:px-[7cw] lg:px=[9vw]
+            <div className="relative px-4 sm:px-[5vw] md:px-[7cw] lg:px=[9vw]
             flex items-center flex-start py-1 bg-secondColor gap-3">
                 <div className="hidden md:flex gap-2 ">
                     <FontAwesomeIcon icon={faFacebook} className='hover:text-whiteColor duration-400' />
                     <FontAwesomeIcon icon={faInstagram} className='hover:text-whiteColor duration-400' />
                     <FontAwesomeIcon icon={faTwitter} className='hover:text-whiteColor duration-400' />
                 </div>
+
                 <div className=" m-auto ">
                     <p className='text-center text-blackColor text-small md:text-sm '>Summer Clearance Sale Is Live | UPTO 50% OFF | SHOP NOW</p>
                 </div>
             </div>
+            <div className={`absolute w-full py-4 bg-white h-auto shadow-xl z-50 transition-transform transform duration-500 ease-in-out
+                ${openSearchBox ? "top-0 left-0 translate-y-0" : "-translate-y-40"}`}>
+                <div className="flex justify-center items-center gap-4 p-3 md:p-6">
+                    <div className="w-3/4 md:w-1/2">
+                        <input
+                            type="text"
+                            placeholder="Search..."
+                            className="bg-white appearance-none border-2 border-gray-300 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-blackColor transition-colors duration-300"
+                        />
+                    </div>
+                    <div className="flex items-center gap-4">
+                        <button className={"btn-dark hidden md:block text-center "}>Search</button>
+                        <FontAwesomeIcon className='text-lg flex md:hidden cursor-pointer' icon={faSearch} />
+                        <RxCross2 className='absolute right-4 text-2xl cursor-pointer hover:text-secondColor transition-colors duration-300' onClick={() => setOpenSearchBox(!openSearchBox)} />
+                    </div>
+                </div>
+            </div>
+
+
             <div className="banner">
                 <div className='px-4 sm:px-[5vw] md:px-[7cw] lg:px=[9vw] flex items-center justify-between py-5 font-medium border-2 border-hoverColor'>
                     <div
@@ -49,24 +73,24 @@ const navigate = useNavigate()
                                 <NavLink to={"/Footwear"} className={({ isActive }) => `p-1 ${isActive ? "text-secondColor  font-bold" : ""}`} onClick={toggleMenu}>
                                     <p>footwear</p>
                                 </NavLink>
-                                <NavLink to={"/activewear"} className={({ isActive }) => `p-1 ${isActive ? "text-secondColor  font-bold" : ""}`} onClick={toggleMenu}>
-                                    <p>activewear</p>
+                                <NavLink to={"/perfumes"} className={({ isActive }) => `p-1 ${isActive ? "text-secondColor  font-bold" : ""}`} onClick={toggleMenu}>
+                                    <p>Perfumes</p>
                                 </NavLink>
                             </ul>
                         </div>
                     </div>
-                    <div className={`md:hidden z-50 mx-4 ${isMenuOpen ? 'menu-open' : ''}`} onClick={toggleMenu}>
+                    <div className={`md:hidden z-40 mx-4 ${isMenuOpen ? 'menu-open' : ''}`} onClick={toggleMenu}>
                         <span>
                             <div className="bar bar1"></div>
                             <div className="bar bar2"></div>
                             <div className="bar bar3"></div>
                         </span>
                     </div>
-                    <div className="searchbox text-small flex items-center gap-2">
+                    <div className="searchbox text-small flex items-center gap-2" onClick={() => setOpenSearchBox(true)}>
                         <FontAwesomeIcon className='md:text-sm text-lg' icon={faSearch} />
                         <p className='hidden md:block'>Search</p>
                     </div>
-                    <div className="  h-[10vmin] w-[12vmin] m-auto" style={{cursor:"pointer"}} onClick={()=> navigate("/")}>
+                    <div className="  h-[10vmin] w-[12vmin] m-auto" style={{ cursor: "pointer" }} onClick={() => navigate("/")}>
                         <img className='hidden md:block' src={images.Logo} alt="" />
                         <p className='main-heading block md:hidden'>Libaas</p>
                     </div>
@@ -111,8 +135,8 @@ const navigate = useNavigate()
                             <p>footwear</p>
                             <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
                         </NavLink>
-                        <NavLink to={"/activewear"} className='flex flex-col items-center gap-1' >
-                            <p>activewear</p>
+                        <NavLink to={"/perfumes"} className='flex flex-col items-center gap-1' >
+                            <p>Perfumes</p>
                             <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
                         </NavLink>
 

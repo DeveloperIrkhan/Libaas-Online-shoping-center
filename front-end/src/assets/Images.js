@@ -109,7 +109,55 @@ import MarathonJuniorShorts_2 from "./MarathonJuniorShorts_2.webp";
 import MarathonJuniorShorts_3 from "./MarathonJuniorShorts_3.webp";
 import Measurement from "./Measurement.png";
 
+import BlackKameezShalwar_1 from "./BlackKameezShalwar_1.webp";
+import BlackKameezShalwar_2 from "./BlackKameezShalwar_2.webp";
+import BrownKameezShalwar_1 from "./BrownKameezShalwar_1.webp";
+import BrownKameezShalwar_2 from "./BrownKameezShalwar_2.webp";
+import BrownKameezShalwar_3 from "./BrownKameezShalwar_3.webp";
+import GrayCottonKameezShalwar_1 from "./GrayCottonKameezShalwar_1.webp";
+import GrayCottonKameezShalwar_2 from "./GrayCottonKameezShalwar_2.webp";
+import GrayCottonKameezShalwar_3 from "./GrayCottonKameezShalwar_3.webp";
+import GrayKameezShalwar_1 from "./GrayKameezShalwar_1.webp";
+import GrayKameezShalwar_2 from "./GrayKameezShalwar_2.webp";
+import LightYellowKameezShalwar_1 from "./LightYellowKameezShalwar_1.webp";
+import LightYellowKameezShalwar_2 from "./LightYellowKameezShalwar_2.webp";
+import LightYellowKameezShalwar_3 from "./LightYellowKameezShalwar_3.webp";
+import SkyBlueKameezShalwar_1 from "./SkyBlueKameezShalwar_1.webp";
+import SkyBlueKameezShalwar_2 from "./SkyBlueKameezShalwar_2.webp";
+import SkyBlueKameezShalwar_3 from "./SkyBlueKameezShalwar_3.webp";
+
+import Perfume_Allure from "./Perfume_Allure.jpg";
+import Perfume_BlackRose from "./Perfume_BlackRose.jpg";
+import Perfume_Chanel from "./Perfume_Chanel.jpg";
+import Perfume_ChanelLight from "./Perfume_ChanelLight.jpg";
+import Perfume_Coco from "./Perfume_Coco.jpg";
+import Perfume_Gold from "./Perfume_Gold.jpg";
+import Perfume_Janan from "./Perfume_Janan.jpg";
+
 export const images = {
+  Perfume_Allure,
+  Perfume_BlackRose,
+  Perfume_Chanel,
+  Perfume_ChanelLight,
+  Perfume_Coco,
+  Perfume_Gold,
+  Perfume_Janan,
+  BlackKameezShalwar_1,
+  BlackKameezShalwar_2,
+  BrownKameezShalwar_1,
+  BrownKameezShalwar_2,
+  BrownKameezShalwar_3,
+  GrayCottonKameezShalwar_1,
+  GrayCottonKameezShalwar_2,
+  GrayCottonKameezShalwar_3,
+  GrayKameezShalwar_1,
+  GrayKameezShalwar_2,
+  LightYellowKameezShalwar_1,
+  LightYellowKameezShalwar_2,
+  LightYellowKameezShalwar_3,
+  SkyBlueKameezShalwar_1,
+  SkyBlueKameezShalwar_2,
+  SkyBlueKameezShalwar_3,
   Measurement,
   MarathonJuniorShorts_1,
   MarathonJuniorShorts_2,
