@@ -24,11 +24,13 @@ const Collection = () => {
   // change Page
   const Paginate = (pageNumber) => setCurrentPage(pageNumber)
   const toggleCategory = (e) => {
+    setIsLoading(true)
     if (category.includes(e.target.value)) {
       setCategory((prev) => prev.filter(item => item != e.target.value))
     } else {
       setCategory((prev) => [...prev, e.target.value])
     }
+    setIsLoading(false)
   }
   const toggleSubCategory = (e) => {
     if (subCategory.includes(e.target.value)) {

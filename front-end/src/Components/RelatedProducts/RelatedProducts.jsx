@@ -24,7 +24,7 @@ const RelatedProducts = ({ category, subCategory }) => {
                 <PageTitle title1={"Related"} title2={"Products"} fontSize={' text-sm'}/>
             </div>
             <div className="m-4">
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3">
                     {reletedProduct.length > 0 ? reletedProduct.map((item) => (
                         <Card key={item._id}
                             title={item.name}

@@ -11,7 +11,7 @@ import { useShopContext } from '../../Context/Context'
 
 const Navbar = () => {
     const location = useLocation();
-    const { openSearchBox, setOpenSearchBox, search, setSearch } = useShopContext();
+    const { openSearchBox, setOpenSearchBox, search, setSearch, getCartCount } = useShopContext();
     const [visable, setVisable] = useState(false)
     const navigate = useNavigate()
     const toggleMenu = () => {
@@ -29,19 +29,23 @@ const Navbar = () => {
     return (
         <div className="">
             <div className="relative px-4 sm:px-[5vw] md:px-[7cw] lg:px=[9vw]
-            flex items-center flex-start py-1 bg-secondColor gap-3">
-                <div className="hidden md:flex gap-2 ">
-                    <FontAwesomeIcon icon={faFacebook} className='hover:text-whiteColor duration-400' />
-                    <FontAwesomeIcon icon={faInstagram} className='hover:text-whiteColor duration-400' />
-                    <FontAwesomeIcon icon={faTwitter} className='hover:text-whiteColor duration-400' />
+            flex items-center flex-start py-1 bg-blackColor gap-3 text-white">
+                <div className="hidden md:flex gap-2">
+                    <FontAwesomeIcon icon={faFacebook} className='hover:text-blue-600 transition-colors duration-400' />
+                    <FontAwesomeIcon icon={faInstagram} className='hover:text-pink-600 transition-colors duration-400' />
+                    <FontAwesomeIcon icon={faTwitter} className='hover:text-black transition-colors duration-400' />
                 </div>
 
-                <div className=" m-auto ">
-                    <p className='text-center text-blackColor text-small md:text-sm '>Summer Clearance Sale Is Live | UPTO 50% OFF | SHOP NOW</p>
+                <div className=" m-auto">
+                    <p className='text-center text-white text-small md:text-sm '>
+                        <span className="">Summer Clearance Sale Is Live | UPTO 50% OFF | </span>
+                        <span onClick={()=> navigate("/Collections")} className="cursor-pointer hover:underline hover:text-secondColor
+                         transition-all duration-300">SHOP NOW</span></p>
                 </div>
             </div>
 
-            {visable && <div className={`absolute w-full py-4 bg-white h-auto shadow-xl z-50 transition-transform transform duration-500 ease-in-out
+            {visable && <div className={`absolute w-full py-4 bg-white h-auto shadow-xl z-50 transition-transform 
+            transform duration-500 ease-in-out
                 ${openSearchBox ? "top-0 left-0 translate-y-0" : "-translate-y-40"}`}>
                 <div className="flex justify-center items-center gap-4 p-3 md:p-6">
                     <div className="w-3/4 md:w-1/2">
@@ -51,7 +55,8 @@ const Navbar = () => {
                             onChange={(e) => setSearch(e.target.value)}
                             type="text"
                             placeholder="Search..."
-                            className="bg-white appearance-none border-2 border-gray-300 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-blackColor transition-colors duration-300"
+                            className="bg-white appearance-none border-2 border-gray-300 rounded-lg w-full py-2 px-4
+                             text-gray-700 leading-tight focus:outline-none focus:border-blackColor transition-colors duration-300"
                         />
                     </div>
                     <div className="flex items-center gap-4">
@@ -100,7 +105,7 @@ const Navbar = () => {
                             <div className="bar bar3"></div>
                         </span>
                     </div>
-                    <div className="searchbox text-small flex items-center gap-2" onClick={() => setOpenSearchBox(true)}>
+                    <div className="searchbox text-small flex items-center gap-2 hover:cursor-pointer" onClick={() => setOpenSearchBox(true)}>
                         <FontAwesomeIcon className='md:text-sm text-lg' icon={faSearch} />
                         <p className='hidden md:block'>Search</p>
                     </div>
@@ -108,14 +113,18 @@ const Navbar = () => {
                         <img className='hidden md:block' src={images.Logo} alt="" />
                         <p className='main-heading block md:hidden'>Libaas</p>
                     </div>
-                    <ul className='flex items-center gap-2 text-small text-blackColor uppercase'>
+                    <ul className='flex items-center gap-2 text-small text-blackColor uppercase relative'>
                         <NavLink to={"/auth"} className='flex items-center gap-1' >
                             <p className='hidden md:block'>Account</p>
                             <img className='block md:hidden' src={images.AccountIcon} style={{ width: "25px" }} alt="" />
                         </NavLink>
-                        <NavLink to={"/cart"} className='flex items-center gap-0.5' >
+                        <NavLink to={"/cart"} className='flex items-center gap-0.5 ' >
                             <p className='hidden md:flex'>cart</p>
                             <img src={images.Cart} style={{ width: "25px" }} alt="" />
+                            <span className='absolute z-10 -right-[7px] top-3 w-5 h-5 flex justify-center items-center 
+                             p-1 bg-blackColor text-white rounded-full'>
+                                {getCartCount()}
+                            </span>
                         </NavLink>
                     </ul>
                 </div>

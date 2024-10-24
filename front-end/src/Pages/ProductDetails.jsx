@@ -3,6 +3,7 @@ import { PiTShirtThin } from "react-icons/pi";
 import { MdOutlineChangeCircle } from "react-icons/md";
 import { FaShippingFast } from "react-icons/fa";
 import { TfiRulerAlt2 } from "react-icons/tfi";
+import { LiaRulerVerticalSolid } from "react-icons/lia";
 import { useParams } from 'react-router-dom'
 import { useShopContext } from '../Context/Context';
 import { FaRegClock } from "react-icons/fa";
@@ -12,12 +13,14 @@ import Accordion from '../Components/Cards/Accordion';
 import { IoChevronDown } from 'react-icons/io5';
 import { images } from '../assets/Images';
 import RelatedProducts from '../Components/RelatedProducts/RelatedProducts';
+import Spinner from '../Components/Cards/Spinner/Spinner';
+import MeasurementGuide from '../Components/Modals/MeasurementGuide';
 const ProductDetails = () => {
     const [product, setProduct] = useState(null);
     const [productImage, setProductimage] = useState(null);
     const [productSize, setProductSize] = useState("");
     const { _id } = useParams();
-    const { products, currency } = useShopContext();
+    const { products, currency, IsModelOpen, setIsModelOpen, addToCart } = useShopContext();
     const [isOpen, setIsOpen] = useState(false);
     const toggleAccordion = () => {
         setIsOpen(!isOpen);
@@ -38,7 +41,8 @@ const ProductDetails = () => {
     return (
         <>
             {product ? (
-                <div className="container md:px-40 mx-auto px-4 py-8">
+                <div className="container md:px-40 mx-auto px-4 py-8 z-10">
+                    <MeasurementGuide />
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 order-2 md:order-1">
                         {/* Images Section */}
                         <div className="w-full flex justify-normal">
@@ -94,14 +98,17 @@ const ProductDetails = () => {
                                     </div></>}
 
                             </div>
-                            {product.InStock &&
-                                <p className="text-black text-sm my-3 flex flex-row items-center gap-2">
-                                    <FaRegClock /> In Stock
-                                </p>
-                            }
-                            <CustomBtn className={"btn-dark active:bg-orange-500"} onClickFun={() => { }} text={"Add To Cart"} />
-
-
+                            <div className="inline-flex justify-between items-center">
+                                {product.InStock &&
+                                    <p className="text-black text-sm my-3 flex flex-row items-center gap-2">
+                                        <FaRegClock /> In Stock
+                                    </p>
+                                }
+                                <p onClick={() => { setIsModelOpen(!IsModelOpen) }}
+                                    className='text-black text-sm my-3 flex flex-row items-center gap-2 py-1 hover:border-yellow-400 hover:text-yellow-400 cursor-pointer'><LiaRulerVerticalSolid /> size guide</p>
+                            </div>
+                            <CustomBtn className={"btn-dark active:bg-orange-500"}
+                                onClickFun={() => { addToCart(product._id, productSize) }} text={"Add To Cart"} />
                             <div className="flex flex-col  gap-4 mt-4 py-3">
                                 <AccordionBullets
                                     Icon={PiTShirtThin}
@@ -157,7 +164,7 @@ const ProductDetails = () => {
 
                 </div>
             ) : (
-                <>Loading.....</>
+                <><Spinner /></>
             )}
         </>
     );

@@ -1,5 +1,6 @@
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import './App.css'
+import './CustomTostify.css'
 import Home from './Pages/Home'
 import Collection from './Pages/Collection'
 import About from './Pages/About'
@@ -18,16 +19,11 @@ import Accessories from "./Pages/Accessories"
 import Auth from './Pages/Auth'
 import ProductDetails from './Pages/ProductDetails'
 import Perfumes from './Pages/Perfumes'
-
 import { ShopProvider } from './Context/Context'
-import { product } from "./DummyData/product.js";
-import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
-  const [openSearchBox, setOpenSearchBox] = useState(false)
-  const [search, setSearch] = useState("");
-  const currency = "Rs/-";
-  const delivery_Fee = 5;
-  const products = product;
+
 
   const routes = createBrowserRouter(
     createRoutesFromElements(
@@ -57,7 +53,8 @@ function App() {
 
 
   return (
-    <ShopProvider value={{ currency, delivery_Fee, products, search, setSearch, openSearchBox, setOpenSearchBox }}>
+    <ShopProvider>
+      <ToastContainer />
       <div>
         <RouterProvider router={routes} />
       </div>
