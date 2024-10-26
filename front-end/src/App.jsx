@@ -16,6 +16,7 @@ import NewArrivals from './Pages/NewArrivals'
 import BestSellers from "./Pages/BestSellers"
 import Clothing from "./Pages/Clothing"
 import Accessories from "./Pages/Accessories"
+import ReturnRefundPolicy from "./Pages/ReturnRefundPolicy/ReturnRefundPolicy"
 import Auth from './Pages/Auth'
 import ProductDetails from './Pages/ProductDetails'
 import Perfumes from './Pages/Perfumes'
@@ -43,7 +44,9 @@ function App() {
           <Route path='/cart' element={<Cart />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/my-orders' element={<MyOrders />} />
+          <Route path='/refund-policy' element={<ReturnRefundPolicy />} />
           <Route path='/auth' element={<Auth />} />
+          <Route path='/about-us' element={<About />} />
           <Route path='/products' element={<Product />} />
           <Route path='/product-details/:_id' element={<ProductDetails />} />
         </Route>

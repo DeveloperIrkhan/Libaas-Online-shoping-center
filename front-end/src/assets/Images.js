@@ -125,7 +125,8 @@ import LightYellowKameezShalwar_3 from "./LightYellowKameezShalwar_3.webp";
 import SkyBlueKameezShalwar_1 from "./SkyBlueKameezShalwar_1.webp";
 import SkyBlueKameezShalwar_2 from "./SkyBlueKameezShalwar_2.webp";
 import SkyBlueKameezShalwar_3 from "./SkyBlueKameezShalwar_3.webp";
-
+import profile from "./profile.png";
+import camera from "./camera.svg";
 import Perfume_Allure from "./Perfume_Allure.jpg";
 import Perfume_BlackRose from "./Perfume_BlackRose.jpg";
 import Perfume_Chanel from "./Perfume_Chanel.jpg";
@@ -133,9 +134,44 @@ import Perfume_ChanelLight from "./Perfume_ChanelLight.jpg";
 import Perfume_Coco from "./Perfume_Coco.jpg";
 import Perfume_Gold from "./Perfume_Gold.jpg";
 import Perfume_Janan from "./Perfume_Janan.jpg";
+import TshirtBanner from "./TshirtBanner.jpg";
+
+import Footwear_1 from "./Footwear_1.webp";
+import Footwear_2 from "./Footwear_2.webp";
+import Footwear_3 from "./Footwear_3.webp";
+import Footwear_4 from "./Footwear_4.webp";
+import Footwear_5 from "./Footwear_5.webp";
+import Footwear_6 from "./Footwear_6.webp";
+import Footwear_7 from "./Footwear_7.webp";
+import Footwear_8 from "./Footwear_8.webp";
+import Footwear_9 from "./Footwear_9.webp";
+import Footwear_10 from "./Footwear_10.webp";
+import Footwear_11 from "./Footwear_11.webp";
+import Footwear_12 from "./Footwear_12.webp";
+import Footwear_13 from "./Footwear_13.webp";
+import Footwear_14 from "./Footwear_14.webp";
+import Footwear_15 from "./Footwear_15.webp";
 
 export const images = {
+  Footwear_1,
+  Footwear_2,
+  Footwear_3,
+  Footwear_4,
+  Footwear_5,
+  Footwear_6,
+  Footwear_7,
+  Footwear_8,
+  Footwear_9,
+  Footwear_10,
+  Footwear_11,
+  Footwear_12,
+  Footwear_13,
+  Footwear_14,
+  Footwear_15,
   Perfume_Allure,
+  TshirtBanner,
+  camera,
+  profile,
   Perfume_BlackRose,
   Perfume_Chanel,
   Perfume_ChanelLight,

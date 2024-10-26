@@ -64,6 +64,7 @@ const NewArrivals = () => {
                         {headgear.slice(currentIndex, currentIndex + cardsToShow).map((item, itemIndex) => (
                             <div key={`${item.name}-${itemIndex}`} className="carousel-item bg-white shadow-sm rounded-lg overflow-hidden relative group">
                                 <NewArrivalsCard
+                                    to={`product-details/${item._id}`}
                                     image={item.image[imageIndex[itemIndex]]}
                                     title={item.name}
                                     classes={"bg-white shadow-sm rounded-lg overflow-hidden"}

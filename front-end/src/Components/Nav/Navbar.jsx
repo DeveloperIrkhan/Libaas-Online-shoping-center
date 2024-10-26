@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { images } from '../../assets/Images'
 import './nav.css'
-import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { faFacebook, faInstagram, faTwitter,  faTiktok, faYoutube } from '@fortawesome/free-brands-svg-icons'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import CustomBtn from '../CustomBtn'
 import { RxCross2 } from 'react-icons/rx'
@@ -33,13 +33,14 @@ const Navbar = () => {
                 <div className="hidden md:flex gap-2">
                     <FontAwesomeIcon icon={faFacebook} className='hover:text-blue-600 transition-colors duration-400' />
                     <FontAwesomeIcon icon={faInstagram} className='hover:text-pink-600 transition-colors duration-400' />
-                    <FontAwesomeIcon icon={faTwitter} className='hover:text-black transition-colors duration-400' />
+                    <FontAwesomeIcon icon={faTiktok} className='hover:text-black transition-colors duration-400' />
+                    <FontAwesomeIcon icon={faYoutube} className='hover:text-red-600 transition-colors duration-400' />
                 </div>
 
                 <div className=" m-auto">
                     <p className='text-center text-white text-small md:text-sm '>
                         <span className="">Summer Clearance Sale Is Live | UPTO 50% OFF | </span>
-                        <span onClick={()=> navigate("/Collections")} className="cursor-pointer hover:underline hover:text-secondColor
+                        <span onClick={() => navigate("/Collections")} className="cursor-pointer hover:underline hover:text-secondColor
                          transition-all duration-300">SHOP NOW</span></p>
                 </div>
             </div>
@@ -114,10 +115,31 @@ const Navbar = () => {
                         <p className='main-heading block md:hidden'>Libaas</p>
                     </div>
                     <ul className='flex items-center gap-2 text-small text-blackColor uppercase relative'>
-                        <NavLink to={"/auth"} className='flex items-center gap-1' >
-                            <p className='hidden md:block'>Account</p>
-                            <img className='block md:hidden' src={images.AccountIcon} style={{ width: "25px" }} alt="" />
-                        </NavLink>
+                        <div className="relative group flex items-center gap-1">
+                            <NavLink to="/auth" className='flex items-center'>
+                                <p className='hidden md:block'>Account</p>
+                                <img className='block md:hidden' src={images.AccountIcon} style={{ width: "25px" }} alt="Account Icon" />
+                            </NavLink>
+
+                            {/* Dropdown menu */}
+                            <div className="absolute dropwonn z-50 border top-5 right-0 bg-white 
+                            rounded-t-none rounded-lg shadow-lg opacity-0 invisible 
+                            group-hover:visible group-hover:opacity-100 transform 
+                            group-hover:translate-y-2 transition-all duration-500 ease-in-out">
+                                <div className="dropdown-menu flex flex-col">
+                                    <Link className="py-2 px-8 tracking-wider border-b transition-colors duration-150 hover:bg-gray-100">
+                                        Profile
+                                    </Link>
+                                    <Link to="/my-orders" className="py-2 px-8 tracking-wider border-b transition-colors duration-150 hover:bg-gray-100">
+                                        Orders
+                                    </Link>
+                                    <Link className="py-2 px-8 tracking-wider border-b transition-colors duration-150 hover:bg-gray-100">
+                                        SignOut
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+
                         <NavLink to={"/cart"} className='flex items-center gap-0.5 ' >
                             <p className='hidden md:flex'>cart</p>
                             <img src={images.Cart} style={{ width: "25px" }} alt="" />
@@ -132,7 +154,8 @@ const Navbar = () => {
             </div>
             <div className="">
                 <div className="flex flex-col">
-                    <ul className='hidden md:flex sm:px-[5vw] md:px-[7cw] lg:px=[9vw] justify-center md:gap-7 py-5 text-darkColor text-middum-extended uppercase'>
+                    <ul className='hidden md:flex sm:px-[5vw] md:px-[7cw] lg:px=[9vw] justify-center
+                     md:gap-7 py-5 text-darkColor text-middum-extended uppercase'>
                         <NavLink to={"/summer-sale"} className='flex flex-col items-center gap-1' >
                             <p>summer clearance sale</p>
                             <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />

@@ -8,7 +8,7 @@ const Card = ({ image, title, classes, price, saleOnProduct, originalPrice, onmo
     return (
         <NavLink className={"p-0 m-0"} to={to}>
             <div
-                className={`${classes} relative group mt-0 w-full h-full bg-white rounded-lg shadow-md hover:bg-slate-50 duration-300`}
+                className={`${classes} relative min-w-[5vmin] group mt-0 h-full bg-white rounded-lg shadow-md hover:bg-slate-50 duration-300`}
                 onMouseEnter={onmouseEnter}
                 onMouseLeave={onmouseOut}
             >

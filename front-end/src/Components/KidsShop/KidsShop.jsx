@@ -94,6 +94,7 @@ const KidsShop = () => {
                                     collection.slice(currentIndexNo, currentIndexNo + ShowItems).map((item) => (
                                         <div key={item._id}>
                                             <KidsShopCard
+                                                to={`product-details/${item._id}`}
                                                 classes={'mx-3'}
                                                 onmouseEnter={() => setHoveredIndex(item._id)}
                                                 onmouseOut={() => setHoveredIndex(null)}

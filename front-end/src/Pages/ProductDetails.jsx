@@ -41,12 +41,12 @@ const ProductDetails = () => {
     return (
         <>
             {product ? (
-                <div className="container md:px-40 mx-auto px-4 py-8 z-10">
+                <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] mt-3">
                     <MeasurementGuide />
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 order-2 md:order-1">
                         {/* Images Section */}
-                        <div className="w-full flex justify-normal">
-                            <div className="flex flex-col sm:flex-row gap-4">
+                        <div className="w-full flex items-center justify-center">
+                            <div className="flex justify-center flex-col md:flex-row gap-4">
                                 {/* Thumbnails (Small Images) */}
                                 <div className="flex sm:flex-col sm:w-1/3 w-full gap-2 sm:gap-4 order-2 md:order-1">
                                     {product.image.map((item, index) => (
@@ -54,21 +54,21 @@ const ProductDetails = () => {
                                             key={index}
                                             src={item}
                                             alt="product image"
-                                            className="cursor-pointer w-1/4 sm:w-full h-auto object-cover sm:object-contain"
+                                            className="cursor-pointer w-1/4 sm:w-full h-auto"
                                             onClick={() => setProductimage(item)}
                                         />
                                     ))}
                                 </div>
                                 {/* Large Image */}
-                                <div className="w-full sm:w-full rounded-md order-1 md:order-2">
-                                    <img className="w-full h-auto object-cover" src={productImage} alt="Selected Product Image" />
+                                <div className="flex justify-center rounded-lg order-1 md:order-2">
+                                    <img className="w-full max-w-[600px] h-auto" src={productImage} alt="Selected Product Image" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Product Details Section */}
-                        <div className="flex flex-col mt-3 md:mt-10  order-1 md:order-2">
-                            <h1 className="text-2xl font-semibold text-black mb-2">
+                        <div className="flex flex-col mt-3 md:mt-10 order-1 md:order-2">
+                            <h1 className="text-xl md:text-2xl font-semibold text-black mb-2">
                                 {product.name}
                             </h1>
 
@@ -154,9 +154,7 @@ const ProductDetails = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="">
-                        <RelatedProducts category={product.category} subCategory={product.subCategory} />
-                    </div>
+                    <RelatedProducts category={product.category} subCategory={product.subCategory} />
                     {/* Product Reviews Section */}
                     <div className="mt-12">
                         <h2 className="text-xl font-semibold text-gray-800 mb-4">Product Reviews</h2>

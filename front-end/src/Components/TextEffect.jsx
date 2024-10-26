@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { images } from '../assets/Images';
+import { useNavigate } from 'react-router-dom';
 
 const TextEffect = () => {
-    
+  const navigate = useNavigate()
   // following code is for images  slider,
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);

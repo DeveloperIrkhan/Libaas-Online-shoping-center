@@ -95,9 +95,10 @@ const WomenShop = () => {
         <div className='py2 md:py-6'>
           <div className="flex justify-center ">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4" >
-              {WomenCollection.map((item, index) => (
+              {WomenCollection.reverse().map((item, index) => (
                 <div key={index} className="">
                   <WomenShopCard classes={"gap-x-4 my-5"} 
+                  to={`product-details/${item._id}`}
                   image={item.image[0]} 
                   title={item.name} 
                   price={item.price} 
@@ -106,7 +107,7 @@ const WomenShop = () => {
             </div>
           </div>
           <div className="row text-center my-5">
-            <CustomBtn className={"btn-dark"} onClickFun={() => { }} text={"View All"} />
+            <CustomBtn  className={"btn-dark"} onClickFun={() => { }} text={"View All"} />
           </div>
         </div>
       </div>

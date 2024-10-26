@@ -1,19 +1,20 @@
 import React from 'react'
 import { FaFacebook, FaInstagram, FaTiktok, FaYoutube } from "react-icons/fa";
+import { NavLink } from 'react-router-dom';
 const Footer = () => {
     const h_style = "fa-[18px] font-bold leading-[23px]  align-baseline text-blackColor tracking-extra-spacing not-italic uppercase indent-0 py-5"
     const p_style = "leading-[20px] py-1 font-normal leading-snug tracking-[1.5px] align-baseline text-[#7b7878]"
     return (
         <div className='mt-16 bg-[#f7f7f8]'>
             <div className="flex flex-col md:grid grid-cols-2 md:grid-cols-4 gap-4 md:p-20 p-5">
-                <div className="">
+                <div className="flex flex-col">
                     <p className={`${h_style}`}> INFORMATION</p>
                     <p className={`${p_style}`}> Become Our Distributor</p>
+                    <NavLink to={"/refund-policy"} className={`${p_style}`}> Return & Refund Policy</NavLink>
                     <p className={`${p_style}`}> Terms & Conditions</p>
                     <p className={`${p_style}`}> Shipping Policy</p>
                     <p className={`${p_style}`}> Privacy Policy</p>
-                    <p className={`${p_style}`}> Return Policy</p>
-                    <p className={`${p_style}`}> Blogs</p>
+                    <NavLink to={"/about-us"} className={`${p_style}`}> About us</NavLink>
                 </div>
                 <div className="">
                     <p className={`${h_style}`}>CUSTOMER CARE</p>
@@ -32,9 +33,9 @@ const Footer = () => {
                         <div className="group-hover:border-yellow-500 duration-200 flex items-center border-b border-gray-500 py-2">
                             <input className="appearance-none bg-transparent border-none w-full
                              text-gray-700 mr-3 py-1 px-2 leading-tight 
-                             focus:outline-none" 
-                             type="text" 
-                             placeholder="example@gmail.com" />
+                             focus:outline-none"
+                                type="text"
+                                placeholder="example@gmail.com" />
                         </div>
                         <button className='bg-darkColor text-white px-4 py-2 rounded my-2 w-full'>Submit</button>
                     </div>

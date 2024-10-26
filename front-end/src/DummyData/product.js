@@ -816,11 +816,95 @@ export const product = [
     bestSeller: false,
     NewArrival: true,
     SaleOnProduct: true
+  },
+  {
+    _id: 47,
+    name: "Black Women Shoes",
+    description:
+      "Step out in style with our sleek black women's shoes, designed for comfort and elegance.",
+    price: 5999,
+    OrigionalPrice: 7999,
+    InStock: true,
+    image: [
+      images.Footwear_1,
+      images.Footwear_2,
+      images.Footwear_3,
+      images.Footwear_4
+    ],
+    sizes: ["32", "34", "35"],
+    category: "Women",
+    subCategory: "Footwear",
+    date: "12-11-2024",
+    bestSeller: false,
+    NewArrival: true,
+    SaleOnProduct: true
+  },
+  {
+    _id: 48,
+    name: "Brown Shoes",
+    description:
+      "Step out in style with our sleek black women's shoes, designed for comfort and elegance.",
+    price: 5999,
+    OrigionalPrice: 5999,
+    InStock: true,
+    image: [images.Footwear_5, images.Footwear_6, images.Footwear_7],
+    sizes: ["32", "34", "35"],
+    category: "Men",
+    subCategory: "Footwear",
+    date: "12-11-2024",
+    bestSeller: false,
+    NewArrival: true,
+    SaleOnProduct: true
+  },
+  {
+    _id: 49,
+    name: "Janan",
+    description:
+      "Step out in style with our sleek black women's shoes, designed for comfort and elegance.",
+    price: 5999,
+    OrigionalPrice: 7999,
+    InStock: true,
+    image: [images.Footwear_8, images.Footwear_9, images.Footwear_10],
+    sizes: ["100ml Bottle", "250ml Bottle", "500ml Bottle"],
+    category: "Men",
+    subCategory: "Footwear",
+    date: "12-11-2024",
+    bestSeller: false,
+    NewArrival: true,
+    SaleOnProduct: true
+  },
+  {
+    _id: 50,
+    name: "White Sandels",
+    description:
+      "Step out in style with our sleek black women's shoes, designed for comfort and elegance.",
+    price: 8999,
+    OrigionalPrice: 9999,
+    InStock: true,
+    image: [images.Footwear_11, images.Footwear_12, images],
+    sizes: ["100ml Bottle", "250ml Bottle", "500ml Bottle"],
+    category: "Men",
+    subCategory: "Footwear",
+    date: "12-11-2024",
+    bestSeller: false,
+    NewArrival: true,
+    SaleOnProduct: true
+  },
+  {
+    _id: 51,
+    name: "White Chapal",
+    description:
+      "Step out in style with our sleek black women's shoes, designed for comfort and elegance.",
+    price: 3599,
+    OrigionalPrice: 4999,
+    InStock: true,
+    image: [images.Footwear_13, images.Footwear_14, images.Footwear_15],
+    sizes: ["100ml Bottle", "250ml Bottle", "500ml Bottle"],
+    category: "Men",
+    subCategory: "Footwear",
+    date: "12-11-2024",
+    bestSeller: false,
+    NewArrival: true,
+    SaleOnProduct: true
   }
 ];
-
-// ,
-// ,
-// ,
-// Perfume_Gold,
-// Perfume_Janan,

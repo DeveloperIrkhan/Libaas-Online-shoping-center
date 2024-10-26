@@ -93,6 +93,7 @@ const Home = () => {
                 className={`carousel-item ${direction === 'next' ? 'slide-next' : direction === 'prev' ? 'slide-prev' : ''}`}
               >
                 <HomeCard
+                  to={`product-details/${item._id}`}
                   image={item.image}
                   title={item.name}
                   description={item.description}

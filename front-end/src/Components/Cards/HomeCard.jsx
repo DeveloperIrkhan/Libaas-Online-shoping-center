@@ -1,7 +1,8 @@
 import React from 'react'
-const HomeCard = ({ image, title, classes, description }) => {
+import { NavLink } from 'react-router-dom'
+const HomeCard = ({ image, title, classes, description, to }) => {
     return (
-        <div className={`${classes} relative group`}>
+        <NavLink to={to} className={`${classes} relative group`}>
             <img src={image} alt={title} className="w-full object-cover" />
             <div className="absolute z-10 bottom-5 left-0 right-0">
                 <p className="text-center card-title-fonts text-white
@@ -12,7 +13,7 @@ const HomeCard = ({ image, title, classes, description }) => {
             group-hover:opacity-100 absolute z-10 bottom-1/4 px-4 font-bold text-white text-center">
                 {description}
             </div>
-        </div>
+        </NavLink>
     )
 }
 
