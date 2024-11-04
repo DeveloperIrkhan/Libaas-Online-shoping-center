@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { product } from "../DummyData/product.js"
 import { toast } from "react-toastify";
+import axios from 'axios';
+
 const ShopContext = createContext();
 export const ShopProvider = ({ children }) => {
   const [openSearchBox, setOpenSearchBox] = useState(false);
@@ -84,6 +86,18 @@ export const ShopProvider = ({ children }) => {
     return totalAmount;
 
   }
+
+
+
+
+  const signUpAsync = async (SignUpData) => {
+    try {
+      const response = await axios.post("",)
+    } catch (error) {
+
+    }
+  }
+  const signInAsync = async () => { }
 
 
   const values =

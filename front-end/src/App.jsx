@@ -23,6 +23,8 @@ import Perfumes from './Pages/Perfumes'
 import { ShopProvider } from './Context/Context'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AdminLayout from './Components/Layout/AdminLayout'
+import AdminDashboard from './Pages/AdminPanel/AdminDashboard'
 function App() {
 
 
@@ -49,6 +51,9 @@ function App() {
           <Route path='/about-us' element={<About />} />
           <Route path='/products' element={<Product />} />
           <Route path='/product-details/:_id' element={<ProductDetails />} />
+        </Route>
+        <Route path='/admin-panel' element={<AdminLayout />}>
+          <Route index element={<AdminDashboard />} />
         </Route>
       </>
     )

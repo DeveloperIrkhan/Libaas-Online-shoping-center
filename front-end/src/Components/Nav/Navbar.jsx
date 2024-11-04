@@ -5,7 +5,6 @@ import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faInstagram, faTwitter,  faTiktok, faYoutube } from '@fortawesome/free-brands-svg-icons'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import CustomBtn from '../CustomBtn'
 import { RxCross2 } from 'react-icons/rx'
 import { useShopContext } from '../../Context/Context'
 

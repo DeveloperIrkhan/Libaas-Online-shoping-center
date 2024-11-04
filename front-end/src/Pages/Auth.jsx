@@ -14,7 +14,6 @@ const Auth = () => {
 
     const onSubmitFormHandler = (event) => {
         event.preventDefault()
-
     }
     return (
         <div className="h-full w-full px-3 md:px-6 mt-4">
