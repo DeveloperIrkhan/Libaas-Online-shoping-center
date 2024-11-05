@@ -24,7 +24,11 @@ import { ShopProvider } from './Context/Context'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AdminLayout from './Components/Layout/AdminLayout'
-import AdminDashboard from './Pages/AdminPanel/AdminDashboard'
+import AddItem from './Pages/AdminPanel/pages/AddItem'
+import ListOrder from './Pages/AdminPanel/pages/ListOrder'
+import AddCategory from './Pages/AdminPanel/pages/AddCategory'
+import AddSubCategory from './Pages/AdminPanel/pages/AddSubCategory'
+import ListProduct from './Pages/AdminPanel/pages/ListProduct'
 function App() {
 
 
@@ -52,8 +56,12 @@ function App() {
           <Route path='/products' element={<Product />} />
           <Route path='/product-details/:_id' element={<ProductDetails />} />
         </Route>
-        <Route path='/admin-panel' element={<AdminLayout />}>
-          <Route index element={<AdminDashboard />} />
+        <Route path='/admin-panel/' element={<AdminLayout />}>
+          <Route path='add-item' element={<AddItem />} />
+          <Route path='add-category' element={<AddCategory />} />
+          <Route path='add-sub-category' element={<AddSubCategory />} />
+          <Route path='list-products' element={<ListProduct />} />
+          <Route path='list-orders' element={<ListOrder />} />
         </Route>
       </>
     )

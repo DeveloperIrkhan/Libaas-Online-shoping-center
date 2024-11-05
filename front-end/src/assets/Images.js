@@ -152,7 +152,18 @@ import Footwear_13 from "./Footwear_13.webp";
 import Footwear_14 from "./Footwear_14.webp";
 import Footwear_15 from "./Footwear_15.webp";
 
+import AddProduct from "./AddProduct.png";
+import caregory from "./caregory.png";
+import subCategory from "./subCategory.png";
+import ListProduct from "./ListProduct.png";
+import ListOrder from "./ListOrder.png";
+
 export const images = {
+  AddProduct,
+  caregory,
+  subCategory,
+  ListProduct,
+  ListOrder,
   Footwear_1,
   Footwear_2,
   Footwear_3,
