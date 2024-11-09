@@ -14,18 +14,18 @@ const AdminLayout = () => {
             </div>
             {/* this content section */}
             <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[5vw] my-5">
-                <div className="mt-10 font-Aclonica fa-1x md:text-xl my-4">
+                <div className="mt-10 font-Aclonica my-4">
                     <PageTitle title1="admin" title2={"panel"} />
                 </div>
-                <div className='flex flex-col md:flex-row gap-4'>
-                    <div className="w-full md:w-[20%] flex flex-col gap-y-3">
+                <div className='flex flex-row md:gap-4'>
+                    <div className="md:w-[25%] flex flex-col gap-y-3">
                         <NavButton redirectTo={"add-item"} img={images.AddProduct} buttonText={"Add Item"} />
                         <NavButton redirectTo={"add-category"} img={images.caregory} buttonText={"Add Category"} />
                         <NavButton redirectTo={"add-sub-category"} img={images.subCategory} buttonText={"Add SubCategory"} />
                         <NavButton redirectTo={"list-products"} img={images.ListProduct} buttonText={"List Items"} />
                         <NavButton redirectTo={"list-orders"} img={images.ListOrder} buttonText={"List Orders"} />
                     </div>
-                    <div className="w-full md:w-[80%] rounded-lg bg-white shadow-md px-2 md:p-4">
+                    <div className="w-full md:w-[75%] rounded-lg bg-white shadow-md px-2 md:p-4">
                         <Outlet />
                     </div>
                 </div>
