@@ -3,19 +3,51 @@ import { images } from '../../assets/Images'
 import './nav.css'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebook, faInstagram, faTwitter,  faTiktok, faYoutube } from '@fortawesome/free-brands-svg-icons'
+import { faFacebook, faInstagram, faTwitter, faTiktok, faYoutube } from '@fortawesome/free-brands-svg-icons'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { RxCross2 } from 'react-icons/rx'
 import { useShopContext } from '../../Context/Context'
+import axios from 'axios'
+import { toast } from 'react-toastify'
+import Cookies from 'js-cookie'
 
 const Navbar = () => {
     const location = useLocation();
-    const { openSearchBox, setOpenSearchBox, search, setSearch, getCartCount } = useShopContext();
+    const { openSearchBox, setOpenSearchBox, search, setSearch, getCartCount, loggedInUser, setloggedInUser, setToken } = useShopContext();
     const [visable, setVisable] = useState(false)
     const navigate = useNavigate()
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
     }
+
+    useEffect(() => {
+    }, [loggedInUser, setloggedInUser])
+
+    const signoutAsync = async () => {
+        try {
+            const token = Cookies.get('accessToken')
+            const response = await axios.post("http://localhost:8080/api/v1/auth/logout", {}, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: `Bearer ${token}`,
+                },
+            })
+            if (response.data.success) {
+                const { message } = response.data
+                toast.success(message)
+                navigate("/")
+            }
+            setToken("")
+            setloggedInUser(null)
+            localStorage.removeItem("loggedIn")
+            localStorage.removeItem("role")
+            Cookies.remove("accessToken")
+            Cookies.remove("refreshToken")
+        } catch (error) {
+            console.log("error", error)
+        }
+    }
+
     useEffect(() => {
         if (location.pathname.includes('collections')) {
             setVisable(true)
@@ -116,27 +148,30 @@ const Navbar = () => {
                     <ul className='flex items-center gap-2 text-small text-blackColor uppercase relative'>
                         <div className="relative group flex items-center gap-1">
                             <NavLink to="/auth" className='flex items-center'>
-                                <p className='hidden md:block'>Account</p>
+                                {loggedInUser ? <>
+                                    <div className='w-10 h-10 border-2 rounded-full overflow-hidden flex justify-center items-center'>
+                                        <img className='w-9 h-9 rounded-full' src={loggedInUser.avator} alt="" /></div>
+                                </> : <p className='hidden md:block'>Account</p>}
                                 <img className='block md:hidden' src={images.AccountIcon} style={{ width: "25px" }} alt="Account Icon" />
                             </NavLink>
 
                             {/* Dropdown menu */}
-                            <div className="absolute dropwonn z-50 border top-5 right-0 bg-white 
+                            {loggedInUser && <div className="absolute dropwonn z-50 border top-10 right-0 bg-white 
                             rounded-t-none rounded-lg shadow-lg opacity-0 invisible 
                             group-hover:visible group-hover:opacity-100 transform 
                             group-hover:translate-y-2 transition-all duration-500 ease-in-out">
                                 <div className="dropdown-menu flex flex-col">
-                                    <Link className="py-2 px-8 tracking-wider border-b transition-colors duration-150 hover:bg-gray-100">
+                                    <Link to={"/profile"} className="py-2 px-8 tracking-wider border-b transition-colors duration-150 hover:bg-gray-100">
                                         Profile
                                     </Link>
                                     <Link to="/my-orders" className="py-2 px-8 tracking-wider border-b transition-colors duration-150 hover:bg-gray-100">
                                         Orders
                                     </Link>
-                                    <Link className="py-2 px-8 tracking-wider border-b transition-colors duration-150 hover:bg-gray-100">
+                                    <Link onClick={signoutAsync} className="py-2 px-8 tracking-wider border-b transition-colors duration-150 hover:bg-gray-100">
                                         SignOut
                                     </Link>
                                 </div>
-                            </div>
+                            </div>}
                         </div>
 
                         <NavLink to={"/cart"} className='flex items-center gap-0.5 ' >

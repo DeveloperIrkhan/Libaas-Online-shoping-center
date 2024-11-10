@@ -1,22 +1,97 @@
 import React, { useState } from 'react'
 import CustomBtn from '../Components/CustomBtn'
-import PageTitle from '../Components/Heading/PageTitle'
+import Spinner from '../Components/Cards/Spinner/Spinner'
 import { images } from '../assets/Images'
-
+import axios from 'axios'
+import { toast } from 'react-toastify'
+import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router-dom'
+import { useShopContext } from '../Context/Context'
 const Auth = () => {
     const [currentState, setCurrentState] = useState("Signup")
-    const [uploadedImage, setUploadedImage] = useState(null)
+    const [loading, setLoading] = useState(false)
+    const [avator, setAvator] = useState()
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
-
-    const onSubmitFormHandler = (event) => {
+    const { token, setToken, role, setRole } = useShopContext()
+    const navigate = useNavigate()
+    const onSubmitFormHandler = async (event) => {
         event.preventDefault()
-    }
+        setLoading(true)
+        if (currentState === "Signup") {
+            try {
+                const formdata = new FormData()
+                formdata.append('firstName', firstName)
+                formdata.append('lastName', lastName)
+                formdata.append("email", email)
+                formdata.append("avator", avator)
+                formdata.append("password", password)
+
+                const response = await axios.post("http://localhost:8080/api/v1/auth/register", formdata, {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                });
+
+                console.log(response);
+                if (response.data.success) {
+                    const { message } = response.data;
+                    toast.success(message);
+                }
+            } catch (error) {
+                console.error("Registration error:", error.response || error);
+                toast.error("Registration failed");
+            }
+            finally {
+                setLoading(false);
+                setCurrentState("Login")
+            }
+        }
+        else {
+            try {
+                const response = await axios.post("http://localhost:8080/api/v1/auth/login", { email, password })
+                console.log("response", response)
+                if (response.data.success) {
+                    const { accessToken, refreshToken, loggedIn } = response.data;
+                    const expireDate = new Date();
+                    expireDate.setHours(expireDate.getHours() + 2);
+                    Cookies.set('accessToken', accessToken, { expires: expireDate });
+                    Cookies.set('refreshToken', refreshToken, { expires: 2 });
+                    setToken(accessToken);
+                    localStorage.setItem("loggedIn", JSON.stringify(loggedIn));
+
+                    if (loggedIn.UserRole === 2) {
+                        setRole("Admin")
+                        localStorage.setItem("role", "Admin");
+                        toast.success("Admin login successfully")
+                        navigate("/admin-panel/")
+                    }
+                    else {
+                        setRole("User")
+                        toast.success("Logged in successfully");
+                        navigate("/my-orders")
+                    }
+
+                }
+                else {
+                    toast.error(response.data.message || "Invalid login");
+                }
+            } catch (error) {
+                console.error("Login error:", error.response || error);
+            }
+            finally {
+                setLoading(false);
+            }
+        }
+
+    };
+   
     return (
         <div className="w-full px-3 md:px-6 mt-4">
+            {loading && <Spinner />}
             <div className="text-lg md:text-2xl font-Aclonica font-bold text-gray-600 flex justify-center items-center">
                 <p className='tracking-widest'>{currentState}</p>
                 <hr className='border-none h-[2.5px] w-8 bg-gray-600 ml-3' />
@@ -26,13 +101,19 @@ const Auth = () => {
                     <div className="md:inline-flex md:items-center mb-6">
                         <div className="md:w-full">
                             {currentState === "Signup" &&
-                                <div className="flex flex-col justify-center items-center relative">
-                                    <div className='min-w-49 w-20 h-20 rounded-full shadow-lg flex items-center justify-center border'>
-                                        <img src={`${uploadedImage ? uploadedImage : images.profile}`} className='rounded-full' alt="" />
-                                        <img src={images.camera} className={`absolute w-7 ${uploadedImage ? "hidden" : "opacity-80 block"}`} alt="" />
-                                    </div>
-                                    <input type="text" />
-                                    <p className='mt-0 p-0 text-gray-600 font-bold absolute top-20'>Upload Avator</p>
+                                <div className="flex flex-col justify-center items-center relative my-6">
+                                    <label className='cursor-pointer' htmlFor="avator">
+                                        <div className='min-w-49 w-20 h-20 rounded-full shadow-lg flex items-center justify-center border overflow-hidden'>
+                                            <img src={`${avator ? URL.createObjectURL(avator) : images.profile}`} className='rounded-full w-20 h-20' alt="" />
+                                            <img src={images.camera} className={`absolute w-7 ${avator ? "hidden" : "opacity-80 block"}`} alt="" />
+                                        </div>
+                                    </label>
+                                    <input onChange={(e) => setAvator(e.target.files[0])}
+                                        type="file"
+                                        name="avator"
+                                        id="avator"
+                                        hidden required />
+                                    <p htmlFor="avator" className='mt-0 p-0 text-gray-600 font-bold absolute top-20'>Upload Avator</p>
                                 </div>
                             }
                             {currentState === "Signup" &&

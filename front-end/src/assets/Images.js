@@ -157,7 +157,6 @@ import caregory from "./caregory.png";
 import subCategory from "./subCategory.png";
 import ListProduct from "./ListProduct.png";
 import ListOrder from "./ListOrder.png";
-
 export const images = {
   AddProduct,
   caregory,

@@ -20,8 +20,8 @@ import ReturnRefundPolicy from "./Pages/ReturnRefundPolicy/ReturnRefundPolicy"
 import Auth from './Pages/Auth'
 import ProductDetails from './Pages/ProductDetails'
 import Perfumes from './Pages/Perfumes'
-import { ShopProvider } from './Context/Context'
-import { ToastContainer, toast } from 'react-toastify';
+import { useShopContext } from './Context/Context'
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AdminLayout from './Components/Layout/AdminLayout'
 import AddItem from './Pages/AdminPanel/pages/AddItem'
@@ -29,8 +29,11 @@ import ListOrder from './Pages/AdminPanel/pages/ListOrder'
 import AddCategory from './Pages/AdminPanel/pages/AddCategory'
 import AddSubCategory from './Pages/AdminPanel/pages/AddSubCategory'
 import ListProduct from './Pages/AdminPanel/pages/ListProduct'
+import { useEffect } from 'react'
+import Profile from './Pages/Profile'
 function App() {
 
+  const { loggedInUser, setloggedInUser } = useShopContext();
 
   const routes = createBrowserRouter(
     createRoutesFromElements(
@@ -38,6 +41,7 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
           <Route path='/collections' element={<Collection />} />
+          <Route path='/profile' element={<Profile/>} />
           <Route path='/summer-sale' element={<SummerSale />} />
           <Route path='/Footwear' element={<Footwear />} />
           <Route path='/perfumes' element={<Perfumes />} />
@@ -68,13 +72,14 @@ function App() {
   )
 
 
+ 
   return (
-    <ShopProvider>
+    <>
       <ToastContainer />
       <div>
         <RouterProvider router={routes} />
       </div>
-    </ShopProvider>
+    </>
   )
 }
 

@@ -1,18 +1,27 @@
-import React, { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
 import Navbar from "./../../Pages/AdminPanel/Navbar/Navbar"
 import PageTitle from '../Heading/PageTitle'
 import NavButton from '../admin-panel/NavButton'
 import { images } from '../../assets/Images'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 import Spinner from '../Cards/Spinner/Spinner'
 import { toast } from 'react-toastify'
 import { useShopContext } from '../../Context/Context'
 const AdminLayout = () => {
-    const { token, setToken } = useShopContext()
+    const { token, setToken, role, setRole } = useShopContext()
+    const Navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+
+    }, [])
+
+
+
     const onSubmitFormHandler = async (e) => {
         e.preventDefault();
         // const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/login`, { email, password })
@@ -21,15 +30,23 @@ const AdminLayout = () => {
             const response = await axios.post("http://localhost:8080/api/v1/auth/login", { email, password })
             console.log("response", response)
             if (response.data.success) {
-                const { accessToken, loggedIn } = response.data;
-                console.log(response)
+                const { accessToken, refreshToken, loggedIn } = response.data;
+                const expireDate = new Date();
+                expireDate.setHours(expireDate.getHours() + 2);
+                Cookies.set('accessToken', accessToken, { expires: expireDate });
+                Cookies.set('refreshToken', refreshToken, { expires: 2 });
+                setToken(accessToken);
+                localStorage.setItem("loggedIn", JSON.stringify(loggedIn));
+
                 if (loggedIn.UserRole === 2) {
-                    setToken(accessToken);
+                    setRole("Admin")
+                    localStorage.setItem("role", "Admin");
                     toast.success("Admin login successfully")
                 }
-                else if (loggedIn.role === 1) {
-                    setToken(accessToken);
+                else if (loggedIn.UserRole === 1) {
+                    setRole("User")
                     toast.success("Logged in successfully");
+                    Navigate("/my-orders")
                 }
                 else {
                     toast.warning("Access restricted");
@@ -39,7 +56,7 @@ const AdminLayout = () => {
                 toast.error(response.data.message || "Invalid login");
             }
         } catch (error) {
-            toast.error("invalid login")
+            console.error("Login error:", error.response || error);
         }
         finally {
             setLoading(false);
@@ -48,7 +65,7 @@ const AdminLayout = () => {
     return (
         <div className='bg-gray-50'>
             {loading && <Spinner />}
-            {(token !== "" && token !== undefined && token.length > 0) ? (
+            {(token !== "" && token !== undefined && token.length > 0 && role === "Admin") ? (
                 <div className='bg-gray-50 w-full h-screen'>
                     <div className="header">
                         <Navbar />
