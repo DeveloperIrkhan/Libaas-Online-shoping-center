@@ -8,6 +8,7 @@ export const ShopProvider = ({ children }) => {
   const [openSearchBox, setOpenSearchBox] = useState(false);
   const [IsModelOpen, setIsModelOpen] = useState(false);
   const [search, setSearch] = useState("");
+  const [token, setToken] = useState("")
   const currency = "Rs/-";
   const delivery_Fee = 200;
   const products = product;
@@ -117,6 +118,7 @@ export const ShopProvider = ({ children }) => {
     currency,
     delivery_Fee,
     products,
+    token, setToken
   }
   return (
     <ShopContext.Provider value={values}>

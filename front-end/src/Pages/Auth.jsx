@@ -16,7 +16,7 @@ const Auth = () => {
         event.preventDefault()
     }
     return (
-        <div className="h-full w-full px-3 md:px-6 mt-4">
+        <div className="w-full px-3 md:px-6 mt-4">
             <div className="text-lg md:text-2xl font-Aclonica font-bold text-gray-600 flex justify-center items-center">
                 <p className='tracking-widest'>{currentState}</p>
                 <hr className='border-none h-[2.5px] w-8 bg-gray-600 ml-3' />
