@@ -24,6 +24,10 @@ const Navbar = () => {
     }, [loggedInUser, setloggedInUser])
 
     const signoutAsync = async () => {
+        localStorage.removeItem("loggedIn")
+        localStorage.removeItem("role")
+        Cookies.remove("accessToken")
+        Cookies.remove("refreshToken")
         try {
             const token = Cookies.get('accessToken')
             const response = await axios.post("http://localhost:8080/api/v1/auth/logout", {}, {
@@ -39,10 +43,7 @@ const Navbar = () => {
             }
             setToken("")
             setloggedInUser(null)
-            localStorage.removeItem("loggedIn")
-            localStorage.removeItem("role")
-            Cookies.remove("accessToken")
-            Cookies.remove("refreshToken")
+
         } catch (error) {
             console.log("error", error)
         }

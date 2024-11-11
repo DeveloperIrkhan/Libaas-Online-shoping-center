@@ -15,17 +15,40 @@ export const ShopProvider = ({ children }) => {
   const delivery_Fee = 200;
   const products = product;
 
+  //saving & getting item in localstorage with time expiry
+  const setWithExpiry = (key, value, timeInHours) => {
+    const TimeNow = new Date();
+    const items = {
+      value: value,
+      expiry: TimeNow.getTime() + timeInHours * 60 * 60 * 1000
+    }
+
+    localStorage.setItem(key, JSON.stringify(items));
+  }
+  const getWithExpiry = (key) => {
+    const items = localStorage.getItem(key)
+    if (!items) return null;
+
+    const item = JSON.parse(items)
+    const TimeNow = new Date();
+
+    if (TimeNow.getTime() > item.expiry) {
+      localStorage.removeItem(key);
+      return null;
+    }
+    return item.value;
+  }
   // this is used for to check cartitems in localstorage else create  a new array
   const [cartItems, setCartItems] = useState(() => {
-    const storedCart = localStorage.getItem("cartItems");
+    const storedCart = getWithExpiry("cartItems")
     return storedCart ? JSON.parse(storedCart) : {};
   });
   useEffect(() => {
-    const userRole = localStorage.getItem("role") ?? ""
+    const userRole = getWithExpiry("role")
     setRole(userRole)
     setToken(Cookies.get('accessToken'))
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems, role]);
+    setWithExpiry("cartItems", JSON.stringify(cartItems), 7)
+  }, [cartItems, role, token]);
   // adding to cart
   const addToCart = async (itemId, productSize) => {
     if (!productSize) {
@@ -93,23 +116,20 @@ export const ShopProvider = ({ children }) => {
 
   }
 
+
+
+
+
   useEffect(() => {
-      const storedUser = localStorage.getItem("loggedIn");
-      if (storedUser) {
-        setloggedInUser(JSON.parse(storedUser));
-      }
-      console.log(loggedInUser)
-  }, []);
-
-
-  const signUpAsync = async (SignUpData) => {
-    try {
-      const response = await axios.post("",)
-    } catch (error) {
-
+    const storedUser = JSON.parse(getWithExpiry("loggedIn"))
+    if (storedUser) {
+      setloggedInUser(storedUser);
     }
-  }
-  const signInAsync = async () => { }
+  }, []);
+  useEffect(() => {
+    console.log("loggedIn User", loggedInUser);
+  }, [loggedInUser]);
+
 
 
   const values =
@@ -128,7 +148,9 @@ export const ShopProvider = ({ children }) => {
     search, setSearch,
     token, setToken,
     role, setRole,
-    loggedInUser, setloggedInUser
+    loggedInUser, setloggedInUser,
+    setWithExpiry,
+    getWithExpiry,
   }
   return (
     <ShopContext.Provider value={values}>

@@ -16,7 +16,7 @@ const Auth = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
-    const { token, setToken, role, setRole } = useShopContext()
+    const { token, setToken, role, setRole, setWithExpiry } = useShopContext()
     const navigate = useNavigate()
     const onSubmitFormHandler = async (event) => {
         event.preventDefault()
@@ -52,7 +52,8 @@ const Auth = () => {
         }
         else {
             try {
-                const response = await axios.post("http://localhost:8080/api/v1/auth/login", { email, password })
+                // const response = await axios.post("http://localhost:8080/api/v1/auth/login", { email, password })
+                const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, { email, password })
                 console.log("response", response)
                 if (response.data.success) {
                     const { accessToken, refreshToken, loggedIn } = response.data;
@@ -61,16 +62,20 @@ const Auth = () => {
                     Cookies.set('accessToken', accessToken, { expires: expireDate });
                     Cookies.set('refreshToken', refreshToken, { expires: 2 });
                     setToken(accessToken);
-                    localStorage.setItem("loggedIn", JSON.stringify(loggedIn));
+                    setWithExpiry("loggedIn", JSON.stringify(loggedIn), 1)
+                    // localStorage.setItem("loggedIn", JSON.stringify(loggedIn));
 
                     if (loggedIn.UserRole === 2) {
                         setRole("Admin")
-                        localStorage.setItem("role", "Admin");
+                        // localStorage.setItem("role", "Admin");
+                        setWithExpiry("role", "Admin", 1)
+
                         toast.success("Admin login successfully")
                         navigate("/admin-panel/")
                     }
                     else {
                         setRole("User")
+                        setWithExpiry("role", "User", 1)
                         toast.success("Logged in successfully");
                         navigate("/my-orders")
                     }
@@ -88,7 +93,7 @@ const Auth = () => {
         }
 
     };
-   
+
     return (
         <div className="w-full px-3 md:px-6 mt-4">
             {loading && <Spinner />}

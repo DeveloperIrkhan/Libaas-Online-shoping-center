@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { images } from './../../../assets/Images'
+import { images } from '../../../assets/Images'
 import './nav.css'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useShopContext } from '../../../Context/Context'
 import Cookies from 'js-cookie'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import Spinner from '../../../Components/Cards/Spinner/Spinner'
 
-const Navbar = () => {
+const AdminNavbar = () => {
     const navigate = useNavigate()
     const { loggedInUser, setloggedInUser, setToken } = useShopContext();
-    useEffect(() => {
-    }, [loggedInUser, setloggedInUser])
+    const [loading, setIsLoading] = useState(false)
 
+    useEffect(() => {
+        if (loggedInUser !== null) {
+            setIsLoading(false);
+        }
+    }, [loggedInUser]);
     const signoutAsync = async () => {
         try {
             const token = Cookies.get('accessToken')
@@ -40,6 +45,8 @@ const Navbar = () => {
 
     return (
         <div className="">
+            {loading && <Spinner />}
+
             <div className="banner">
                 <div className='px-4 sm:px-[5vw] md:px-[7cw] lg:px=[9vw] flex items-center justify-between py-5 font-medium border-2 border-hoverColor'>
                     <div className="  h-[10vmin] w-[12vmin] m-auto" style={{ cursor: "pointer" }}
@@ -49,13 +56,13 @@ const Navbar = () => {
                     </div>
                     <ul className='flex items-center gap-2 text-small text-blackColor uppercase relative'>
                         <div className="relative group flex items-center gap-1">
-                            <NavLink to="/auth" className='flex items-center'>
+                            <div  className='flex items-center'>
                                 {loggedInUser ? <>
                                     <div className='w-10 h-10 border-2 rounded-full overflow-hidden flex justify-center items-center'>
                                         <img className='w-9 h-9 rounded-full' src={loggedInUser.avator} alt="" /></div>
                                 </> : <p className='hidden md:block'>Account</p>}
                                 <img className='block md:hidden' src={images.AccountIcon} style={{ width: "25px" }} alt="Account Icon" />
-                            </NavLink>
+                            </div>
 
                             {/* Dropdown menu */}
                             {loggedInUser && <div className="absolute dropwonn z-50 border top-10 right-0 bg-white 
@@ -84,4 +91,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export default AdminNavbar
