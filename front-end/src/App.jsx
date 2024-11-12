@@ -1,4 +1,4 @@
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider, useNavigate } from 'react-router-dom'
 import './App.css'
 import './CustomTostify.css'
 import Home from './Pages/Home'
@@ -21,7 +21,7 @@ import Auth from './Pages/Auth'
 import ProductDetails from './Pages/ProductDetails'
 import Perfumes from './Pages/Perfumes'
 import { useShopContext } from './Context/Context'
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AdminLayout from './Components/Layout/AdminLayout'
 import AddItem from './Pages/AdminPanel/pages/AddItem'
@@ -29,11 +29,70 @@ import ListOrder from './Pages/AdminPanel/pages/ListOrder'
 import AddCategory from './Pages/AdminPanel/pages/AddCategory'
 import AddSubCategory from './Pages/AdminPanel/pages/AddSubCategory'
 import ListProduct from './Pages/AdminPanel/pages/ListProduct'
-import { useEffect } from 'react'
+import Cookies from "js-cookie"
 import Profile from './Pages/Profile'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 function App() {
+  const { loggedInUser, setloggedInUser, setWithExpiry, setToken } = useShopContext();
+  const [refresh_token, setrefreshToken] = useState(null)
+  const [access_token, setAccessToken] = useState(null)
+  const API_URL = import.meta.env.VITE_BACKEND_URL
+  useEffect(() => {
+    const accessToken = Cookies.get('accessToken');
+    const refreshToken = Cookies.get('refreshToken');
+    console.log("accessToken", accessToken)
+    console.log("refreshToken", refreshToken)
+    setrefreshToken(refreshToken)
+    setAccessToken(accessToken)
+    if (refreshToken && (!accessToken || accessToken === undefined)) {
+      getUserUsingRefreshToken();
+    }
+  }, [])
 
-  const { loggedInUser, setloggedInUser } = useShopContext();
+  const getUserUsingRefreshToken = async () => {
+    // const response = await axios.get(`http://localhost:8080/api/v1/auth/get-refresh-token`,{},
+    try {
+      const response = await axios.get(`http://localhost:8080/api/v1/auth/get-refresh-token`,
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${refresh_token}`  // Send refreshToken as part of the headers if needed
+          }
+        },)
+      console.log("response", response)
+      if (response.data.success) {
+        const { message } = response.data;
+        toast.success(message);
+
+        const { accessToken, refreshToken, loggedIn } = response.data;
+        Cookies.set('accessToken', accessToken);
+        Cookies.set('refreshToken', refreshToken);
+        setToken(accessToken);
+        setWithExpiry("loggedIn", JSON.stringify(loggedIn), 2)
+        if (loggedIn.UserRole === 2) {
+          setRole("Admin")
+          setWithExpiry("role", "Admin", 1)
+          toast.success("Admin login successfully")
+        }
+        else {
+          setRole("User")
+          setWithExpiry("role", "User", 1)
+          toast.success("Logged in successfully");
+        }
+      }
+    } catch (error) {
+      console.log(error)
+      if (error.response && error.response.data.message === "refresh token is expired") {
+        toast.error("Your session has expired. Please log in again.");
+        Cookies.remove('accessToken');
+        Cookies.remove('refreshToken');
+      }
+    }
+  }
+
+
 
   const routes = createBrowserRouter(
     createRoutesFromElements(
@@ -41,7 +100,7 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
           <Route path='/collections' element={<Collection />} />
-          <Route path='/profile' element={<Profile/>} />
+          <Route path='/profile' element={<Profile />} />
           <Route path='/summer-sale' element={<SummerSale />} />
           <Route path='/Footwear' element={<Footwear />} />
           <Route path='/perfumes' element={<Perfumes />} />
@@ -72,7 +131,7 @@ function App() {
   )
 
 
- 
+
   return (
     <>
       <ToastContainer />

@@ -28,7 +28,7 @@ export const ShopProvider = ({ children }) => {
   const getWithExpiry = (key) => {
     const items = localStorage.getItem(key)
     if (!items) return null;
-
+    // If the item doesn’t exist, return null
     const item = JSON.parse(items)
     const TimeNow = new Date();
 

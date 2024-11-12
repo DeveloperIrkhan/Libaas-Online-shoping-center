@@ -18,6 +18,7 @@ const AddItem = () => {
   const [productImage4, setProductImage4] = useState(null)
   const [startDate, setStartDate] = useState(new Date());
   const [bestSeller, setBestSeller] = useState('');
+  const [sizes, setSizes] = useState([])
   const inputStyles = "bg-white appearance-none border-2 mt-3 border-gray-200 rounded max-w-md py-2 px-4 text-gray-700 leading-tight tracking-tighter focus:outline-none focus:bg-white focus:border-blackColor";
   const categories = [{ _id: 1, name: "MAN" }, { _id: 2, name: "WOMEN" }, { _id: 3, name: "KIDS" }, { _id: 4, name: "PERFUMES" }, { _id: 5, name: "SUN GLASSESS" }]
   const subcategories = [{ _id: 1, name: "INNER WEAR" }, { _id: 2, name: "OUTER WEAR" }, { _id: 3, name: "HEAD WEAR" }, { _id: 4, name: "FOOT WEAR" }]
@@ -123,19 +124,19 @@ const AddItem = () => {
             <p>Product Sizes</p>
             {/* for shirts */}
             <div className="flex gap-4 mt-2">
-              <div>
+              <div onClick={() => setSizes(prev => prev.includes("S") ? prev.filter(item => item !== "S") : [...prev, "S"])}>
                 <p className='bg-gray-200 hover:bg-gray-300 px-3 py-1 cursor-pointer'>S</p>
               </div>
-              <div>
+              <div onClick={() => setSizes(prev => prev.includes("M") ? prev.filter(item => item !== "M") : [...prev, "M"])}>
                 <p className='bg-gray-200 hover:bg-gray-300 px-3 py-1 cursor-pointer'>M</p>
               </div>
-              <div>
+              <div onClick={() => setSizes(prev => prev.includes("L") ? prev.filter(item => item !== "L") : [...prev, "L"])}>
                 <p className='bg-gray-200 hover:bg-gray-300 px-3 py-1 cursor-pointer'>L</p>
               </div>
-              <div>
+              <div onClick={() => setSizes(prev => prev.includes("XL") ? prev.filter(item => item !== "XL") : [...prev, "XL"])}>
                 <p className='bg-gray-200 hover:bg-gray-300 px-3 py-1 cursor-pointer'>XL</p>
               </div>
-              <div>
+              <div onClick={() => setSizes(prev => prev.includes("XXL") ? prev.filter(item => item !== "XXL") : [...prev, "XXL"])}>
                 <p className='bg-gray-200 hover:bg-gray-300 px-3 py-1 cursor-pointer'>XXL</p>
               </div>
             </div>

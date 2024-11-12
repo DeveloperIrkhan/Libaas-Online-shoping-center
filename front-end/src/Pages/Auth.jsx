@@ -8,7 +8,7 @@ import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 import { useShopContext } from '../Context/Context'
 const Auth = () => {
-    const [currentState, setCurrentState] = useState("Signup")
+    const [currentState, setCurrentState] = useState("Login")
     const [loading, setLoading] = useState(false)
     const [avator, setAvator] = useState()
     const [firstName, setFirstName] = useState("")

@@ -14,9 +14,10 @@ const AdminLayout = () => {
     }, [token, role, loggedInUser])
 
     useEffect(() => {
-        if (loggedInUser !== null) {
-            setIsLoading(false);
+        if (loggedInUser === null) {
+            setIsLoading(true);
         }
+        else setIsLoading(false)
     }, [loggedInUser]);
 
 
