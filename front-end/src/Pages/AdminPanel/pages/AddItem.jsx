@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PageTitle from './../../../Components/Heading/PageTitle'
 import { images } from '../../../assets/Images'
 import DatePicker from "react-datepicker";
@@ -17,14 +17,38 @@ const AddItem = () => {
   const [productImage3, setProductImage3] = useState(null)
   const [productImage4, setProductImage4] = useState(null)
   const [startDate, setStartDate] = useState(new Date());
-  const [bestSeller, setBestSeller] = useState('');
+  const [bestSeller, setBestSeller] = useState(false);
   const [sizes, setSizes] = useState([])
   const inputStyles = "bg-white appearance-none border-2 mt-3 border-gray-200 rounded max-w-md py-2 px-4 text-gray-700 leading-tight tracking-tighter focus:outline-none focus:bg-white focus:border-blackColor";
   const categories = [{ _id: 1, name: "MAN" }, { _id: 2, name: "WOMEN" }, { _id: 3, name: "KIDS" }, { _id: 4, name: "PERFUMES" }, { _id: 5, name: "SUN GLASSESS" }]
   const subcategories = [{ _id: 1, name: "INNER WEAR" }, { _id: 2, name: "OUTER WEAR" }, { _id: 3, name: "HEAD WEAR" }, { _id: 4, name: "FOOT WEAR" }]
+  // useEffect(() => {
+  //   console.log(bestSeller)
+  //   console.log(startDate)
+  // }, [bestSeller, startDate])
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(name, description, category, subCategory, price, productImage1, productImage2, productImage3, productImage4, startDate, bestSeller)
+    let formdata = new formdata();
+    formdata.append("name", name)
+    formdata.append("description", description)
+    formdata.append("category", category)
+    formdata.append("subCategory", subCategory)
+    formdata.append("price", price)
+    formdata.append("productImage1", productImage1)
+    formdata.append("productImage2", productImage2)
+    formdata.append("productImage3", productImage3)
+    formdata.append("productImage4", productImage4)
+    formdata.append("startDate", startDate)
+    formdata.append("bestSeller", bestSeller)
+
+    try {
+
+    } catch (error) {
+
+    }
+    finally {
+
+    }
   }
   return (
     <form onSubmit={onSubmitHandler}>
@@ -125,31 +149,31 @@ const AddItem = () => {
             {/* for shirts */}
             <div className="flex gap-4 mt-2">
               <div onClick={() => setSizes(prev => prev.includes("S") ? prev.filter(item => item !== "S") : [...prev, "S"])}>
-                <p className='bg-gray-200 hover:bg-gray-300 px-3 py-1 cursor-pointer'>S</p>
+                <p className={`bg-gray-200 hover:bg-gray-400 px-3 py-1 cursor-pointer ${sizes.includes("S") ? "bg-gray-400" : ""}`}>S</p>
               </div>
               <div onClick={() => setSizes(prev => prev.includes("M") ? prev.filter(item => item !== "M") : [...prev, "M"])}>
-                <p className='bg-gray-200 hover:bg-gray-300 px-3 py-1 cursor-pointer'>M</p>
+                <p className={`bg-gray-200 hover:bg-gray-400 px-3 py-1 cursor-pointer ${sizes.includes("M") ? "bg-gray-400" : ""}`}>M</p>
               </div>
               <div onClick={() => setSizes(prev => prev.includes("L") ? prev.filter(item => item !== "L") : [...prev, "L"])}>
-                <p className='bg-gray-200 hover:bg-gray-300 px-3 py-1 cursor-pointer'>L</p>
+                <p className={`bg-gray-200 hover:bg-gray-400 px-3 py-1 cursor-pointer ${sizes.includes("L") ? "bg-gray-400" : ""}`}>L</p>
               </div>
               <div onClick={() => setSizes(prev => prev.includes("XL") ? prev.filter(item => item !== "XL") : [...prev, "XL"])}>
-                <p className='bg-gray-200 hover:bg-gray-300 px-3 py-1 cursor-pointer'>XL</p>
+                <p className={`bg-gray-200 hover:bg-gray-400 px-3 py-1 cursor-pointer ${sizes.includes("XL") ? "bg-gray-400" : ""}`}>XL</p>
               </div>
               <div onClick={() => setSizes(prev => prev.includes("XXL") ? prev.filter(item => item !== "XXL") : [...prev, "XXL"])}>
-                <p className='bg-gray-200 hover:bg-gray-300 px-3 py-1 cursor-pointer'>XXL</p>
+                <p className={`bg-gray-200 hover:bg-gray-400 px-3 py-1 cursor-pointer ${sizes.includes("XXL") ? "bg-gray-400" : ""}`}>XXL</p>
               </div>
             </div>
             {/* for perfumes */}
             <div className="flex gap-4 mt-2">
-              <div>
-                <p className='bg-gray-200 hover:bg-gray-300 px-3 py-1 cursor-pointer'>100ml</p>
+              <div onClick={() => setSizes(prev => prev.includes("100ml") ? prev.filter(item => item !== "100ml") : [...prev, "100ml"])}>
+                <p className={`bg-gray-200 hover:bg-gray-400 px-3 py-1 cursor-pointer ${sizes.includes("100ml") ? "bg-gray-400" : ""}`}>100ml</p>
               </div>
-              <div>
-                <p className='bg-gray-200 hover:bg-gray-300 px-3 py-1 cursor-pointer'>250ml</p>
+              <div onClick={() => setSizes(prev => prev.includes("250ml") ? prev.filter(item => item !== "250ml") : [...prev, "250ml"])}>
+                <p className={`bg-gray-200 hover:bg-gray-400 px-3 py-1 cursor-pointer ${sizes.includes("250ml") ? "bg-gray-400" : ""}`}>250ml</p>
               </div>
-              <div>
-                <p className='bg-gray-200 hover:bg-gray-300 px-3 py-1 cursor-pointer'>500ml</p>
+              <div onClick={() => setSizes(prev => prev.includes("500ml") ? prev.filter(item => item !== "500ml") : [...prev, "500ml"])}>
+                <p className={`bg-gray-200 hover:bg-gray-400 px-3 py-1 cursor-pointer ${sizes.includes("500ml") ? "bg-gray-400" : ""}`}>500ml</p>
               </div>
             </div>
           </div>
@@ -159,7 +183,7 @@ const AddItem = () => {
               type="checkbox"
               id='bestSeller'
               value={bestSeller}
-              onChange={(e) => setBestSeller(e.target.value)} />
+              onChange={(e) => setBestSeller(e.target.checked)} />
             <label htmlFor="bestSeller">Add to BestSeller</label>
           </div>
           <div className="my-3 flex items-center gap-4">

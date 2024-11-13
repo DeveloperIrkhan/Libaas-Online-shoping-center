@@ -14,36 +14,36 @@ const AdminLogin = () => {
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
 
-    useEffect(() => {
-
-    }, [setToken])
+    // useEffect(() => {
+    //     console.log("AdminLogin ", Token, Role,)
+    // }, [Token, Role])
 
 
 
     const onSubmitFormHandler = async (e) => {
         e.preventDefault();
-        // const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/login`, { email, password })
         try {
             setLoading(true)
-            const response = await axios.post("http://localhost:8080/api/v1/auth/login", { email, password })
-            console.log("response", response)
+            const response = await axios.post("http://localhost:8080/api/v1/auth/login",
+                { email, password },
+                { withCredentials: true }
+            )
             if (response.data.success) {
                 const { accessToken, refreshToken, loggedIn } = response.data;
-                const expireDate = new Date();
-                expireDate.setHours(expireDate.getHours() + 2);
-                Cookies.set('accessToken', accessToken, { expires: expireDate });
-                Cookies.set('refreshToken', refreshToken, { expires: 7 });
+                const accessTokenExpiry = new Date(new Date().getTime() + 3 * 60 * 60 * 1000);
+                Cookies.set('accessToken', accessToken, { expires: accessTokenExpiry, path: '/' });
+                Cookies.set('refreshToken', refreshToken, { expires: 7, path: '/' });
                 setToken(accessToken);
-                setWithExpiry("loggedIn", JSON.stringify(loggedIn), 2)
+                setWithExpiry("loggedIn", JSON.stringify(loggedIn), 7)
                 setloggedInUser(loggedIn)
                 if (loggedIn.UserRole === 2) {
                     setRole("Admin")
-                    setWithExpiry("role", "Admin", 2)
+                    setWithExpiry("role", "Admin", 7)
                     toast.success("Admin login successfully")
                 }
                 else if (loggedIn.UserRole === 1) {
                     setRole("User")
-                    setWithExpiry("role", "User", 2)
+                    setWithExpiry("role", "User", 7)
                     toast.success("Logged in successfully");
                     Navigate("/my-orders")
                 }

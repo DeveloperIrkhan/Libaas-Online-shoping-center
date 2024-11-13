@@ -38,17 +38,27 @@ export const ShopProvider = ({ children }) => {
     }
     return item.value;
   }
-  // this is used for to check cartitems in localstorage else create  a new array
+
   const [cartItems, setCartItems] = useState(() => {
     const storedCart = getWithExpiry("cartItems")
-    return storedCart ? JSON.parse(storedCart) : {};
+    return storedCart ? JSON.parse(storedCart) : [];
   });
+
+  // this is used for to check cartitems in localstorage else create  a new array
   useEffect(() => {
+    const storedUser = JSON.parse(getWithExpiry("loggedIn"))
+    if (storedUser) {
+      setloggedInUser(storedUser);
+    }
     const userRole = getWithExpiry("role")
     setRole(userRole)
-    setToken(Cookies.get('accessToken'))
+    const accessToken = Cookies.get('accessToken')
+    setToken(accessToken)
     setWithExpiry("cartItems", JSON.stringify(cartItems), 7)
-  }, [cartItems, role, token]);
+    console.log(cartItems, role, token)
+  }, []);
+ useEffect(()=>{},[token,role])
+
   // adding to cart
   const addToCart = async (itemId, productSize) => {
     if (!productSize) {
@@ -120,15 +130,6 @@ export const ShopProvider = ({ children }) => {
 
 
 
-  useEffect(() => {
-    const storedUser = JSON.parse(getWithExpiry("loggedIn"))
-    if (storedUser) {
-      setloggedInUser(storedUser);
-    }
-  }, []);
-  useEffect(() => {
-    console.log("loggedIn User", loggedInUser);
-  }, [loggedInUser]);
 
 
 

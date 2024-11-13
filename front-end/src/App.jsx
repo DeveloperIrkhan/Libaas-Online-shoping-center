@@ -34,15 +34,15 @@ import Profile from './Pages/Profile'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 function App() {
-  const { loggedInUser, setloggedInUser, setWithExpiry, setToken } = useShopContext();
-  const [refresh_token, setrefreshToken] = useState(null)
-  const [access_token, setAccessToken] = useState(null)
+  const { loggedInUser, setloggedInUser, setWithExpiry, setToken, setRole } = useShopContext();
+  const [refreshToken, setrefreshToken] = useState(null)
+  const [accessToken, setAccessToken] = useState(null)
   const API_URL = import.meta.env.VITE_BACKEND_URL
   useEffect(() => {
     const accessToken = Cookies.get('accessToken');
     const refreshToken = Cookies.get('refreshToken');
-    console.log("accessToken", accessToken)
-    console.log("refreshToken", refreshToken)
+    console.log("Initial accessToken:", accessToken);
+    console.log("Initial refreshToken:", refreshToken);
     setrefreshToken(refreshToken)
     setAccessToken(accessToken)
     if (refreshToken && (!accessToken || accessToken === undefined)) {
@@ -58,7 +58,7 @@ function App() {
           withCredentials: true,
           headers: {
             'Content-Type': 'application/json',
-            authorization: `Bearer ${refresh_token}`  // Send refreshToken as part of the headers if needed
+            authorization: `Bearer ${refreshToken}`  // Send refreshToken as part of the headers if needed
           }
         },)
       console.log("response", response)
@@ -67,18 +67,23 @@ function App() {
         toast.success(message);
 
         const { accessToken, refreshToken, loggedIn } = response.data;
-        Cookies.set('accessToken', accessToken);
-        Cookies.set('refreshToken', refreshToken);
+        // const accessTokenExpiry = new Date(new Date().getTime() + 3 * 60 * 60 * 1000);
+        // Cookies.set('accessToken', accessToken, { expires: accessTokenExpiry, path: '/' });
+        // Cookies.set('refreshToken', refreshToken, { expires: 7, path: '/' });
         setToken(accessToken);
-        setWithExpiry("loggedIn", JSON.stringify(loggedIn), 2)
+        setrefreshToken(refreshToken)
+        setAccessToken(accessToken)
+        setWithExpiry("loggedIn", JSON.stringify(loggedIn), 7)
         if (loggedIn.UserRole === 2) {
           setRole("Admin")
-          setWithExpiry("role", "Admin", 1)
+          setWithExpiry("role", "Admin", 7)
           toast.success("Admin login successfully")
+          setloggedInUser(loggedIn)
         }
         else {
           setRole("User")
-          setWithExpiry("role", "User", 1)
+          setloggedInUser(loggedIn)
+          setWithExpiry("role", "User", 7)
           toast.success("Logged in successfully");
         }
       }

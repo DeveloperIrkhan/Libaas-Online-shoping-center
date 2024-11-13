@@ -10,44 +10,52 @@ import { useShopContext } from '../../Context/Context'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import Cookies from 'js-cookie'
+import Spinner from '../Cards/Spinner/Spinner'
 
 const Navbar = () => {
     const location = useLocation();
-    const { openSearchBox, setOpenSearchBox, search, setSearch, getCartCount, loggedInUser, setloggedInUser, setToken } = useShopContext();
+    const [isLoading, setIsLoading] = useState(false)
+    const { openSearchBox, setOpenSearchBox, search, setSearch, getCartCount,
+        token, role, loggedInUser, setloggedInUser, setToken } = useShopContext();
     const [visable, setVisable] = useState(false)
     const navigate = useNavigate()
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
     }
-
     useEffect(() => {
-    }, [loggedInUser, setloggedInUser])
+    }, [token, role, loggedInUser]);
+
 
     const signoutAsync = async () => {
-        localStorage.removeItem("loggedIn")
-        localStorage.removeItem("role")
-        Cookies.remove("accessToken")
-        Cookies.remove("refreshToken")
         try {
-            const token = Cookies.get('accessToken')
+            const token = Cookies.get('accessToken');
+            console.log("signout", token)
+            setloggedInUser(null);
+            localStorage.removeItem("loggedIn");
+            localStorage.removeItem("role");
+            localStorage.removeItem("cartItems");
+            Cookies.remove("accessToken");
+            Cookies.remove("refreshToken");
+
             const response = await axios.post("http://localhost:8080/api/v1/auth/logout", {}, {
                 headers: {
-                    'Content-Type': 'application/json',
-                    authorization: `Bearer ${token}`,
+                    authorization: `Bearer ${token}`, // Correct header formatting
                 },
-            })
+            });
+
             if (response.data.success) {
-                const { message } = response.data
-                toast.success(message)
-                navigate("/")
+                const { message } = response.data;
+                toast.success(message);
+                navigate("/admin-panel");
             }
-            setToken("")
-            setloggedInUser(null)
+            setToken("");
 
         } catch (error) {
-            console.log("error", error)
+            console.log("error", error);
+        } finally {
+            setIsLoading(false);
         }
-    }
+    };
 
     useEffect(() => {
         if (location.pathname.includes('collections')) {
@@ -60,6 +68,7 @@ const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     return (
         <div className="">
+            {isLoading && <Spinner />}
             <div className="relative px-4 sm:px-[5vw] md:px-[7cw] lg:px=[9vw]
             flex items-center flex-start py-1 bg-blackColor gap-3 text-white">
                 <div className="hidden md:flex gap-2">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { images } from '../../../assets/Images'
 import './nav.css'
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useShopContext } from '../../../Context/Context'
 import Cookies from 'js-cookie'
 import axios from 'axios'
@@ -10,38 +10,42 @@ import Spinner from '../../../Components/Cards/Spinner/Spinner'
 
 const AdminNavbar = () => {
     const navigate = useNavigate()
-    const { loggedInUser, setloggedInUser, setToken } = useShopContext();
+    const { loggedInUser, setloggedInUser, token, setToken } = useShopContext();
     const [loading, setIsLoading] = useState(false)
 
     useEffect(() => {
-        if (loggedInUser !== null) {
-            setIsLoading(false);
-        }
-    }, [loggedInUser]);
+        console.log("useEffect", token)
+    }, [token]);
     const signoutAsync = async () => {
         try {
-            const token = Cookies.get('accessToken')
+            const token = Cookies.get('accessToken');
+            console.log("signout", token)
+            setloggedInUser(null);
+            localStorage.removeItem("loggedIn");
+            localStorage.removeItem("role");
+            localStorage.removeItem("cartItems");
+            Cookies.remove("accessToken");
+            Cookies.remove("refreshToken");
+
             const response = await axios.post("http://localhost:8080/api/v1/auth/logout", {}, {
                 headers: {
-                    'Content-Type': 'application/json',
-                    authorization: `Bearer ${token}`,
+                    authorization: `Bearer ${token}`, // Correct header formatting
                 },
-            })
+            });
+
             if (response.data.success) {
-                const { message } = response.data
-                toast.success(message)
-                navigate("/admin-panel")
+                const { message } = response.data;
+                toast.success(message);
+                navigate("/admin-panel");
             }
-            setToken("")
-            setloggedInUser(null)
-            localStorage.removeItem("loggedIn")
-            localStorage.removeItem("role")
-            Cookies.remove("accessToken")
-            Cookies.remove("refreshToken")
+            setToken("");
+
         } catch (error) {
-            console.log("error", error)
+            console.log("error", error);
+        } finally {
+            setIsLoading(false);
         }
-    }
+    };
 
     return (
         <div className="">
@@ -56,7 +60,7 @@ const AdminNavbar = () => {
                     </div>
                     <ul className='flex items-center gap-2 text-small text-blackColor uppercase relative'>
                         <div className="relative group flex items-center gap-1">
-                            <div  className='flex items-center'>
+                            <div className='flex items-center'>
                                 {loggedInUser ? <>
                                     <div className='w-10 h-10 border-2 rounded-full overflow-hidden flex justify-center items-center'>
                                         <img className='w-9 h-9 rounded-full' src={loggedInUser.avator} alt="" /></div>

@@ -16,7 +16,7 @@ const Auth = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
-    const { token, setToken, role, setRole, setWithExpiry } = useShopContext()
+    const { token, setToken, role, setRole, setWithExpiry, setloggedInUser } = useShopContext()
     const navigate = useNavigate()
     const onSubmitFormHandler = async (event) => {
         event.preventDefault()
@@ -53,29 +53,29 @@ const Auth = () => {
         else {
             try {
                 // const response = await axios.post("http://localhost:8080/api/v1/auth/login", { email, password })
-                const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, { email, password })
-                console.log("response", response)
+                const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/login`,
+                    { email, password },
+                    { withCredentials: true })
                 if (response.data.success) {
                     const { accessToken, refreshToken, loggedIn } = response.data;
-                    const expireDate = new Date();
-                    expireDate.setHours(expireDate.getHours() + 2);
-                    Cookies.set('accessToken', accessToken, { expires: expireDate });
-                    Cookies.set('refreshToken', refreshToken, { expires: 2 });
+                    const accessTokenExpiry = new Date(new Date().getTime() + 3 * 60 * 60 * 1000);
+                    Cookies.set('accessToken', accessToken, { expires: accessTokenExpiry, path: '/' });
+                    Cookies.set('refreshToken', refreshToken, { expires: 7, path: '/' });
                     setToken(accessToken);
-                    setWithExpiry("loggedIn", JSON.stringify(loggedIn), 1)
-                    // localStorage.setItem("loggedIn", JSON.stringify(loggedIn));
+                    setloggedInUser(loggedIn)
+                    setWithExpiry("loggedIn", JSON.stringify(loggedIn), 7)
 
                     if (loggedIn.UserRole === 2) {
                         setRole("Admin")
                         // localStorage.setItem("role", "Admin");
-                        setWithExpiry("role", "Admin", 1)
+                        setWithExpiry("role", "Admin", 7)
 
                         toast.success("Admin login successfully")
                         navigate("/admin-panel/")
                     }
                     else {
                         setRole("User")
-                        setWithExpiry("role", "User", 1)
+                        setWithExpiry("role", "User", 7)
                         toast.success("Logged in successfully");
                         navigate("/my-orders")
                     }

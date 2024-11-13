@@ -6,26 +6,22 @@ import NavButton from '../admin-panel/NavButton'
 import { images } from '../../assets/Images'
 import { useShopContext } from '../../Context/Context'
 import AdminLogin from '../../Pages/AdminPanel/pages/AdminLogin'
-import Spinner from '../Cards/Spinner/Spinner'
 const AdminLayout = () => {
     const { token, role, loggedInUser } = useShopContext()
-    const [loading, setIsLoading] = useState(false)
-    useEffect(() => {
-    }, [token, role, loggedInUser])
 
     useEffect(() => {
-        if (loggedInUser === null) {
-            setIsLoading(true);
-        }
-        else setIsLoading(false)
-    }, [loggedInUser]);
+    }, [token, role, loggedInUser]);
 
 
 
     return (
         <div className='bg-gray-50'>
-            {loading && <Spinner/>}
-            {(token !== "" && token !== undefined && token.length > 0 && role === "Admin") ? (
+            {(
+                token !== ""
+                && token !== undefined
+                && token.length > 0
+                && role === "Admin"
+            ) ? (
                 <div className='bg-gray-50 w-full h-screen'>
                     <div className="header">
                         <AdminNavbar />
@@ -50,12 +46,10 @@ const AdminLayout = () => {
                     <div className="footer">
 
                     </div>
-                </div>)
-                : (
-                    <AdminLogin />
-
-                )
-            }
+                </div>
+            ) : (
+                <AdminLogin />
+            )}
         </div>
     )
 }
