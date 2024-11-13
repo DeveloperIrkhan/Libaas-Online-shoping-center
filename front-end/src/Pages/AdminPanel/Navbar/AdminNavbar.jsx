@@ -19,7 +19,6 @@ const AdminNavbar = () => {
     const signoutAsync = async () => {
         try {
             const token = Cookies.get('accessToken');
-            console.log("signout", token)
             setloggedInUser(null);
             localStorage.removeItem("loggedIn");
             localStorage.removeItem("role");

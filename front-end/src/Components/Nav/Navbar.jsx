@@ -29,7 +29,6 @@ const Navbar = () => {
     const signoutAsync = async () => {
         try {
             const token = Cookies.get('accessToken');
-            console.log("signout", token)
             setloggedInUser(null);
             localStorage.removeItem("loggedIn");
             localStorage.removeItem("role");
@@ -46,7 +45,7 @@ const Navbar = () => {
             if (response.data.success) {
                 const { message } = response.data;
                 toast.success(message);
-                navigate("/admin-panel");
+                navigate("/");
             }
             setToken("");
 
@@ -157,13 +156,16 @@ const Navbar = () => {
                     </div>
                     <ul className='flex items-center gap-2 text-small text-blackColor uppercase relative'>
                         <div className="relative group flex items-center gap-1">
-                            <NavLink to="/auth" className='flex items-center'>
-                                {loggedInUser ? <>
+                            {loggedInUser ?
+                                <>
                                     <div className='w-10 h-10 border-2 rounded-full overflow-hidden flex justify-center items-center'>
                                         <img className='w-9 h-9 rounded-full' src={loggedInUser.avator} alt="" /></div>
-                                </> : <p className='hidden md:block'>Account</p>}
-                                <img className='block md:hidden' src={images.AccountIcon} style={{ width: "25px" }} alt="Account Icon" />
-                            </NavLink>
+                                </> :
+                                <NavLink to="/auth" className='flex items-center'>
+                                    <p className='hidden md:block'>Account</p>
+                                </NavLink>
+                            }
+                            <img className='block md:hidden' src={images.AccountIcon} style={{ width: "25px" }} alt="Account Icon" />
 
                             {/* Dropdown menu */}
                             {loggedInUser && <div className="absolute dropwonn z-50 border top-10 right-0 bg-white 

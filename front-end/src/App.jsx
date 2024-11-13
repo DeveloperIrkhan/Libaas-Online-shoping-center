@@ -48,6 +48,14 @@ function App() {
     if (refreshToken && (!accessToken || accessToken === undefined)) {
       getUserUsingRefreshToken();
     }
+    else {
+      setloggedInUser(null);
+      localStorage.removeItem("loggedIn");
+      localStorage.removeItem("role");
+      localStorage.removeItem("cartItems");
+      Cookies.remove("accessToken");
+      Cookies.remove("refreshToken");
+    }
   }, [])
 
   const getUserUsingRefreshToken = async () => {
