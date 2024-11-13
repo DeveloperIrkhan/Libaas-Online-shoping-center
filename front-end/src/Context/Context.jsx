@@ -55,8 +55,8 @@ export const ShopProvider = ({ children }) => {
     const accessToken = Cookies.get('accessToken')
     setToken(accessToken)
     setWithExpiry("cartItems", JSON.stringify(cartItems), 7)
-    console.log(cartItems, role, token)
-  }, []);
+    // console.log(cartItems, role, token)
+  }, [cartItems, role, token]);
  useEffect(()=>{},[token,role])
 
   // adding to cart

@@ -41,20 +41,20 @@ function App() {
   useEffect(() => {
     const accessToken = Cookies.get('accessToken');
     const refreshToken = Cookies.get('refreshToken');
-    console.log("Initial accessToken:", accessToken);
-    console.log("Initial refreshToken:", refreshToken);
+    // console.log("Initial accessToken:", accessToken);
+    // console.log("Initial refreshToken:", refreshToken);
     setrefreshToken(refreshToken)
     setAccessToken(accessToken)
     if (refreshToken && (!accessToken || accessToken === undefined)) {
       getUserUsingRefreshToken();
     }
     else {
-      setloggedInUser(null);
-      localStorage.removeItem("loggedIn");
-      localStorage.removeItem("role");
-      localStorage.removeItem("cartItems");
-      Cookies.remove("accessToken");
-      Cookies.remove("refreshToken");
+      // setloggedInUser(null);
+      // localStorage.removeItem("loggedIn");
+      // localStorage.removeItem("role");
+      // localStorage.removeItem("cartItems");
+      // Cookies.remove("accessToken");
+      // Cookies.remove("refreshToken");
     }
   }, [])
 

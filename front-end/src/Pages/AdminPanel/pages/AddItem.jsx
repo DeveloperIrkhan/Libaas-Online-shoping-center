@@ -3,55 +3,87 @@ import PageTitle from './../../../Components/Heading/PageTitle'
 import { images } from '../../../assets/Images'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import CustomBtn from '../../../Components/CustomBtn'
-
+import axios from 'axios'
+import Cookies from 'js-cookie'
+import Spinner from '../../../Components/Cards/Spinner/Spinner';
+import { toast } from 'react-toastify'
 
 const AddItem = () => {
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
-  const [category, setCategory] = useState("")
-  const [subCategory, setSubCategory] = useState("")
+  const [category, setCategory] = useState("MAN")
+  const [subCategory, setSubCategory] = useState("INNER WEAR")
   const [price, setPrice] = useState(0)
+  const [productImage0, setProductImage0] = useState(null)
   const [productImage1, setProductImage1] = useState(null)
   const [productImage2, setProductImage2] = useState(null)
   const [productImage3, setProductImage3] = useState(null)
-  const [productImage4, setProductImage4] = useState(null)
   const [startDate, setStartDate] = useState(new Date());
   const [bestSeller, setBestSeller] = useState(false);
   const [sizes, setSizes] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
   const inputStyles = "bg-white appearance-none border-2 mt-3 border-gray-200 rounded max-w-md py-2 px-4 text-gray-700 leading-tight tracking-tighter focus:outline-none focus:bg-white focus:border-blackColor";
   const categories = [{ _id: 1, name: "MAN" }, { _id: 2, name: "WOMEN" }, { _id: 3, name: "KIDS" }, { _id: 4, name: "PERFUMES" }, { _id: 5, name: "SUN GLASSESS" }]
   const subcategories = [{ _id: 1, name: "INNER WEAR" }, { _id: 2, name: "OUTER WEAR" }, { _id: 3, name: "HEAD WEAR" }, { _id: 4, name: "FOOT WEAR" }]
-  // useEffect(() => {
-  //   console.log(bestSeller)
-  //   console.log(startDate)
-  // }, [bestSeller, startDate])
-  const onSubmitHandler = (e) => {
+
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
-    let formdata = new formdata();
+    console.log("Form submitted")
+    const formdata = new FormData();
     formdata.append("name", name)
     formdata.append("description", description)
+    formdata.append("price", price)
     formdata.append("category", category)
     formdata.append("subCategory", subCategory)
-    formdata.append("price", price)
+    formdata.append("sizes", JSON.stringify(sizes))
+    formdata.append("bestSeller", bestSeller)
+    formdata.append("productImage0", productImage0)
     formdata.append("productImage1", productImage1)
     formdata.append("productImage2", productImage2)
     formdata.append("productImage3", productImage3)
-    formdata.append("productImage4", productImage4)
-    formdata.append("startDate", startDate)
-    formdata.append("bestSeller", bestSeller)
+    // formdata.append("startDate", startDate)
 
     try {
+      setIsLoading(true)
+      const token = Cookies.get('accessToken');
 
+      const asyncResponse = await axios.post("http://localhost:8080/api/v1/product/create-product", formdata, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Authorization": `Bearer ${token}`,
+        },
+      })
+      console.log(asyncResponse)
+      const { success, message } = asyncResponse.data
+      if (success) {
+        toast.success(message)
+      }
+      else {
+        toast.error(message)
+      }
     } catch (error) {
-
+      console.log(error)
     }
     finally {
-
+      setIsLoading(false)
+      setName("")
+      setDescription("")
+      setCategory("")
+      setSubCategory("")
+      setPrice(0)
+      setProductImage0(null)
+      setProductImage1(null)
+      setProductImage2(null)
+      setProductImage3(null)
+      setStartDate(new Date())
+      setBestSeller(false)
+      setSizes([])
+      setIsLoading(false)
     }
   }
   return (
     <form onSubmit={onSubmitHandler}>
+      {isLoading && <Spinner />}
       <div>
         <div className="font-Aclonica fa-1x md:text-md my-4 capitalize">
           <PageTitle title1="Add" title2={"item"} />
@@ -59,7 +91,14 @@ const AddItem = () => {
         <div className="py-3">
           {/* iamges section */}
           <div className="flex flex-row  md:justify-normal justify-center items-center gap-3">
-            <label htmlFor='productImage1' className='border-2 border-dashed w-16 h-16 md:w-32 md:h-32 flex justify-center items-center'>
+            <label htmlFor='productImage0' className='border-2 border-dashed w-16 h-16 md:w-32 md:h-32 flex justify-center items-center'>
+              <img
+                src={productImage0 ? URL.createObjectURL(productImage0) : images.Upload}
+                className={`${productImage0 != null ? "w-full h-full" : "w-9 h-9 md:w-16 md:h-16"}`}
+                alt="" />
+              <input onChange={(e) => setProductImage0(e.target.files[0])} type="file" id='productImage0' hidden />
+            </label>
+            <label htmlFor='productImage1' className='border-2 border-dashed w-16 h-16 md:w-32 md:h-32 flex justify-center items-center '>
               <img
                 src={productImage1 ? URL.createObjectURL(productImage1) : images.Upload}
                 className={`${productImage1 != null ? "w-full h-full" : "w-9 h-9 md:w-16 md:h-16"}`}
@@ -79,13 +118,6 @@ const AddItem = () => {
                 className={`${productImage3 != null ? "w-full h-full" : "w-9 h-9 md:w-16 md:h-16"}`}
                 alt="" />
               <input onChange={(e) => setProductImage3(e.target.files[0])} type="file" id='productImage3' hidden />
-            </label>
-            <label htmlFor='productImage4' className='border-2 border-dashed w-16 h-16 md:w-32 md:h-32 flex justify-center items-center'>
-              <img
-                src={productImage4 ? URL.createObjectURL(productImage4) : images.Upload}
-                className={`${productImage4 != null ? "w-full h-full" : "w-9 h-9 md:w-16 md:h-16"}`}
-                alt="" />
-              <input onChange={(e) => setProductImage4(e.target.files[0])} type="file" id='productImage4' hidden />
             </label>
 
           </div>
@@ -198,7 +230,7 @@ const AddItem = () => {
             </div>
           </div>
         </div>
-        <button className='px-4 py-2 bg-slate-800 duration-150 hover:bg-slate-700 text-white rounded-md'>Add Item</button>
+        <button type='submit' className='px-4 py-2 bg-slate-800 duration-150 hover:bg-slate-700 text-white rounded-md'>Add Item</button>
       </div>
     </form>
   )

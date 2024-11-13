@@ -14,7 +14,7 @@ const AdminNavbar = () => {
     const [loading, setIsLoading] = useState(false)
 
     useEffect(() => {
-        console.log("useEffect", token)
+        // console.log("useEffect", token)
     }, [token]);
     const signoutAsync = async () => {
         try {
