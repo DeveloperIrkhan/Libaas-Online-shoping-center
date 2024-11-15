@@ -28,7 +28,7 @@ const RelatedProducts = ({ category, subCategory }) => {
                     {reletedProduct.length > 0 ? reletedProduct.map((item) => (
                         <Card key={item._id}
                             title={item.name}
-                            image={item?.image[0]}
+                            image={item?.productImage[0]}
                             price={item.price}
                             to={`/product-details/${item._id}`}
                             saleOnProduct={item.SaleOnProduct}

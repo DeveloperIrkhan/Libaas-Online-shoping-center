@@ -28,7 +28,7 @@ const ProductDetails = () => {
     const fetchProductById = async () => {
         products.map((item) => {
             if (item._id.toString() === _id) {
-                setProductimage(item.image[0])
+                setProductimage(item.productImage[0])
                 setProduct(item)
                 return null
             }
@@ -49,11 +49,11 @@ const ProductDetails = () => {
                             <div className="flex justify-center flex-col md:flex-row gap-4">
                                 {/* Thumbnails (Small Images) */}
                                 <div className="flex sm:flex-col sm:w-1/3 w-full gap-2 sm:gap-4 order-2 md:order-1">
-                                    {product.image.map((item, index) => (
+                                    {product.productImage.map((item, index) => (
                                         <img
                                             key={index}
                                             src={item}
-                                            alt="product image"
+                                            alt="product productImage"
                                             className="cursor-pointer w-1/4 sm:w-full h-auto"
                                             onClick={() => setProductimage(item)}
                                         />
@@ -72,13 +72,14 @@ const ProductDetails = () => {
                                 {product.name}
                             </h1>
 
-                            <div className="flex items-center mb-4">
-                                <p className="text-lg font-semibold text-gray-600 mr-2">
-                                    {currency} {product.price}
+                            <div className="flex items-center mb-4 gap-1">
+                                <p className='font-semibold text-lg'>{currency}</p>
+                                <p className={`  mr-2 ${product.discountPrice > 0 ? "line-through text-yellow-500 text-sm" : "text-gray-600 font-semibold text-lg"}`}>
+                                    {product.originalPrice}
                                 </p>
-                                <p className="text-lg text-gray-600 line-through">
-                                    {product.OrigionalPrice}
-                                </p>
+                                {product.discountPrice > 0 && <p className="font-semibold text-lg text-gray-600">
+                                    {product.discountPrice}
+                                </p>}
                             </div>
 
                             <p className="text-gray-700 mb-4">

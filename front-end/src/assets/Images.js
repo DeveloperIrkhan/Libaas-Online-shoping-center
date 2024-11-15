@@ -24,24 +24,10 @@ import Cap from "./Cap.webp";
 import SunGlasses from "./SunGlasses.webp";
 import TankTop from "./TankTop.webp";
 import Bracelet from "./Bracelet.webp";
-import Cap_1 from "./Cap_1.webp";
-import Cap_2 from "./Cap_2.webp";
-import Cap_3 from "./Cap_3.webp";
-import BCap_1 from "./BCap_1.webp";
-import BCap_2 from "./BCap_2.webp";
-import BCap_3 from "./BCap_3.webp";
-import WCap_1 from "./WCap_1.webp";
-import WCap_2 from "./WCap_2.webp";
-import WCap_3 from "./WCap_3.webp";
-import YCap_1 from "./YCap_1.webp";
-import YCap_2 from "./YCap_2.webp";
-import YCap_3 from "./YCap_3.webp";
+
 import Kids from "./Kids.webp";
 import KidsCloths from "./KidsCloths.webp";
 import Logo from "./Logo.png";
-import AttractivePrintedKid_1 from "./AttractivePrintedKid_1.webp";
-import AttractivePrintedKid_2 from "./AttractivePrintedKid_2.webp";
-import AttractivePrintedKid_3 from "./AttractivePrintedKid_3.webp";
 import GirlPOLKADOT_1 from "./GirlPOLKADOT_1.webp";
 import GirlPOLKADOT_2 from "./GirlPOLKADOT_2.webp";
 import GirlPOLKADOTRED_1 from "./GirlPOLKADOTRED_1.webp";
@@ -266,9 +252,6 @@ export const images = {
   GoldLionPrintedSweatShirtNavy_1,
   GoldLionPrintedSweatShirtNavy_2,
   GoldLionPrintedSweatShirtNavy_3,
-  AttractivePrintedKid_1,
-  AttractivePrintedKid_2,
-  AttractivePrintedKid_3,
   GirlPOLKADOT_1,
   GirlPOLKADOT_2,
   GirlPOLKADOTRED_1,
@@ -280,18 +263,6 @@ export const images = {
   Kids,
   KidsCloths,
   Cap,
-  Cap_1,
-  Cap_2,
-  Cap_3,
-  BCap_1,
-  BCap_2,
-  BCap_3,
-  WCap_1,
-  WCap_2,
-  WCap_3,
-  YCap_1,
-  YCap_2,
-  YCap_3,
   SunGlasses,
   TankTop,
   Bracelet,

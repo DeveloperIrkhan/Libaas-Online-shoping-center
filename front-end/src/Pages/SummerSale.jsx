@@ -20,12 +20,13 @@ const SummerSale = () => {
                         summerSaleProducts.length > 0 ?
                             summerSaleProducts.map((item) => (
                                 <Card key={item._id} classes={"gap-x-4 my-5"}
-                                    image={item.image[0]}
+                                    image={item.productImage[0]}
                                     title={item.name}
-                                    price={item.price}
+                                    originalPrice={item.originalPrice}
+                                    discountPrice={item.discountPrice}
                                     to={`/product-details/${item._id}`}
                                     saleOnProduct={item.SaleOnProduct}
-                                    originalPrice={item.OrigionalPrice} />
+                                />
                             )) : <div className='flex w-full p-4 bg-red-100 rounded-xl'>No products found.....</div>
                     }
                 </div>

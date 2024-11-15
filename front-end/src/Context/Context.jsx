@@ -1,92 +1,143 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { product } from "../DummyData/product.js"
 import { toast } from "react-toastify";
 import axios from 'axios';
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
+import { API_URL } from "../App.jsx";
+
 const ShopContext = createContext();
+
 export const ShopProvider = ({ children }) => {
   const [openSearchBox, setOpenSearchBox] = useState(false);
   const [role, setRole] = useState("");
   const [IsModelOpen, setIsModelOpen] = useState(false);
   const [search, setSearch] = useState("");
-  const [token, setToken] = useState("")
-  const [loggedInUser, setloggedInUser] = useState(null)
+  const [token, setToken] = useState("");
+  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [products, setProduct] = useState([]);
+  const [getCategory, setCategory] = useState([]);
+  const [getSubCategory, setSubCategory] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [cartItems, setCartItems] = useState({});
+
   const currency = "Rs/-";
   const delivery_Fee = 200;
-  const products = product;
 
-  //saving & getting item in localstorage with time expiry
+  const getProductAsync = async () => {
+    try {
+      setIsLoading(true);
+      const getProductResponse = await axios.get(`${API_URL}/product/get-products`);
+      setProduct(getProductResponse.data.products ? getProductResponse.data.products : []);
+    } catch (error) {
+      console.log("Error while getting products", error);
+      toast.error("Failed to load products");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const getCategories = async () => {
+    try {
+      setIsLoading(true);
+      const getCategoriesResponse = await axios.get(`${API_URL}/category/get-categorys`);
+      if (getCategoriesResponse.data.success) {
+        setCategory(getCategoriesResponse.data.categories ? getCategoriesResponse.data.categories : []);
+      }
+    } catch (error) {
+      console.log("Error while getting categories", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const getSubCategories = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(`${API_URL}/subcategory/get-all-subcategory`);
+      if (response.data.success) {
+        const { subcategories } = response.data;
+        setSubCategory(subcategories ? subcategories : []);
+      }
+    } catch (error) {
+      console.log("Error while getting subcategories", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const setWithExpiry = (key, value, timeInHours) => {
-    const TimeNow = new Date();
+    const timeNow = new Date();
     const items = {
       value: value,
-      expiry: TimeNow.getTime() + timeInHours * 60 * 60 * 1000
-    }
-
+      expiry: timeNow.getTime() + timeInHours * 60 * 60 * 1000
+    };
     localStorage.setItem(key, JSON.stringify(items));
-  }
-  const getWithExpiry = (key) => {
-    const items = localStorage.getItem(key)
-    if (!items) return null;
-    // If the item doesn’t exist, return null
-    const item = JSON.parse(items)
-    const TimeNow = new Date();
+  };
 
-    if (TimeNow.getTime() > item.expiry) {
+  const getWithExpiry = (key) => {
+    const items = localStorage.getItem(key);
+    if (!items) return null;
+
+    const item = JSON.parse(items);
+    const timeNow = new Date();
+
+    if (timeNow.getTime() > item.expiry) {
       localStorage.removeItem(key);
       return null;
     }
     return item.value;
+  };
+
+  function getCartData() {
+    const storedCart = getWithExpiry("cartItems");
+    return storedCart ? JSON.parse(storedCart) : {};
   }
 
-  const [cartItems, setCartItems] = useState(() => {
-    const storedCart = getWithExpiry("cartItems")
-    return storedCart ? JSON.parse(storedCart) : [];
-  });
-
-  // this is used for to check cartitems in localstorage else create  a new array
   useEffect(() => {
-    const storedUser = JSON.parse(getWithExpiry("loggedIn"))
-    if (storedUser) {
-      setloggedInUser(storedUser);
+    const storedCart = getCartData();
+    if (storedCart) {
+      setCartItems(storedCart);
     }
-    const userRole = getWithExpiry("role")
-    setRole(userRole)
-    const accessToken = Cookies.get('accessToken')
-    setToken(accessToken)
-    setWithExpiry("cartItems", JSON.stringify(cartItems), 7)
-    // console.log(cartItems, role, token)
-  }, [cartItems, role, token]);
- useEffect(()=>{},[token,role])
+  }, []);
 
-  // adding to cart
-  const addToCart = async (itemId, productSize) => {
+  useEffect(() => {
+    getProductAsync();
+    getCategories();
+    getSubCategories();
+    const storedUser = JSON.parse(getWithExpiry("loggedIn"));
+    if (storedUser) {
+      setLoggedInUser(storedUser);
+    }
+    const userRole = getWithExpiry("role");
+    setRole(userRole);
+    const accessToken = Cookies.get('accessToken');
+    setToken(accessToken);
+    setWithExpiry("cartItems", JSON.stringify(cartItems), 7);
+  }, [cartItems, role, token]);
+
+  const addToCart = (itemId, productSize) => {
     if (!productSize) {
-      toast.error("please select any product size")
+      toast.error("Please select a product size");
       return;
     }
-    let cartdata = structuredClone(cartItems)
-    //    let cartdata = { ...cartItems }
 
-    if (cartdata[itemId]) {
-      if (cartdata[itemId][productSize]) {
-        cartdata[itemId][productSize] += 1
+    const cartData = structuredClone(cartItems);
+
+    if (cartData[itemId]) {
+      if (cartData[itemId][productSize]) {
+        cartData[itemId][productSize] += 1;
+      } else {
+        cartData[itemId][productSize] = 1;
       }
-      else {
-        cartdata[itemId][productSize] = 1
-      }
+    } else {
+      cartData[itemId] = { [productSize]: 1 };
     }
-    else {
-      cartdata[itemId] = {};
-      cartdata[itemId][productSize] = 1
-    }
-    toast.success("Item added!")
-    setCartItems(cartdata)
-    // localStorage.setItem("cartItems", JSON.stringify(cartdata))
 
-  }
+    toast.success("Item added!");
+    setCartItems(cartData);
+    console.log("cartItems", cartData);
+    setWithExpiry("cartItems", JSON.stringify(cartData), 7);
+  };
 
-  // get count of the cart
   const getCartCount = () => {
     let count = 0;
     for (const items in cartItems)
@@ -96,45 +147,45 @@ export const ShopProvider = ({ children }) => {
             count += cartItems[items][item];
           }
         } catch (error) {
-          console.log("error", error)
+          console.log("Error", error);
         }
       }
     return count;
-  }
-  // Updating Cart items
-  const updateCartItems = async (itemId, size, quantity) => {
-    let cartdata = { ...cartItems }
-    cartdata[itemId][size] = quantity;
-    setCartItems(cartdata)
-  }
-  //Getting Cart Amount
+  };
+
+  const updateCartItems = (itemId, size, quantity) => {
+    let cartData = { ...cartItems };
+    cartData[itemId][size] = quantity;
+    setCartItems(cartData);
+  };
+
   const getCartAmount = () => {
     let totalAmount = 0;
     for (const items in cartItems) {
-      let productInfo = products.find((product) => product._id === Number(items))
+      let productInfo = products.find((product) => product._id === items);
+      if (!productInfo) {
+        // console.warn(`Product with ID ${items} not found in products array.`);
+        continue; // Skip this item
+      }
       for (const item in cartItems[items]) {
         try {
           if (cartItems[items][item] > 0) {
-            totalAmount += productInfo.price * cartItems[items][item]
+            if (productInfo.discountPrice) {
+              totalAmount += productInfo.discountPrice * cartItems[items][item];
+            }
+            else {
+              totalAmount += productInfo.originalPrice * cartItems[items][item];
+            }
           }
         } catch (error) {
-
+          console.log("Error", error);
         }
       }
     }
     return totalAmount;
+  };
 
-  }
-
-
-
-
-
-
-
-
-  const values =
-  {
+  const values = {
     getCartCount,
     getCartAmount,
     addToCart,
@@ -142,22 +193,25 @@ export const ShopProvider = ({ children }) => {
     currency,
     delivery_Fee,
     products,
-    //states
+    isLoading, setIsLoading,
+    getCategory, setCategory,
+    getSubCategory, setSubCategory,
     openSearchBox, setOpenSearchBox,
     IsModelOpen, setIsModelOpen,
     cartItems, setCartItems,
     search, setSearch,
     token, setToken,
     role, setRole,
-    loggedInUser, setloggedInUser,
+    loggedInUser, setLoggedInUser,
     setWithExpiry,
     getWithExpiry,
-  }
+  };
+
   return (
     <ShopContext.Provider value={values}>
       {children}
     </ShopContext.Provider>
   );
-}
+};
 
 export const useShopContext = () => useContext(ShopContext);

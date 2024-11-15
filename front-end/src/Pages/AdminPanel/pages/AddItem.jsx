@@ -7,47 +7,58 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import Spinner from '../../../Components/Cards/Spinner/Spinner';
 import { toast } from 'react-toastify'
-
+import { API_URL } from '../../../App';
+import { useShopContext } from '../../../Context/Context';
 const AddItem = () => {
+  const { getCategory, getSubCategory } = useShopContext()
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
-  const [category, setCategory] = useState("MAN")
+  const [category, setCategory] = useState("MEN")
   const [subCategory, setSubCategory] = useState("INNER WEAR")
-  const [price, setPrice] = useState(0)
+  const [originalPrice, setOriginalPrice] = useState(0)
+  const [discountPrice, setDiscountPrice] = useState(0)
   const [productImage0, setProductImage0] = useState(null)
   const [productImage1, setProductImage1] = useState(null)
   const [productImage2, setProductImage2] = useState(null)
   const [productImage3, setProductImage3] = useState(null)
   const [startDate, setStartDate] = useState(new Date());
   const [bestSeller, setBestSeller] = useState(false);
+  const [NewArrival, setNewArrival] = useState(false);
+  const [SaleOnProduct, setSaleOnProduct] = useState(false);
   const [sizes, setSizes] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const inputStyles = "bg-white appearance-none border-2 mt-3 border-gray-200 rounded max-w-md py-2 px-4 text-gray-700 leading-tight tracking-tighter focus:outline-none focus:bg-white focus:border-blackColor";
   const categories = [{ _id: 1, name: "MAN" }, { _id: 2, name: "WOMEN" }, { _id: 3, name: "KIDS" }, { _id: 4, name: "PERFUMES" }, { _id: 5, name: "SUN GLASSESS" }]
   const subcategories = [{ _id: 1, name: "INNER WEAR" }, { _id: 2, name: "OUTER WEAR" }, { _id: 3, name: "HEAD WEAR" }, { _id: 4, name: "FOOT WEAR" }]
-
+  // useEffect(() => {
+  //   console.log("NewArrival", NewArrival)
+  //   console.log("SaleOnProduct", SaleOnProduct)
+  //   console.log("bestSeller", bestSeller)
+  // }, [NewArrival, SaleOnProduct, bestSeller])
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    console.log("Form submitted")
     const formdata = new FormData();
     formdata.append("name", name)
     formdata.append("description", description)
-    formdata.append("price", price)
+    formdata.append("originalPrice", originalPrice)
+    formdata.append("discountPrice", discountPrice)
     formdata.append("category", category)
     formdata.append("subCategory", subCategory)
     formdata.append("sizes", JSON.stringify(sizes))
     formdata.append("bestSeller", bestSeller)
-    formdata.append("productImage0", productImage0)
-    formdata.append("productImage1", productImage1)
-    formdata.append("productImage2", productImage2)
-    formdata.append("productImage3", productImage3)
+    formdata.append("NewArrival", NewArrival)
+    formdata.append("SaleOnProduct", SaleOnProduct)
+    productImage0 && formdata.append("productImage0", productImage0)
+    productImage1 && formdata.append("productImage1", productImage1)
+    productImage2 && formdata.append("productImage2", productImage2)
+    productImage3 && formdata.append("productImage3", productImage3)
     // formdata.append("startDate", startDate)
 
     try {
       setIsLoading(true)
       const token = Cookies.get('accessToken');
 
-      const asyncResponse = await axios.post("http://localhost:8080/api/v1/product/create-product", formdata, {
+      const asyncResponse = await axios.post(`${API_URL}/product/create-product`, formdata, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Authorization": `Bearer ${token}`,
@@ -70,7 +81,8 @@ const AddItem = () => {
       setDescription("")
       setCategory("")
       setSubCategory("")
-      setPrice(0)
+      setOriginalPrice(0)
+      setDiscountPrice(0)
       setProductImage0(null)
       setProductImage1(null)
       setProductImage2(null)
@@ -136,13 +148,21 @@ const AddItem = () => {
               type="text"
               required
               placeholder='description' />
+            <label className='mt-3 ml-1'>Original Price</label>
             <input
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              value={originalPrice}
+              onChange={(e) => setOriginalPrice(e.target.value)}
               className={inputStyles}
               type="number"
               required
-              placeholder='Item Price' />
+              placeholder='Item Original Price' />
+            <label className='mt-3 ml-1'>Discount Price</label>
+            <input
+              value={discountPrice}
+              onChange={(e) => setDiscountPrice(e.target.value)}
+              className={inputStyles}
+              type="number"
+              placeholder='Item Discount Price' />
           </div>
           <div className="flex flex-col gap-3 my-2">
             <div className={`${inputStyles} w-[50%]`}>
@@ -151,10 +171,10 @@ const AddItem = () => {
                 onChange={(e) => { setCategory(e.target.value) }}
                 className='form-control w-full'
                 id="">
-                {categories.map((item) => {
+                {getCategory && getCategory.map((item) => {
                   return (
-                    <option className='w-full' key={item._id} value={item._id}>
-                      {item.name}
+                    <option className='w-full' key={item._id} value={item.value}>
+                      {item.category}
                     </option>
                   )
                 })}
@@ -166,10 +186,10 @@ const AddItem = () => {
                 onChange={(e) => { setSubCategory(e.target.value) }}
                 className='form-control w-full'
                 id="">
-                {subcategories.map((item) => {
+                {getSubCategory && getSubCategory.map((item) => {
                   return (
-                    <option key={item._id} value={item._id}>
-                      {item.name}
+                    <option key={item._id} value={item.value}>
+                      {item.subCategory}
                     </option>
                   )
                 })}
@@ -181,31 +201,31 @@ const AddItem = () => {
             {/* for shirts */}
             <div className="flex gap-4 mt-2">
               <div onClick={() => setSizes(prev => prev.includes("S") ? prev.filter(item => item !== "S") : [...prev, "S"])}>
-                <p className={`bg-gray-200 hover:bg-gray-400 px-3 py-1 cursor-pointer ${sizes.includes("S") ? "bg-gray-400" : ""}`}>S</p>
+                <p className={`bg-gray-500 text-white hover:bg-gray-700 px-3 py-1 cursor-pointer ${sizes.includes("S") ? "bg-gray-900" : ""}`}>S</p>
               </div>
               <div onClick={() => setSizes(prev => prev.includes("M") ? prev.filter(item => item !== "M") : [...prev, "M"])}>
-                <p className={`bg-gray-200 hover:bg-gray-400 px-3 py-1 cursor-pointer ${sizes.includes("M") ? "bg-gray-400" : ""}`}>M</p>
+                <p className={`bg-gray-500 text-white hover:bg-gray-700 px-3 py-1 cursor-pointer ${sizes.includes("M") ? "bg-gray-900" : ""}`}>M</p>
               </div>
               <div onClick={() => setSizes(prev => prev.includes("L") ? prev.filter(item => item !== "L") : [...prev, "L"])}>
-                <p className={`bg-gray-200 hover:bg-gray-400 px-3 py-1 cursor-pointer ${sizes.includes("L") ? "bg-gray-400" : ""}`}>L</p>
+                <p className={`bg-gray-500 text-white hover:bg-gray-700 px-3 py-1 cursor-pointer ${sizes.includes("L") ? "bg-gray-900" : ""}`}>L</p>
               </div>
               <div onClick={() => setSizes(prev => prev.includes("XL") ? prev.filter(item => item !== "XL") : [...prev, "XL"])}>
-                <p className={`bg-gray-200 hover:bg-gray-400 px-3 py-1 cursor-pointer ${sizes.includes("XL") ? "bg-gray-400" : ""}`}>XL</p>
+                <p className={`bg-gray-500 text-white hover:bg-gray-700 px-3 py-1 cursor-pointer ${sizes.includes("XL") ? "bg-gray-900" : ""}`}>XL</p>
               </div>
               <div onClick={() => setSizes(prev => prev.includes("XXL") ? prev.filter(item => item !== "XXL") : [...prev, "XXL"])}>
-                <p className={`bg-gray-200 hover:bg-gray-400 px-3 py-1 cursor-pointer ${sizes.includes("XXL") ? "bg-gray-400" : ""}`}>XXL</p>
+                <p className={`bg-gray-500 text-white hover:bg-gray-700 px-3 py-1 cursor-pointer ${sizes.includes("XXL") ? "bg-gray-900" : ""}`}>XXL</p>
               </div>
             </div>
             {/* for perfumes */}
             <div className="flex gap-4 mt-2">
               <div onClick={() => setSizes(prev => prev.includes("100ml") ? prev.filter(item => item !== "100ml") : [...prev, "100ml"])}>
-                <p className={`bg-gray-200 hover:bg-gray-400 px-3 py-1 cursor-pointer ${sizes.includes("100ml") ? "bg-gray-400" : ""}`}>100ml</p>
+                <p className={`bg-gray-500 text-white hover:bg-gray-700 px-3 py-1 cursor-pointer ${sizes.includes("100ml") ? "bg-gray-900" : ""}`}>100ml</p>
               </div>
               <div onClick={() => setSizes(prev => prev.includes("250ml") ? prev.filter(item => item !== "250ml") : [...prev, "250ml"])}>
-                <p className={`bg-gray-200 hover:bg-gray-400 px-3 py-1 cursor-pointer ${sizes.includes("250ml") ? "bg-gray-400" : ""}`}>250ml</p>
+                <p className={`bg-gray-500 text-white hover:bg-gray-700 px-3 py-1 cursor-pointer ${sizes.includes("250ml") ? "bg-gray-900" : ""}`}>250ml</p>
               </div>
               <div onClick={() => setSizes(prev => prev.includes("500ml") ? prev.filter(item => item !== "500ml") : [...prev, "500ml"])}>
-                <p className={`bg-gray-200 hover:bg-gray-400 px-3 py-1 cursor-pointer ${sizes.includes("500ml") ? "bg-gray-400" : ""}`}>500ml</p>
+                <p className={`bg-gray-500 text-white hover:bg-gray-700 px-3 py-1 cursor-pointer ${sizes.includes("500ml") ? "bg-gray-900" : ""}`}>500ml</p>
               </div>
             </div>
           </div>
@@ -217,6 +237,23 @@ const AddItem = () => {
               value={bestSeller}
               onChange={(e) => setBestSeller(e.target.checked)} />
             <label htmlFor="bestSeller">Add to BestSeller</label>
+          </div>
+
+          <div className="my-3 flex items-center gap-2">
+            <input
+              type="checkbox"
+              id='NewArrival'
+              value={bestSeller}
+              onChange={(e) => setNewArrival(e.target.checked)} />
+            <label htmlFor="NewArrival">Add to NewArrival</label>
+          </div>
+          <div className="my-3 flex items-center gap-2">
+            <input
+              type="checkbox"
+              id='SaleOnProduct'
+              value={SaleOnProduct}
+              onChange={(e) => setSaleOnProduct(e.target.checked)} />
+            <label htmlFor="SaleOnProduct">Add to SaleOnProduct</label>
           </div>
           <div className="my-3 flex items-center gap-4">
             <p className='mt-3'>Today Date</p>

@@ -1,16 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { GoChevronRight, GoChevronLeft } from "react-icons/go";
 import NewArrivalsCard from '../Cards/NewArrivalsCard';
 import { useShopContext } from '../../Context/Context';
 
 const NewArrivals = () => {
     const { products } = useShopContext();
-    const headgear = products.filter(item => item.subCategory === "Headwear" && item.NewArrival === true)
+    const headgear = products.filter(item => item.subCategory === "HEADWEAR" && item.NewArrival === true)
     const [currentIndex, setCurrentIndex] = useState(0);
     const [imageIndex, setImageIndex] = useState(headgear.map(() => 0)); // Track image index for each item
     const [direction, setDirection] = useState('');
     const cardsToShow = 4;
+    useEffect(() => {
 
+    }, [products]);
 
     const handleNext = (e) => {
         e.preventDefault();
@@ -29,13 +31,13 @@ const NewArrivals = () => {
 
     const nextPicture = (itemIndex) => {
         setImageIndex((prev) =>
-            prev.map((index, i) => (i === itemIndex ? (index + 1) % headgear[itemIndex].image.length : index))
+            prev.map((index, i) => (i === itemIndex ? (index + 1) % headgear[itemIndex].productImage.length : index))
         );
     };
 
     const prevPicture = (itemIndex) => {
         setImageIndex((prev) =>
-            prev.map((index, i) => (i === itemIndex ? (index - 1 + headgear[itemIndex].image.length) % headgear[itemIndex].image.length : index))
+            prev.map((index, i) => (i === itemIndex ? (index - 1 + headgear[itemIndex].productImage.length) % headgear[itemIndex].productImage.length : index))
         );
     };
 
@@ -65,7 +67,7 @@ const NewArrivals = () => {
                             <div key={`${item.name}-${itemIndex}`} className="carousel-item bg-white shadow-sm rounded-lg overflow-hidden relative group">
                                 <NewArrivalsCard
                                     to={`product-details/${item._id}`}
-                                    image={item.image[imageIndex[itemIndex]]}
+                                    image={item.productImage[imageIndex[itemIndex]]}
                                     title={item.name}
                                     classes={"bg-white shadow-sm rounded-lg overflow-hidden"}
                                     description={item.description}

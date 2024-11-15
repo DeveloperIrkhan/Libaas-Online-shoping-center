@@ -1,8 +1,8 @@
 import React from 'react'
 
-const PageTitle = ({ title1, title2 }) => {
+const PageTitle = ({ title1, title2, fontsize = "text-sm md:text-xl" }) => {
     return (
-        <div className='flex flex-column items-center capitalize text-sm md:text-xl'>
+        <div className={`flex flex-column items-center capitalize ${fontsize}`}>
             <p className="text-gray-500 relative inline-block font-semibold 
              tracking-wider 
             after:content-['']">

@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 import { useShopContext } from '../Context/Context'
+import { API_URL } from '../App'
 const Auth = () => {
     const [currentState, setCurrentState] = useState("Login")
     const [loading, setLoading] = useState(false)
@@ -30,7 +31,7 @@ const Auth = () => {
                 formdata.append("avator", avator)
                 formdata.append("password", password)
 
-                const response = await axios.post("http://localhost:8080/api/v1/auth/register", formdata, {
+                const response = await axios.post(`${API_URL}/auth/register`, formdata, {
                     headers: {
                         "Content-Type": "multipart/form-data"
                     }
@@ -53,7 +54,7 @@ const Auth = () => {
         else {
             try {
                 // const response = await axios.post("http://localhost:8080/api/v1/auth/login", { email, password })
-                const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/login`,
+                const response = await axios.post(`${API_URL}/auth/login`,
                     { email, password },
                     { withCredentials: true })
                 if (response.data.success) {

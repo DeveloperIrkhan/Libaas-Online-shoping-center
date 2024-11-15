@@ -94,7 +94,7 @@ const Home = () => {
               >
                 <HomeCard
                   to={`product-details/${item._id}`}
-                  image={item.image}
+                  image={item.productImage[0]}
                   title={item.name}
                   description={item.description}
                   classes={"card max-w-md relative bg-white shadow-lg rounded-sm overflow-hidden gap-2 my-2 md:my-0"}

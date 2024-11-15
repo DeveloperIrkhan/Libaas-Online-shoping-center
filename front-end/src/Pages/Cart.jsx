@@ -18,12 +18,14 @@ const Cart = () => {
   //   }
   // }, [])
   useEffect(() => {
+    // console.log("products", products)
+    // console.log("cartData", cartItems)
     const tempraryData = [];
     for (const items in cartItems) {
       for (const item in cartItems[items]) {
         if (cartItems[items][item] > 0) {
           tempraryData.push({
-            _id: Number(items),
+            _id: items,
             size: item,
             quantity: cartItems[items][item],
           })
@@ -32,7 +34,7 @@ const Cart = () => {
 
     }
     setCartData(tempraryData)
-  }, [cartItems])
+  }, [cartItems,setCartItems])
 
 
   return (
@@ -52,8 +54,8 @@ const Cart = () => {
                 const cartProducts = products.find((singleProduct) => singleProduct._id === item._id);
                 return (
                   <div key={index} className="py-4 border-t border-b text-gray-700 grid gird-cols-2 md:grid-cols-2 items-center gap-4 px-3">
-                    <div className="flex items-start gap-5">
-                      <img src={cartProducts.image[0]} className='w-16 sm:w-20' alt="" />
+                    {cartProducts && <div className="flex items-start gap-5">
+                      <img src={cartProducts.productImage[0] ? cartProducts.productImage[0] : ""} className='w-16 sm:w-20' alt="" />
                       <div className="">
                         <p className='text-sm sm:text-lg font-medium'>{cartProducts?.name}</p>
                         <div className="flex items-center gap-5 mt-3">
@@ -61,21 +63,21 @@ const Cart = () => {
                           <p className='px-2 sm:px-3 sm:py-2 border rounded-sm bg-slate-50'>{item.size}</p>
                         </div>
                       </div>
-                    </div>
+                    </div>}
 
                     <div className="flex justify-between md:justify-around items-center gap-2">
                       <div className="max-w-28 flex justify-center items-center gap-2">
-                        <div className={`bg-blackColor w-6 h-6 flex items-center justify-center rounded-full text-white text-middum cursor-pointer hover:bg-gray-500 duration-300 ${Number(item.quantity) === 1 ? "opacity-0" : ""}`}>
+                        <button className={`bg-blackColor w-6 h-6 flex items-center justify-center rounded-full text-white text-middum cursor-pointer hover:bg-gray-500 duration-300 ${Number(item.quantity) === 1 ? "opacity-0" : ""}`}>
                           <FaMinus className='text-white text-sm'
                             size={10}
-                            onClick={() => Number(item.quantity) === 1 ? null : updateCartItems(item._id, item.size, item.quantity - 1)} />
-                        </div>
+                            onClick={() => item.quantity === 1 ? null : updateCartItems(item._id, item.size, item.quantity - 1)} />
+                        </button>
                         <p className='text-sm sm:text-lg font-medium'>{item.quantity}</p>
-                        <div className='bg-blackColor w-6 h-6 flex items-center justify-center rounded-full text-white text-middum cursor-pointer hover:bg-gray-500 duration-300'>
+                        <button className='bg-blackColor w-6 h-6 flex items-center justify-center rounded-full text-white text-middum cursor-pointer hover:bg-gray-500 duration-300'>
                           <FaPlus className='text-white'
                             size={10}
                             onClick={() => updateCartItems(item._id, item.size, item.quantity + 1)} />
-                        </div>
+                        </button>
                       </div>
                       <div className="flex justify-end items-center">
                         <IoTrashBin onClick={() => updateCartItems(item._id, item.size, 0)} className="text-red-300 hover:text-red-600 duration-300" size={20} />

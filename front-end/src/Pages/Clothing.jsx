@@ -9,7 +9,7 @@ const Clothing = () => {
 
   useEffect(() => {
     let productCopy = products.slice()
-    setClothing(productCopy.filter(product => product.subCategory === "Clothing"))
+    setClothing(productCopy.filter(product => product.category === "CLOTHING"))
   }, [])
   return (
     <div className="px-4 sm:px-[5vw] md:px-[7cw] gl:px=[9vw]">
@@ -20,7 +20,7 @@ const Clothing = () => {
             clothing.length > 0 ?
               clothing.map((item) => (
                 <Card key={item._id} classes={"gap-x-4 my-5"}
-                  image={item.image[0]}
+                  image={item.productImage[0]}
                   title={item.name}
                   price={item.price}
                   to={`/product-details/${item._id}`}

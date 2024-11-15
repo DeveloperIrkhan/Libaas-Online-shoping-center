@@ -33,20 +33,23 @@ import Cookies from "js-cookie"
 import Profile from './Pages/Profile'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+export const API_URL = import.meta.env.VITE_BACKEND_URL
 function App() {
   const { loggedInUser, setloggedInUser, setWithExpiry, setToken, setRole } = useShopContext();
-  const [refreshToken, setrefreshToken] = useState(null)
-  const [accessToken, setAccessToken] = useState(null)
-  const API_URL = import.meta.env.VITE_BACKEND_URL
+  const [refreshToken, setrefreshToken] = useState(Cookies.get('refreshToken') ? Cookies.get('refreshToken') : null)
+  const [accessToken, setAccessToken] = useState(Cookies.get('accessToken') ? Cookies.get('accessToken') : null)
   useEffect(() => {
-    const accessToken = Cookies.get('accessToken');
-    const refreshToken = Cookies.get('refreshToken');
+    // console.log("refreshToken", refreshToken)
+    // console.log("accessToken", accessToken)
+    // const accessToken = Cookies.get('accessToken');
+    // const refreshToken = Cookies.get('refreshToken');
     // console.log("Initial accessToken:", accessToken);
     // console.log("Initial refreshToken:", refreshToken);
-    setrefreshToken(refreshToken)
-    setAccessToken(accessToken)
-    if (refreshToken && (!accessToken || accessToken === undefined)) {
+    // setrefreshToken(refreshToken)
+    // setAccessToken(accessToken)
+    if (refreshToken && (!accessToken || accessToken === null)) {
       getUserUsingRefreshToken();
+      // console.log()
     }
     else {
       // setloggedInUser(null);
@@ -61,7 +64,7 @@ function App() {
   const getUserUsingRefreshToken = async () => {
     // const response = await axios.get(`http://localhost:8080/api/v1/auth/get-refresh-token`,{},
     try {
-      const response = await axios.get(`http://localhost:8080/api/v1/auth/get-refresh-token`,
+      const response = await axios.get(`${API_URL}/auth/get-refresh-token`,
         {
           withCredentials: true,
           headers: {
