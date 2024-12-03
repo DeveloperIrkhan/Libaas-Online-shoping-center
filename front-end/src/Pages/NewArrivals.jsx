@@ -6,14 +6,17 @@ const NewArrivals = () => {
 
 
   const [newArrivals, setNewArrivals] = useState([])
-  const { products } = useShopContext()
+  const { products,getProductAsync } = useShopContext()
 
   useEffect(() => {
     let productCopy = products.slice()
-    setNewArrivals(productCopy.filter(product => product.NewArrival === true))
-  }, [])
+    const lastMonth = new Date();
+    lastMonth.setDate(lastMonth.getDate() - 30);
+    setNewArrivals(productCopy.filter(product => product.NewArrival === true &&
+      new Date(product.date) >= lastMonth))
+  }, [products])
   return (
-    <div className="px-4 sm:px-[5vw] md:px-[7cw] gl:px=[9vw]">
+    <div className="px-4 sm:px-[5vw] md:px-[7cw] xl:px-[9vw]">
       <div className="m-4">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
 
@@ -27,7 +30,7 @@ const NewArrivals = () => {
                   to={`/product-details/${item._id}`}
                   saleOnProduct={item.SaleOnProduct}
                   originalPrice={item.originalPrice} />
-              )) : <div className='flex w-full p-4 bg-red-100 rounded-xl'>No products found.....</div>
+              )) : <div className='flex justify-center items-center w-full p-4'>No products found.....</div>
           }
         </div>
       </div>

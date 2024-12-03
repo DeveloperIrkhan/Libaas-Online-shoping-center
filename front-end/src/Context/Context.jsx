@@ -12,7 +12,7 @@ export const ShopProvider = ({ children }) => {
   const [IsModelOpen, setIsModelOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [token, setToken] = useState("");
-  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [loggedInUser, setloggedInUser] = useState(null);
   const [products, setProduct] = useState([]);
   const [getCategory, setCategory] = useState([]);
   const [getSubCategory, setSubCategory] = useState([]);
@@ -24,34 +24,27 @@ export const ShopProvider = ({ children }) => {
 
   const getProductAsync = async () => {
     try {
-      setIsLoading(true);
       const getProductResponse = await axios.get(`${API_URL}/product/get-products`);
       setProduct(getProductResponse.data.products ? getProductResponse.data.products : []);
     } catch (error) {
       console.log("Error while getting products", error);
       toast.error("Failed to load products");
-    } finally {
-      setIsLoading(false);
-    }
+    } 
   };
 
   const getCategories = async () => {
     try {
-      setIsLoading(true);
       const getCategoriesResponse = await axios.get(`${API_URL}/category/get-categorys`);
       if (getCategoriesResponse.data.success) {
         setCategory(getCategoriesResponse.data.categories ? getCategoriesResponse.data.categories : []);
       }
     } catch (error) {
       console.log("Error while getting categories", error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
   const getSubCategories = async () => {
     try {
-      setIsLoading(true);
       const response = await axios.get(`${API_URL}/subcategory/get-all-subcategory`);
       if (response.data.success) {
         const { subcategories } = response.data;
@@ -59,8 +52,6 @@ export const ShopProvider = ({ children }) => {
       }
     } catch (error) {
       console.log("Error while getting subcategories", error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -101,11 +92,12 @@ export const ShopProvider = ({ children }) => {
 
   useEffect(() => {
     getProductAsync();
+    // console.log(products)
     getCategories();
     getSubCategories();
     const storedUser = JSON.parse(getWithExpiry("loggedIn"));
     if (storedUser) {
-      setLoggedInUser(storedUser);
+      setloggedInUser(storedUser);
     }
     const userRole = getWithExpiry("role");
     setRole(userRole);
@@ -202,9 +194,10 @@ export const ShopProvider = ({ children }) => {
     search, setSearch,
     token, setToken,
     role, setRole,
-    loggedInUser, setLoggedInUser,
+    loggedInUser, setloggedInUser,
     setWithExpiry,
     getWithExpiry,
+    getProductAsync
   };
 
   return (

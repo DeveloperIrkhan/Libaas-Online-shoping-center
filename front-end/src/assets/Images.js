@@ -84,12 +84,6 @@ import GripCoreLeggingsPink_3 from "./GripCoreLeggingsPink_3.webp";
 import IgniteTrouser_1 from "./IgniteTrouser_1.webp";
 import IgniteTrouser_2 from "./IgniteTrouser_2.webp";
 import IgniteTrouser_3 from "./IgniteTrouser_3.webp";
-import ExplorerFreshVibesTeeBlack_1 from "./ExplorerFreshVibesTeeBlack_1.webp";
-import ExplorerFreshVibesTeeBlack_2 from "./ExplorerFreshVibesTeeBlack_2.webp";
-import ExplorerFreshVibesTeeBlack_3 from "./ExplorerFreshVibesTeeBlack_3.webp";
-import FantasyGirlPowerTeeDarkGreen_1 from "./FantasyGirlPowerTeeDarkGreen_1.webp";
-import FantasyGirlPowerTeeDarkGreen_2 from "./FantasyGirlPowerTeeDarkGreen_2.webp";
-import FantasyGirlPowerTeeDarkGreen_3 from "./FantasyGirlPowerTeeDarkGreen_3.webp";
 import MarathonJuniorShorts_1 from "./MarathonJuniorShorts_1.webp";
 import MarathonJuniorShorts_2 from "./MarathonJuniorShorts_2.webp";
 import MarathonJuniorShorts_3 from "./MarathonJuniorShorts_3.webp";
@@ -97,9 +91,6 @@ import Measurement from "./Measurement.png";
 
 import BlackKameezShalwar_1 from "./BlackKameezShalwar_1.webp";
 import BlackKameezShalwar_2 from "./BlackKameezShalwar_2.webp";
-import BrownKameezShalwar_1 from "./BrownKameezShalwar_1.webp";
-import BrownKameezShalwar_2 from "./BrownKameezShalwar_2.webp";
-import BrownKameezShalwar_3 from "./BrownKameezShalwar_3.webp";
 import GrayCottonKameezShalwar_1 from "./GrayCottonKameezShalwar_1.webp";
 import GrayCottonKameezShalwar_2 from "./GrayCottonKameezShalwar_2.webp";
 import GrayCottonKameezShalwar_3 from "./GrayCottonKameezShalwar_3.webp";
@@ -122,22 +113,6 @@ import Perfume_Gold from "./Perfume_Gold.jpg";
 import Perfume_Janan from "./Perfume_Janan.jpg";
 import TshirtBanner from "./TshirtBanner.jpg";
 
-import Footwear_1 from "./Footwear_1.webp";
-import Footwear_2 from "./Footwear_2.webp";
-import Footwear_3 from "./Footwear_3.webp";
-import Footwear_4 from "./Footwear_4.webp";
-import Footwear_5 from "./Footwear_5.webp";
-import Footwear_6 from "./Footwear_6.webp";
-import Footwear_7 from "./Footwear_7.webp";
-import Footwear_8 from "./Footwear_8.webp";
-import Footwear_9 from "./Footwear_9.webp";
-import Footwear_10 from "./Footwear_10.webp";
-import Footwear_11 from "./Footwear_11.webp";
-import Footwear_12 from "./Footwear_12.webp";
-import Footwear_13 from "./Footwear_13.webp";
-import Footwear_14 from "./Footwear_14.webp";
-import Footwear_15 from "./Footwear_15.webp";
-
 import AddProduct from "./AddProduct.png";
 import caregory from "./caregory.png";
 import subCategory from "./subCategory.png";
@@ -152,21 +127,6 @@ export const images = {
   subCategory,
   ListProduct,
   ListOrder,
-  Footwear_1,
-  Footwear_2,
-  Footwear_3,
-  Footwear_4,
-  Footwear_5,
-  Footwear_6,
-  Footwear_7,
-  Footwear_8,
-  Footwear_9,
-  Footwear_10,
-  Footwear_11,
-  Footwear_12,
-  Footwear_13,
-  Footwear_14,
-  Footwear_15,
   Perfume_Allure,
   TshirtBanner,
   camera,
@@ -179,9 +139,6 @@ export const images = {
   Perfume_Janan,
   BlackKameezShalwar_1,
   BlackKameezShalwar_2,
-  BrownKameezShalwar_1,
-  BrownKameezShalwar_2,
-  BrownKameezShalwar_3,
   GrayCottonKameezShalwar_1,
   GrayCottonKameezShalwar_2,
   GrayCottonKameezShalwar_3,
@@ -197,12 +154,6 @@ export const images = {
   MarathonJuniorShorts_1,
   MarathonJuniorShorts_2,
   MarathonJuniorShorts_3,
-  FantasyGirlPowerTeeDarkGreen_1,
-  FantasyGirlPowerTeeDarkGreen_2,
-  FantasyGirlPowerTeeDarkGreen_3,
-  ExplorerFreshVibesTeeBlack_1,
-  ExplorerFreshVibesTeeBlack_2,
-  ExplorerFreshVibesTeeBlack_3,
   GripCoreLeggingsPink_1,
   GripCoreLeggingsPink_2,
   GripCoreLeggingsPink_3,

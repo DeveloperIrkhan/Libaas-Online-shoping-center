@@ -10,7 +10,7 @@ const RelatedProducts = ({ category, subCategory }) => {
     useEffect(() => {
         if (products.length > 0) {
             let relatedProductCopy = products.slice();
-            let relatedProduct = relatedProductCopy.filter((product) => product.category === category && product.subCategory === subCategory)
+            let relatedProduct = relatedProductCopy.filter((product) =>  product.subCategory === subCategory)
             setReletedProduct(relatedProduct.slice(0, 5))
         }
 
@@ -29,10 +29,10 @@ const RelatedProducts = ({ category, subCategory }) => {
                         <Card key={item._id}
                             title={item.name}
                             image={item?.productImage[0]}
-                            price={item.price}
+                            discountPrice={item.discountPrice}
                             to={`/product-details/${item._id}`}
                             saleOnProduct={item.SaleOnProduct}
-                            originalPrice={item.OrigionalPrice} />
+                            originalPrice={item.originalPrice} />
                     )) : <>No related products found</>}
 
                 </div>

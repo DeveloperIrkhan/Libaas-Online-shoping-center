@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import AdminNavbar from "../../Pages/AdminPanel/Navbar/AdminNavbar"
 import PageTitle from '../Heading/PageTitle'
 import NavButton from '../admin-panel/NavButton'
@@ -8,9 +8,9 @@ import { useShopContext } from '../../Context/Context'
 import AdminLogin from '../../Pages/AdminPanel/pages/AdminLogin'
 const AdminLayout = () => {
     const { token, role, loggedInUser } = useShopContext()
-
+    const navigate = useNavigate();
     useEffect(() => {
-        
+        // checking token time if token is expireed then naviagte to the login page
     }, [token, role, loggedInUser]);
 
 

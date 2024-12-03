@@ -5,9 +5,10 @@ import { images } from '../../assets/Images'
 import { useShopContext } from '../../Context/Context'
 const WomenShop = () => {
   const { products } = useShopContext()
-  const collection = products.filter(product => product.NewArrival === true && (product.category === "Women" || product.category === "Unisex"))
+  const collection = products.filter(product => product.NewArrival === true && (product.category === "WOMEN" || product.category === "Unisex"))
   const [WomenCollection, setWomenCollection] = useState([])
   useEffect(() => {
+    console.log("collections",collection)
     setWomenCollection(collection.slice(0, 8))
   }, []);
   document.addEventListener('scroll', function () {
@@ -95,14 +96,16 @@ const WomenShop = () => {
         <div className='py2 md:py-6'>
           <div className="flex justify-center ">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4" >
-              {WomenCollection.reverse().map((item, index) => (
+              {WomenCollection.map((item, index) => (
                 <div key={index} className="">
                   <WomenShopCard classes={"gap-x-4 my-5"} 
                   to={`product-details/${item._id}`}
-                  image={item.image[0]} 
+                  image={item.productImage[0]} 
+                  onmouseEnter={item.productImage[1]} 
+                  onmouseOut={item.productImage[0]} 
                   title={item.name} 
-                  price={item.price} 
-                  originalPrice={item.OrigionalPrice} />
+                  discountPrice={item.discountPrice} 
+                  originalPrice={item.originalPrice} />
                 </div>))}
             </div>
           </div>

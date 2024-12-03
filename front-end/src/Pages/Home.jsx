@@ -5,7 +5,7 @@ import { images } from '../assets/Images';
 import SmallCard from '../Components/Cards/SmallCard';
 import { useNavigate } from 'react-router-dom';
 import TextEffect from '../Components/TextEffect';
-import NewArrivals from '../Components/New Arrivals/NewArrivals';
+import HeadGares from '../Components/New Arrivals/HeadGares';
 import KidsShop from '../Components/KidsShop/KidsShop';
 import WomenShop from '../Components/WomenShop/WomenShop';
 import ExtraSection from '../Components/ExtraSection/ExtraSection';
@@ -21,7 +21,11 @@ const Home = () => {
   const { products } = useShopContext()
 
 
-  const bestSeller = products.filter(product => product.NewArrival === true)
+  const bestSeller = products.filter(product => product.NewArrival === true && (
+    product.subCategory === "T-SHIRTS"
+    || product.subCategory === "POLO SHIRTS"
+    || product.subCategory === "COTTON JEANS"
+  ))
   const top8BestSeller = bestSeller.slice(0, 7)
 
   const handleNext = (e) => {
@@ -86,7 +90,7 @@ const Home = () => {
         </div>
 
         <div className="flex justify-center items-center">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mx-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mx-4">
             {top8BestSeller.slice(currentIndex, currentIndex + cardsToShow).map((item) => (
               <div
                 key={item._id}
@@ -138,7 +142,7 @@ const Home = () => {
         <TextEffect />
       </section>
       <section>
-        <NewArrivals />
+        <HeadGares />
       </section>
       <section>
         <KidsShop />

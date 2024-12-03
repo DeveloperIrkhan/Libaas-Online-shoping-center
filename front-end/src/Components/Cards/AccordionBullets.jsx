@@ -19,7 +19,7 @@ const AccordionBullets = ({ Icon, Name, className, content }) => {
             </div>
             <div
                 className={`text-sm text-blackColor overflow-hidden transition-all duration-1000  w-full ${isOpen ? "max-h-[1200px]" : "max-h-0"}`}>
-                <ul className=''>
+                <p className=''>
                     {content.map((item, index) => (
                         <li key={index} className='flex items-start mb-2'>
                             <span className='ml-3'>
@@ -27,7 +27,7 @@ const AccordionBullets = ({ Icon, Name, className, content }) => {
                             </span>
                         </li>
                     ))}
-                </ul>
+                </p>
             </div >
         </>
     );

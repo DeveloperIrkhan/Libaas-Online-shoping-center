@@ -9,8 +9,8 @@ const Perfumes = () => {
 
     useEffect(() => {
         let productCopy = products.slice()
-        setPerfumes(productCopy.filter(product => product.subCategory === "Perfume"))
-    }, [])
+        setPerfumes(productCopy.filter(product => product.subCategory === "FRAGRANCES"))
+    }, [products])
     return (
         <div className="px-4 sm:px-[5vw] md:px-[7cw] gl:px=[9vw]">
             <div className="m-4">
@@ -20,13 +20,13 @@ const Perfumes = () => {
                         perfumes.length > 0 ?
                             perfumes.map((item) => (
                                 <Card key={item._id} classes={"gap-x-4 my-5"}
-                                    image={item.image[0]}
-                                    title={item.name}
-                                    price={item.price}
+                                    image={item.productImage[0]}
+                                title={item.name}
                                     to={`/product-details/${item._id}`}
-                                    saleOnProduct={item.SaleOnProduct}
-                                    originalPrice={item.OrigionalPrice} />
-                            )) : <div className='flex w-full p-4 bg-red-100 rounded-xl'>No products found.....</div>
+                                    discountPrice={item.discountPrice}
+                                    SaleOnProduct={item.SaleOnProduct}
+                                    originalPrice={item.originalPrice} />
+                            )) :  <div className='flex justify-center items-center w-full p-4'>No products found.....</div>
                     }
                 </div>
             </div>

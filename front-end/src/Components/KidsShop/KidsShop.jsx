@@ -12,7 +12,7 @@ import { useShopContext } from '../../Context/Context'
 const KidsShop = () => {
 
     const { products } = useShopContext()
-    const collection = products.filter(item => item.category === "Kids" && item.NewArrival === true)
+    const collection = products.filter(item => item.category === "KIDS" && item.NewArrival === true)
     const ShowItems = 4;
     const [currentIndexNo, setCurrentIndexNo] = useState(0)
     const [direction, setDirection] = useState("")
@@ -98,9 +98,10 @@ const KidsShop = () => {
                                                 classes={'mx-3'}
                                                 onmouseEnter={() => setHoveredIndex(item._id)}
                                                 onmouseOut={() => setHoveredIndex(null)}
-                                                image={hoveredIndex === item._id ? item.image[1] : item.image[0]}
+                                                image={hoveredIndex === item._id ? item.productImage[1] : item.productImage[0]}
                                                 title={item.name}
-                                                price={item.price}
+                                                originalPrice={item.originalPrice}
+                                                discountPrice={item.discountPrice}
                                             />
                                         </div>
                                     ))

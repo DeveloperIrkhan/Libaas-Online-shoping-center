@@ -5,7 +5,7 @@ import { useShopContext } from '../Context/Context'
 import Card from '../Components/Cards/Card'
 import Spinner from '../Components/Cards/Spinner/Spinner'
 const Collection = () => {
-  const { products, search, openSearchBox, getCategory, getSubCategory, isLoading, setIsLoading } = useShopContext()
+  const { products, search, openSearchBox, getCategory, getSubCategory, isLoading, getProductAsync } = useShopContext()
 
   const [setshowFilter, setSetshowFilter] = useState(false)
   const [showFilterMenu, setShowFilterMenu] = useState(false)
@@ -20,17 +20,16 @@ const Collection = () => {
   const indexOfLastItem = currentPage * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;
   const productsPerPage = filterProducts.slice(indexOfFirstItem, indexOfLastItem)
-
   // change Page
   const Paginate = (pageNumber) => setCurrentPage(pageNumber)
   const toggleCategory = (e) => {
-    setIsLoading(true)
+    console.log(e.target.value)
+    console.log(category)
     if (category.includes(e.target.value)) {
       setCategory((prev) => prev.filter(item => item != e.target.value))
     } else {
       setCategory((prev) => [...prev, e.target.value])
     }
-    setIsLoading(false)
   }
 
   const toggleSubCategory = (e) => {
@@ -60,10 +59,10 @@ const Collection = () => {
     let productsCopy = filterProducts.slice()
     switch (sortType) {
       case "ByHighPrice":
-        setFilterProducts(productsCopy.sort((a, b) => a.price - b.price))
+        setFilterProducts(productsCopy.sort((a, b) => a.originalPrice - b.originalPrice))
         break;
       case "ByLowPrice":
-        setFilterProducts(productsCopy.sort((a, b) => b.price - a.price))
+        setFilterProducts(productsCopy.sort((a, b) => b.originalPrice - a.originalPrice))
         break;
       case "Relevent":
         applyFilter();
@@ -76,12 +75,15 @@ const Collection = () => {
   }
 
   useEffect(() => {
+    getProductAsync()
+  }, [getProductAsync]);
+  useEffect(() => {
     applyFilter();
-  }, [category, subCategory, search, openSearchBox]);
+  }, [category, subCategory, search, openSearchBox,products]);
 
   useEffect(() => {
     filterItemsByPrice();
-  }, [sortType, setSortType,]);
+  }, [sortType, setSortType]);
 
 
   return (
@@ -160,37 +162,39 @@ const Collection = () => {
                 <div className="flex flex-col text-sm md:font-medium text-gray-700">
                   {getCategory && getCategory.map((item, index) => {
                     return (
-                      <p
-                        key={item._id || index}
-                        className='m-1 tracking-widest cursor-pointer'>
-                        <input
-                          className='w-5'
-                          type="checkbox"
-                          id={item.category}
-                          onChange={toggleCategory}
-                          value={item.category} /> <label htmlFor={item.category}> {item.category}</label>
-                      </p>
+                      <div key={item._id || index} className="flex flex-row gap-3 items-center">
+                        <p
+                          className='m-1 tracking-widest cursor-pointer'>
+                          <input
+                            className='w-5'
+                            type="checkbox"
+                            id={item.category}
+                            onChange={toggleCategory}
+                            value={item.category} />
+                        </p>
+                        <label> {item.category}</label>
+                      </div>
                     )
                   })}
-
-
                 </div>
               </div>
               <div className={`pl-5 py-3`}>
-                <div className="flex flex-col text-sm md:font-medium text-gray-700 m-1 uppercase tracking-widest">Type</div>
+                <div className="flex flex-col text-sm md:font-medium text-gray-700 m-1 uppercase tracking-widest ">Sub Category</div>
                 <div className="flex flex-col text-sm md:font-medium text-gray-700">
-                  {getSubCategory && getSubCategory.map((item) => {
+                  {getSubCategory && getSubCategory.map((item, index) => {
                     return (
-                      <p
-                        key={item._id}
-                        className='m-1 tracking-widest cursor-pointer'>
-                        <input
-                          id={item.subCategory}
-                          className='w-5'
-                          type="checkbox"
-                          onChange={toggleSubCategory}
-                          value={item.subCategory} /> <label>{item.subCategory}</label>
-                      </p>
+                      <div key={item._id || index} className="flex flex-row gap-3 items-center">
+                        <p
+                          className='m-1 tracking-widest cursor-pointer'>
+                          <input
+                            className='w-5'
+                            type="checkbox"
+                            id={item.subCategory}
+                            onChange={toggleSubCategory}
+                            value={item.subCategory} />
+                        </p>
+                        <label>{item.subCategory}</label>
+                      </div>
                     )
                   })}
                   {/* <span className='flex my-1 flex-row items-center tracking-widest'>

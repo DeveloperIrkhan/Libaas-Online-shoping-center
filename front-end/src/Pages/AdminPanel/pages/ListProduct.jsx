@@ -5,7 +5,6 @@ import { useShopContext } from '../../../Context/Context'
 import HorizantialCard from '../../../Components/Cards/HorizantialCard'
 const ListProduct = () => {
     const { products } = useShopContext();
-    console.log(products)
     return (
         <div>
             <div className="font-Aclonica fa-1x md:text-md my-4">

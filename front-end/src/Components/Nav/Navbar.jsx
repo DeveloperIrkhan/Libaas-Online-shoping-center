@@ -29,7 +29,6 @@ const Navbar = () => {
     const signoutAsync = async () => {
         try {
             const token = Cookies.get('accessToken');
-            setloggedInUser(null);
             localStorage.removeItem("loggedIn");
             localStorage.removeItem("role");
             localStorage.removeItem("cartItems");
@@ -48,6 +47,7 @@ const Navbar = () => {
                 navigate("/");
             }
             setToken("");
+            setloggedInUser(null);
 
         } catch (error) {
             console.log("error", error);
@@ -125,7 +125,7 @@ const Navbar = () => {
                                     <p>Collections</p>
                                 </NavLink>
                                 <NavLink to={"/Clothing"} className={({ isActive }) => `p-1 ${isActive ? "text-secondColor  font-bold" : ""}`} onClick={toggleMenu}>
-                                    <p>clothing</p>
+                                    <p>Kurtas</p>
                                 </NavLink>
                                 <NavLink to={"/Accessories"} className={({ isActive }) => `p-1 ${isActive ? "text-secondColor  font-bold" : ""}`} onClick={toggleMenu}>
                                     <p>accessories</p>
@@ -133,11 +133,13 @@ const Navbar = () => {
                                 <NavLink to={"/Footwear"} className={({ isActive }) => `p-1 ${isActive ? "text-secondColor  font-bold" : ""}`} onClick={toggleMenu}>
                                     <p>footwear</p>
                                 </NavLink>
+
                                 <NavLink to={"/perfumes"} className={({ isActive }) => `p-1 ${isActive ? "text-secondColor  font-bold" : ""}`} onClick={toggleMenu}>
                                     <p>Perfumes</p>
                                 </NavLink>
                             </ul>
                         </div>
+
                     </div>
                     <div className={`md:hidden z-40 mx-4 ${isMenuOpen ? 'menu-open' : ''}`} onClick={toggleMenu}>
                         <span>
@@ -173,6 +175,9 @@ const Navbar = () => {
                             group-hover:visible group-hover:opacity-100 transform 
                             group-hover:translate-y-2 transition-all duration-500 ease-in-out">
                                 <div className="dropdown-menu flex flex-col">
+                                    {role === "Admin" && <Link to={"/admin-panel"} className="py-2 px-8 tracking-wider border-b transition-colors duration-150 hover:bg-gray-100">
+                                        Admin Panel
+                                    </Link>}
                                     <Link to={"/profile"} className="py-2 px-8 tracking-wider border-b transition-colors duration-150 hover:bg-gray-100">
                                         Profile
                                     </Link>
@@ -216,13 +221,68 @@ const Navbar = () => {
                             <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
                         </NavLink>
                         <NavLink to={"/Clothing"} className='flex flex-col items-center gap-1' >
-                            <p>clothing</p>
+                            <p>Kurtas</p>
                             <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
                         </NavLink>
-                        <NavLink to={"/Accessories"} className='flex flex-col items-center gap-1' >
-                            <p>accessories</p>
-                            <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
-                        </NavLink>
+                        <div className="cursor-pointer flex flex-col items-center gap-1 relative group">
+                            <p>Accessories</p>
+                            <hr className='w-3/4 border-none h-[1.5px] bg-gray-700 hidden group-hover:block group-hover:opacity-100' />
+                            {/* Dropdown menu */}
+                            <div className='bg-white absolute w-32 z-50 border top-5 
+                                            rounded-t-none rounded-lg shadow-lg opacity-0 invisible 
+                                            group-hover:visible group-hover:opacity-100 transform 
+                                            group-hover:translate-y-2 transition-all duration-500 ease-in-out'>
+                                <div className='flex flex-col md:flex-row justify-around'>
+                                    <div className='flex flex-col justify-start gap-3 p-2 capitalize'>
+                                        <p className='text-xs w-full  text-gray-400 hover:text-black duration-200'>Caps</p>
+                                        <p className='text-xs w-full text-gray-400 hover:text-black duration-200'>Key Chains</p>
+                                        <p className='text-xs w-full text-gray-400 hover:text-black duration-200'>Jewellary</p>
+                                        <p className='text-xs w-full text-gray-400 hover:text-black duration-200'>Socks</p>
+                                        <p className='text-xs w-full text-gray-400 hover:text-black duration-200'>Sunglasses</p>
+                                        <p className='text-xs w-full text-gray-400 hover:text-black duration-200'>Belts</p>
+                                        <p className='text-xs w-full text-gray-400 hover:text-black duration-200'>Wallets</p>
+                                        <p className='text-xs w-full text-gray-400 hover:text-black duration-200'>Perfumes</p>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* "Clothings" with dropdown */}
+                        <div className="cursor-pointer flex flex-col items-center gap-1 relative group">
+                            <p>Clothings</p>
+                            <hr className='w-3/4 border-none h-[1.5px] bg-gray-700 hidden group-hover:block group-hover:opacity-100' />
+                            {/* Dropdown menu */}
+                            <div className='bg-white absolute w-[100vmin] z-50 border top-5 
+                                            rounded-t-none rounded-lg shadow-lg opacity-0 invisible 
+                                            group-hover:visible group-hover:opacity-100 transform 
+                                            group-hover:translate-y-2 transition-all duration-500 ease-in-out'>
+                                <div className='flex flex-col md:flex-row justify-around'>
+                                    <div className='flex flex-col justify-start gap-3 p-2 capitalize'>
+                                        <p className='text-sm border-b-2'>TOP</p>
+                                        <p className='text-xs p-1 hover:bg-gray-200'>Causal Shirts</p>
+                                        <p className='text-xs p-1 hover:bg-gray-200'>T-Shirts</p>
+                                        <p className='text-xs p-1 hover:bg-gray-200'>Polo Shirts</p>
+                                    </div>
+                                    <div className='flex flex-col justify-start gap-3 p-2 capitalize'>
+                                        <p className='text-sm border-b-2'>Bottom</p>
+                                        <p className='text-xs p-1 hover:bg-gray-200'>Cotton Jeans</p>
+                                        <p className='text-xs p-1 hover:bg-gray-200'>Dress Pants</p>
+                                        <p className='text-xs p-1 hover:bg-gray-200'>Shorts</p>
+                                        <p className='text-xs p-1 hover:bg-gray-200'>Shirts</p>
+                                        <p className='text-xs p-1 hover:bg-gray-200'>Shirts</p>
+                                    </div>
+                                    <div className='flex flex-col justify-start p-2 capitalize gap-3'>
+                                        <p className='text-sm border-b-2'>Winterwear</p>
+                                        <p className='text-xs p-1 hover:bg-gray-200'>Jackets</p>
+                                        <p className='text-xs p-1 hover:bg-gray-200'>Hoodies</p>
+                                        <p className='text-xs p-1 hover:bg-gray-200'>Polo Shirts</p>
+                                        <p className='text-xs p-1 hover:bg-gray-200'>Swartshirt</p>
+                                        <p className='text-xs p-1 hover:bg-gray-200'>Sweaters</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <NavLink to={"/Footwear"} className='flex flex-col items-center gap-1' >
                             <p>footwear</p>
                             <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
@@ -231,9 +291,9 @@ const Navbar = () => {
                             <p>Perfumes</p>
                             <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
                         </NavLink>
-
                     </ul>
                 </div>
+
             </div>
 
             <div className="bg-hoverColor text-small flex justify-around py-2 text-darkColor">

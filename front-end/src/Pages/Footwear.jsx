@@ -4,17 +4,17 @@ import Card from '../Components/Cards/Card'
 const Footwear = () => {
   const { products } = useShopContext()
   const collection = products.filter(product =>
-    product.subCategory === "Footwear" &&
+    product.subCategory === "FOOTWEAR" &&
     (
-      product.category === "Women" ||
-      product.category === "Unisex" ||
-      product.category === "Men" ||
-      product.category === "Kids"
+      product.category === "WOMEN" ||
+      product.category === "UNISEX" ||
+      product.category === "MEN" ||
+      product.category === "KIDS"
     ))
   const [footware, setFootware] = useState([])
   useEffect(() => {
     setFootware(collection)
-  }, []);
+  }, [products]);
   return (
 
     <>
@@ -26,13 +26,13 @@ const Footwear = () => {
               footware.length > 0 ?
                 footware.map((item) => (
                   <Card key={item._id} classes={"gap-x-4 my-5"}
-                    image={item.image[0]}
+                    image={item.productImage[0]}
                     title={item.name}
-                    price={item.price}
                     to={`/product-details/${item._id}`}
-                    saleOnProduct={item.SaleOnProduct}
-                    originalPrice={item.OrigionalPrice} />
-                )) : <div className='flex w-full p-4 bg-red-100 rounded-xl'>No products found.....</div>
+                    discountPrice={item.discountPrice}
+                    SaleOnProduct={item.SaleOnProduct}
+                    originalPrice={item.originalPrice} />
+                )) :  <div className='flex justify-center items-center w-full p-4'>No products found.....</div>
             }
           </div>
         </div>

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useShopContext } from '../../Context/Context';
 import { NavLink } from 'react-router-dom';
 
-const Card = ({ image, title, classes, discountPrice, saleOnProduct, originalPrice, onmouseEnter, onmouseOut, to }) => {
+const Card = ({ image, title, classes, discountPrice, SaleOnProduct, originalPrice, onmouseEnter, onmouseOut, to }) => {
     const percentageSaved = Math.round(((originalPrice - discountPrice) / originalPrice) * 100);
     const { currency } = useShopContext()
 
@@ -13,7 +13,7 @@ const Card = ({ image, title, classes, discountPrice, saleOnProduct, originalPri
                 onMouseEnter={onmouseEnter}
                 onMouseLeave={onmouseOut}
             >
-                {saleOnProduct && discountPrice > 0 ? (
+                {discountPrice > 0 ? (
                     <div className="bg-[#fddd4c] text-white px-2 py-1 rounded-md uppercase text-small font-semibold absolute z-10 top-2 left-3">
                         save {percentageSaved} %
                     </div>
@@ -35,6 +35,7 @@ const Card = ({ image, title, classes, discountPrice, saleOnProduct, originalPri
                         </span>
                         <span className={`${discountPrice ? "line-through text-yellow-400" : "text-gray-700 font-bold"}`}>{originalPrice}</span>
                     </p>
+
                 </div>
             </div>
         </NavLink>

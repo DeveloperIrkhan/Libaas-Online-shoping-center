@@ -1,33 +1,51 @@
 import React, { useEffect, useState } from 'react'
 import { useShopContext } from '../Context/Context'
 import Card from '../Components/Cards/Card'
+import Spinner from '../Components/Cards/Spinner/Spinner'
 
 const Clothing = () => {
-
   const [clothing, setClothing] = useState([])
   const { products } = useShopContext()
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    let productCopy = products.slice()
-    setClothing(productCopy.filter(product => product.category === "CLOTHING"))
-  }, [])
+    const fetchClothing = () => {
+      try {
+        setIsLoading(true)
+        const productCopy = products.slice()
+        const filteredProducts = productCopy.filter(product => product.category === "CLOTHING")
+        setClothing(filteredProducts)
+      } catch (error) {
+        console.error("Error fetching clothing products:", error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    fetchClothing()
+  }, [products])
+
   return (
     <div className="px-4 sm:px-[5vw] md:px-[7cw] gl:px=[9vw]">
       <div className="m-4">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-
-          {
-            clothing.length > 0 ?
-              clothing.map((item) => (
-                <Card key={item._id} classes={"gap-x-4 my-5"}
-                  image={item.productImage[0]}
-                  title={item.name}
-                  price={item.price}
-                  to={`/product-details/${item._id}`}
-                  saleOnProduct={item.SaleOnProduct}
-                  originalPrice={item.OrigionalPrice} />
-              )) : <div className='flex w-full p-4 bg-red-100 rounded-xl'>No products found.....</div>
-          }
+          {isLoading ? (
+            <Spinner />
+          ) : clothing.length === 0 ? (
+            <div className='flex justify-center items-center w-full p-4'>No products found.....</div>
+          ) : (
+            clothing.map(item => (
+              <Card
+                key={item._id}
+                classes="gap-x-4 my-5"
+                image={item.productImage[0]}
+                title={item.name}
+                discountPrice={item.discountPrice}
+                to={`/product-details/${item._id}`}
+                saleOnProduct={item.SaleOnProduct}
+                originalPrice={item.originalPrice}
+              />
+            ))
+          )}
         </div>
       </div>
     </div>

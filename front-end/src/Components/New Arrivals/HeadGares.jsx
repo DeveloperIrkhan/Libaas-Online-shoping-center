@@ -3,15 +3,29 @@ import { GoChevronRight, GoChevronLeft } from "react-icons/go";
 import NewArrivalsCard from '../Cards/NewArrivalsCard';
 import { useShopContext } from '../../Context/Context';
 
-const NewArrivals = () => {
-    const { products } = useShopContext();
-    const headgear = products.filter(item => item.subCategory === "HEADWEAR" && item.NewArrival === true)
+const HeadGares = () => {
+    const { products, getProductAsync } = useShopContext();
+    const [headgear, setHeadgare] = useState([])
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [imageIndex, setImageIndex] = useState(headgear.map(() => 0)); // Track image index for each item
+    const [imageIndex, setImageIndex] = useState(headgear.map(() => 0));
     const [direction, setDirection] = useState('');
     const cardsToShow = 4;
-    useEffect(() => {
 
+   
+    
+    useEffect(() => {
+        getProductAsync();
+    }, [getProductAsync]);
+
+    useEffect(() => {
+        // Filter and set headgear when products update
+        const filteredHeadgear = products.filter(
+            item => item.subCategory === "HEADWEAR" && item.NewArrival === true
+        );
+        setHeadgare(filteredHeadgear);
+
+        // Initialize imageIndex for spinners
+        setImageIndex(filteredHeadgear.map(() => 0));
     }, [products]);
 
     const handleNext = (e) => {
@@ -75,11 +89,11 @@ const NewArrivals = () => {
                                 <div className="hidden group-hover:flex justify-between items-center absolute inset-0 transition-opacity duration-500">
                                     <GoChevronLeft
                                         className="text-2xl cursor-pointer absolute left-0 top-[45%] bg-[#D4D2D2] w-7 h-7 text-black"
-                                        onClick={() => prevPicture(currentIndex + itemIndex)} // Replace with appropriate function
+                                        onClick={() => prevPicture(currentIndex + itemIndex)}
                                     />
                                     <GoChevronRight
                                         className="text-2xl cursor-pointer absolute right-0 top-[45%] bg-[#D4D2D2] w-7 h-7 text-black"
-                                        onClick={() => nextPicture(currentIndex + itemIndex)} // Replace with appropriate function
+                                        onClick={() => nextPicture(currentIndex + itemIndex)}
                                     />
                                 </div>
                             </div>
@@ -92,4 +106,4 @@ const NewArrivals = () => {
     )
 }
 
-export default NewArrivals
+export default HeadGares

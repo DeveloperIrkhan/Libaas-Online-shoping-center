@@ -111,7 +111,7 @@ const ProductDetails = () => {
                             <CustomBtn className={"btn-dark active:bg-orange-500"}
                                 onClickFun={() => { addToCart(product._id, productSize) }} text={"Add To Cart"} />
                             <div className="flex flex-col  gap-4 mt-4 py-3">
-                                <AccordionBullets
+                                {/* <AccordionBullets
                                     Icon={PiTShirtThin}
                                     Name={"Description"}
                                     content=
@@ -121,7 +121,11 @@ const ProductDetails = () => {
                                         { boldText: "Versatile Colors: ", regularText: "Available in wide range of colors, specially the neutral tones to easily pair with any outfit." },
                                         { boldText: "Tailored Fit:", regularText: "Designed to provide a flattering fit without compromising on comfort, available in a range of sizes to suit every body type." },
                                         { boldText: "Durable Construction:", regularText: "Perfect stitching and high-quality buttons ensure durability, making this oxford shirt a staple in your wardrobe for years to come." },
-                                    ]} />
+                                    ]} /> */}
+                                <Accordion className=""
+                                    Icon={PiTShirtThin}
+                                    Name={"Description"}
+                                    content={product.description} />
                                 <Accordion className=""
                                     Icon={MdOutlineChangeCircle}
                                     Name={"Return & Exchange"}
