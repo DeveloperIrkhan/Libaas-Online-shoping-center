@@ -14,6 +14,9 @@ const NewArrivals = () => {
     lastMonth.setDate(lastMonth.getDate() - 30);
     setNewArrivals(productCopy.filter(product => product.NewArrival === true &&
       new Date(product.date) >= lastMonth))
+
+
+      console.log("newArrivals",newArrivals)
   }, [products])
   return (
     <div className="px-4 sm:px-[5vw] md:px-[7cw] xl:px-[9vw]">

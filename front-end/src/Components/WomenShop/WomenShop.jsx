@@ -32,7 +32,7 @@ const WomenShop = () => {
   return (
     <div>
       <div className="scroll-item text-2xl text-blackColor text-center my-4 md:my-10">Women Shop</div>
-      <div className="relative h-full md:h-[800px] md:overflow-scroll py-20 md:py-52 ">
+      {/* <div className="relative h-full md:h-[800px] md:overflow-scroll py-20 md:py-52 ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-5">
           <div className="text-center p-3 md:p-16 xl:p-44">
             <div className="text-content
@@ -89,7 +89,7 @@ const WomenShop = () => {
             <img className='h-[90vmin] w-[70vmin]' src={images.WomenCollection3} alt="" />
           </div>
         </div>
-      </div>
+      </div> */}
 
 
       <div className="px-4 sm:px-[5vw] md:px-[7cw] lg:px=[9vw] py-4">

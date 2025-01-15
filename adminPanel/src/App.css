@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Londrina+Sketch&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Aclonica&display=swap");
+body {
+  font-family: "Noto Sans", serif;
+}
+* {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+::-webkit-scrollbar {
+  width: 14px; /* Adjust the width */
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Optional: customize the track */
+}
+::-webkit-scrollbar-thumb {
+  background: #888; /* Customize the scrollbar color */
+  border-radius: 10px; /* Optional: round corners */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #fed10f; /* Change color on hover */
+}
+:root {
+  --black-color: #4e4d4d;
+  --second-color: #fed10f;
+  --hover-color: #808080;
+  --white-color: #ffffff; /* Corrected white color */
+}
