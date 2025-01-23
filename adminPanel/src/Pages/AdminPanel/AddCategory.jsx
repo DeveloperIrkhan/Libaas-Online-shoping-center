@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import PageTitle from './../../../Components/Heading/PageTitle'
-import Spinner from '../../../Components/Cards/Spinner/Spinner'
+import PageTitle from '../../Components/Heading/PageTitle'
+import Spinner from '../../Components/Spinner/Spinner'
 import axios from 'axios'
-import { API_URL } from '../../../App'
+import { API_URL } from '../../App'
 import { toast } from 'react-toastify'
+import { MdModeEdit } from "react-icons/md";
+import { RiDeleteBin5Fill } from "react-icons/ri";
 
 const AddCategory = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -47,7 +49,7 @@ const AddCategory = () => {
             {isLoading && <Spinner />}
             <div>
                 <div className="py-3 w-full">
-                    <div className="flex flex-col md:flex-row gap-4">
+                    <div className="flex flex-col gap-4">
                         <div className="flex flex-col items-start p-4 w-full md:w-1/2 border shadow-sm rounded-md">
                             <div className="font-Aclonica fa-1x md:text-md my-4 capitalize">
                                 <PageTitle title1="Add" title2={"Category"} fontsize='text-sm' />
@@ -67,15 +69,37 @@ const AddCategory = () => {
                                 Add Item
                             </button>
                         </div>
-                        <div className="flex flex-col items-start p-4 w-full md:w-1/2 border shadow-sm rounded-md">
+                        <div className="flex flex-col items-start p-4 w-full border shadow-sm rounded-md">
                             <div className="font-Aclonica text-sm my-4 capitalize">
                                 <PageTitle title1="Saved" title2={"Categories"} fontsize='text-sm' />
                             </div>
-                            <ul className="uppercase space-y-2">
-                                {categories && categories.map((category) => (
-                                    <li key={category._id} className="animated-bullet">{category.category}</li>
-                                ))}
-                            </ul>
+                            <table className="table-auto w-full">
+                                <thead className='uppercase space-y-2'>
+                                    <tr>
+                                        <th className="px-4 py-2">Serial No</th>
+                                        <th className="px-4 py-2">Category Name</th>
+                                        <th className="px-4 py-2">Operations</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {categories && categories.map((category, index) => (
+                                        <tr key={category._id}  className="bg-gray-100">
+                                            <td className="border px-4 py-2">{index + 1}</td>
+                                            <td className="border px-4 py-2">{category.category}</td>
+                                            <td className="border px-4 py-2">
+                                                <div className="flex justify-center items-center gap-4">
+                                                <span className='flex justify-center items-center text-white rounded-md w-6 h-6 bg-blue-400 duration-200 hover:bg-blue-600'>
+                                                    <MdModeEdit />
+                                                    </span>
+                                                <span className='flex justify-center items-center text-white rounded-md w-6 h-6 bg-red-400 duration-200 hover:bg-red-600'>
+                                                   <RiDeleteBin5Fill /> 
+                                                    </span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

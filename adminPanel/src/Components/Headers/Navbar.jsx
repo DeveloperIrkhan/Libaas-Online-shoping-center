@@ -1,17 +1,54 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Navbar.css"
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebook, faInstagram, faTwitter, faTiktok, faYoutube } from '@fortawesome/free-brands-svg-icons'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import Cookies from 'js-cookie';
 import { images } from '../../assets/Images'
-import { RxCross2 } from 'react-icons/rx'
+import { useAdminContext } from '../../oontext/AdminContext'
+import axios from 'axios';
+import { toast } from 'react-toastify';
 const Navbar = () => {
     const [visable, setVisable] = useState(false)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [toggleMenu, setToggleMenu] = useState(false)
-    const [loggedInUser, setLoggedInUser] = useState(false)
     const [getCartCount, setGetCartCount] = useState(0)
+    const [loading, setIsLoading] = useState(false)
+    const navigate = useNavigate();
+    const { loggedInUser, setloggedInUser, token, setToken } = useAdminContext()
+    useEffect(() => {
+    }, [loggedInUser])
+
+    const signoutAsync = async () => {
+        try {
+            const token = Cookies.get('accessToken');
+            setloggedInUser(null);
+            localStorage.removeItem("loggedIn");
+            localStorage.removeItem("role");
+            localStorage.removeItem("cartItems");
+            Cookies.remove("accessToken");
+            Cookies.remove("refreshToken");
+            Cookies.remove('loggedIn')
+            Cookies.remove('user')
+            const response = await axios.post("http://localhost:8080/api/v1/auth/logout", {}, {
+                headers: {
+                    authorization: `Bearer ${token}`, // Correct header formatting
+                },
+            });
+
+            Cookies.remove('userToken')
+            if (response.data.success) {
+                const { message } = response.data;
+                toast.success(message);
+                navigate("auth");
+
+            }
+            setToken("");
+
+        } catch (error) {
+            console.log("error", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
     return (
         <div className="">
             <div className="shadow-md">
@@ -27,7 +64,7 @@ const Navbar = () => {
                     <div className="flex main-heading  items-center text-small text-blackColor uppercase">
                         <p>Admin Panel</p>
                     </div>
-                    
+
                     {/* login and logout */}
                     <div className='flex items-center gap-2 text-small text-blackColor uppercase relative'>
                         <div className="relative group flex items-center gap-1">

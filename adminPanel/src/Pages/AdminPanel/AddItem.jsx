@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import PageTitle from './../../../Components/Heading/PageTitle'
-import { images } from '../../../assets/Images'
+import PageTitle from './../../Components/Heading/PageTitle'
+import { images } from '../../assets/Images'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios'
 import Cookies from 'js-cookie'
-import Spinner from '../../../Components/Cards/Spinner/Spinner';
+import Spinner from '../../Components/Spinner/Spinner';
 import { toast } from 'react-toastify'
-import { API_URL } from '../../../App';
-import { useShopContext } from '../../../Context/Context';
+import { API_URL } from '../../App';
+import { useAdminContext } from '../../oontext/AdminContext';
 const AddItem = () => {
-  const { getCategory, getSubCategory } = useShopContext()
+  const { categories, subCategories } = useAdminContext()
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [category, setCategory] = useState("MEN")
@@ -28,8 +28,6 @@ const AddItem = () => {
   const [sizes, setSizes] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const inputStyles = "bg-white appearance-none border-2 mt-3 border-gray-200 rounded max-w-md py-2 px-4 text-gray-700 leading-tight tracking-tighter focus:outline-none focus:bg-white focus:border-blackColor";
-  const categories = [{ _id: 1, name: "MAN" }, { _id: 2, name: "WOMEN" }, { _id: 3, name: "KIDS" }, { _id: 4, name: "PERFUMES" }, { _id: 5, name: "SUN GLASSESS" }]
-  const subcategories = [{ _id: 1, name: "INNER WEAR" }, { _id: 2, name: "OUTER WEAR" }, { _id: 3, name: "HEAD WEAR" }, { _id: 4, name: "FOOT WEAR" }]
   // useEffect(() => {
   //   console.log("NewArrival", NewArrival)
   //   console.log("SaleOnProduct", SaleOnProduct)
@@ -171,7 +169,7 @@ const AddItem = () => {
                 onChange={(e) => { setCategory(e.target.value) }}
                 className='form-control w-full'
                 id="">
-                {getCategory && getCategory.map((item) => {
+                {categories && categories.map((item) => {
                   return (
                     <option className='w-full' key={item._id} value={item.value}>
                       {item.category}
@@ -186,7 +184,7 @@ const AddItem = () => {
                 onChange={(e) => { setSubCategory(e.target.value) }}
                 className='form-control w-full'
                 id="">
-                {getSubCategory && getSubCategory.map((item) => {
+                {subCategories && subCategories.map((item) => {
                   return (
                     <option key={item._id} value={item.value}>
                       {item.subCategory}

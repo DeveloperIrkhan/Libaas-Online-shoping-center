@@ -30,8 +30,6 @@ import KidsCloths from "./KidsCloths.webp";
 import Logo from "./Logo.png";
 import GirlPOLKADOT_1 from "./GirlPOLKADOT_1.webp";
 import GirlPOLKADOT_2 from "./GirlPOLKADOT_2.webp";
-import GirlPOLKADOTRED_1 from "./GirlPOLKADOTRED_1.webp";
-import GirlPOLKADOTRED_2 from "./GirlPOLKADOTRED_2.webp";
 import HangingWithDad_1 from "./HangingWithDad_1.webp";
 import HangingWithDad_2 from "./HangingWithDad_2.webp";
 import HangingWithDad_3 from "./HangingWithDad_3.webp";
@@ -205,8 +203,6 @@ export const images = {
   GoldLionPrintedSweatShirtNavy_3,
   GirlPOLKADOT_1,
   GirlPOLKADOT_2,
-  GirlPOLKADOTRED_1,
-  GirlPOLKADOTRED_2,
   HangingWithDad_1,
   HangingWithDad_2,
   HangingWithDad_3,

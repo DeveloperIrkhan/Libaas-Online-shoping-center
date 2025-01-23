@@ -1,10 +1,9 @@
 import React from 'react'
-import PageTitle from './../../../Components/Heading/PageTitle'
-import Card from '../../../Components/Cards/Card'
-import { useShopContext } from '../../../Context/Context'
-import HorizantialCard from '../../../Components/Cards/HorizantialCard'
+import PageTitle from '../../Components/Heading/PageTitle'
+import HorizantialCard from '../../Components/Cards/HorizantialCard'
+import { useAdminContext } from '../../oontext/AdminContext';
 const ListProduct = () => {
-    const { products } = useShopContext();
+    const { products } = useAdminContext();
     return (
         <div>
             <div className="font-Aclonica fa-1x md:text-md my-4">

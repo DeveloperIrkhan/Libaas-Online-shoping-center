@@ -23,12 +23,6 @@ import Perfumes from './Pages/Perfumes'
 import { useShopContext } from './Context/Context'
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AdminLayout from './Components/Layout/AdminLayout'
-import AddItem from './Pages/AdminPanel/pages/AddItem'
-import ListOrder from './Pages/AdminPanel/pages/ListOrder'
-import AddCategory from './Pages/AdminPanel/pages/AddCategory'
-import AddSubCategory from './Pages/AdminPanel/pages/AddSubCategory'
-import ListProduct from './Pages/AdminPanel/pages/ListProduct'
 import Cookies from "js-cookie"
 import Profile from './Pages/Profile'
 import { useEffect, useState } from 'react'
@@ -104,6 +98,7 @@ function App() {
         toast.error("Your session has expired. Please log in again.");
         Cookies.remove('accessToken');
         Cookies.remove('refreshToken');
+        Cookies.remove("loggedIn")
       }
     }
   }
@@ -135,18 +130,9 @@ function App() {
           <Route path='/products' element={<Product />} />
           <Route path='/product-details/:_id' element={<ProductDetails />} />
         </Route>
-        <Route path='/admin-panel/' element={<AdminLayout />}>
-          <Route path='add-item' element={<AddItem />} />
-          <Route path='add-category' element={<AddCategory />} />
-          <Route path='add-sub-category' element={<AddSubCategory />} />
-          <Route path='list-products' element={<ListProduct />} />
-          <Route path='list-orders' element={<ListOrder />} />
-        </Route>
       </>
     )
   )
-
-
 
   return (
     <>

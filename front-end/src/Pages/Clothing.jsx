@@ -13,7 +13,7 @@ const Clothing = () => {
       try {
         setIsLoading(true)
         const productCopy = products.slice()
-        const filteredProducts = productCopy.filter(product => product.category === "CLOTHING")
+        const filteredProducts = productCopy.filter(product => product.category === "CLOTHING" || product.category === "MALE CLOTHS")
         setClothing(filteredProducts)
       } catch (error) {
         console.error("Error fetching clothing products:", error)

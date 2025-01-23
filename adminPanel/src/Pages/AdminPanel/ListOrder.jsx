@@ -1,5 +1,5 @@
 import React from 'react'
-import PageTitle from './../../../Components/Heading/PageTitle'
+import PageTitle from '../../Components/Heading/PageTitle'
 
 const ListOrder = () => {
   return (
