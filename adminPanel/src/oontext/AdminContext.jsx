@@ -17,6 +17,8 @@ export const AdminProvider = ({ children }) => {
     const [categories, setCategory] = useState([]);
     const [subCategories, setSubCategory] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [categoryId, setCategoryId] = useState();
 
     const currency = "Rs/-";
     const delivery_Fee = 200;
@@ -55,7 +57,7 @@ export const AdminProvider = ({ children }) => {
             setRole(userRole);
             const accessToken = Cookies.get('accessToken');
             setToken(accessToken);
-            console.log("token for context", token)
+            // console.log("token for context", token)
         }
     }, [token, setToken])
 
@@ -65,14 +67,16 @@ export const AdminProvider = ({ children }) => {
     }, [token, setToken])
     useEffect(() => {
         setRole(getWithExpiry("role"));
-        console.log("role", role)
+        // console.log("role", role)
     }, [role, setRole])
 
 
     const getProductAsync = async () => {
+        setIsLoading(true)
         try {
             const getProductResponse = await axios.get(`${API_URL}/product/get-products`);
             setProduct(getProductResponse.data.products ? getProductResponse.data.products : []);
+            setIsLoading(false)
         } catch (error) {
             console.log("Error while getting products", error);
             toast.error("Failed to load products");
@@ -106,8 +110,10 @@ export const AdminProvider = ({ children }) => {
         getProductAsync();
         getCategories();
         getSubCategories();
-    }, [products]);
+    }, []);
     const values = {
+        categoryId, setCategoryId,
+        isModalOpen, setIsModalOpen,
         loggedInUser, setloggedInUser,
         role, setRole,
         token, setToken,

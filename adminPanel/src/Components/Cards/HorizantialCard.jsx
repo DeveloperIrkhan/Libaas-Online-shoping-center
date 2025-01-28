@@ -7,13 +7,13 @@ const HorizantialCard = ({ item }) => {
 
         <div
             key={item._id}
-            className="p-4 border border-gray-200 rounded-md text-gray-700 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white shadow-sm duration-300 hover:shadow-lg transition-shadow"
+            className="p-4 border cursor-pointer border-gray-200 rounded-md text-gray-700 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white shadow-sm duration-300 hover:shadow-lg transition-shadow"
         >
             {/* Left Section: Product Image and Details */}
-            <div className="w-44 h-48 border rounded-md shadow-md">
+            <div className="w-full md:w-44 h-48 md:border rounded-md md:shadow-md">
                 <img
                     src={item.productImage[0]}
-                    className="w-full h-full object-cover rounded-md"
+                    className="w-full h-full object-contain md:object-cover rounded-md"
                     alt={item.name}
                 />
             </div>
@@ -25,12 +25,12 @@ const HorizantialCard = ({ item }) => {
                     </p>
                     <div className="flex gap-4">
                         {item.bestSeller && (
-                            <span className="bg-yellow-400 text-white text-xs font-semibold rounded px-2 py-1 mt-1">
+                            <span className="bg-yellow-400 cursor-pointer text-white text-xs font-semibold rounded px-2 py-1 mt-1">
                                 Best Seller
                             </span>
                         )}
                         {item.NewArrival && (
-                            <span className="bg-red-500  text-white text-xs font-semibold rounded px-2 py-1 mt-1">
+                            <span className="bg-green-600 cursor-pointer  text-white text-xs font-semibold rounded px-2 py-1 mt-1">
                                 New Arrivals Seller
                             </span>
                         )}
@@ -51,22 +51,22 @@ const HorizantialCard = ({ item }) => {
                         </span>
                     </p>
                     {item.sizes && item.sizes.length > 0 && (
-                        <div className="flex gap-2 mt-2">
-                            {item.sizes.map((size) => (
+                        <div className="flex gap-2 mt-2 justify-center items-center">
+                          <span className='font-bold'> Sizes:{"   "} </span> {item.sizes.map((size) => (
                                 <span
                                     key={size}
-                                    className="px-2 py- text-xs font-medium border rounded bg-gray-100 text-gray-700">
+                                    className="px-2 py-1 text-xs font-medium border rounded bg-gray-100 text-gray-700">
                                     {size}
                                 </span>
                             ))}
                         </div>
                     )}
                 </div>
-            </div>
-
-            {/* Right Section: Status and Actions */}
-
         </div>
+
+            {/* Right Section: Status and Actions */ }
+
+        </div >
     )
 }
 

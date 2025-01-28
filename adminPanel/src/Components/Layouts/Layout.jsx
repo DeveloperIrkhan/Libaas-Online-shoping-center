@@ -10,7 +10,7 @@ const Layout = () => {
 
   const { token, role } = useAdminContext();
   useEffect(() => {
-    console.log("token",token)
+    // console.log("token",token)
   }, [token])
 
 
