@@ -72,7 +72,7 @@ const Auth = () => {
                         setWithExpiry("role", "Admin", 7)
 
                         toast.success("Admin login successfully")
-                        navigate("/admin-panel/")
+                        navigate("/my-orders")
                     }
                     else {
                         setRole("User")

@@ -25,7 +25,7 @@ const Clothing = () => {
   }, [products])
 
   return (
-    <div className="px-4 sm:px-[5vw] md:px-[7cw] gl:px=[9vw]">
+    <div className="px-4 sm:px-[5vw] md:px-[7cw] lg:px-[9vw]">
       <div className="m-4">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {isLoading ? (

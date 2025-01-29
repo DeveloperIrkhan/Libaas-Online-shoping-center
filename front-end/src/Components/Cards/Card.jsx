@@ -24,7 +24,7 @@ const Card = ({ image, title, classes, discountPrice, SaleOnProduct, originalPri
                     <img
                         src={image}
                         alt={title}
-                        className="w-full h-full object-center transition-transform duration-500 ease-in-out transform group-hover:rotate-2 group-hover:scale-105"
+                        className="w-full h-full object-center transition-transform duration-500 ease-in-out transform group-hover:rotate-3 group-hover:scale-110"
                     />
                 </div>
                 <div className="py-3">

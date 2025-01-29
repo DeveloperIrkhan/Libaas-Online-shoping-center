@@ -56,7 +56,7 @@ const HeadGares = () => {
     };
 
     return (
-        <section className='px-4 sm:px-[5vw] md:px-[7cw] gl:px=[9vw] '>
+        <section className='px-4 sm:px-[5vw] md:px-[7cw] lg:px-[9vw] '>
             <div className='py2 md:py-6'>
                 <div className="row-auto">
                     <div className="text-center">

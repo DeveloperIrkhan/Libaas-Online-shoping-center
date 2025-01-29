@@ -8,7 +8,7 @@ const Layout = () => {
     return (
         <div>
             <Navbar />
-           {/* px-4 sm:px-[5vw] md:px-[7cw] gl:px=[9vw] */}
+           {/* px-4 sm:px-[5vw] md:px-[7cw] lg:px-[9vw] */}
             <div className="">
                 <Outlet />
             </div>

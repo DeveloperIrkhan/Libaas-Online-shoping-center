@@ -38,7 +38,7 @@ const Cart = () => {
 
 
   return (
-    <div className=' px-4 sm:px-[5vw] md:px-[7cw] gl:px=[9vw]'>
+    <div className='px-4 sm:px-[5vw] md:px-[7cw] lg:px-[9vw]'>
       <div className='fa-1x md:text-2xl  mt-10 font-Aclonica flex justify-center'>
         <PageTitle title1={"Shoping"} title2={"Cart"} fontSize={"3vmin"} />
       </div>

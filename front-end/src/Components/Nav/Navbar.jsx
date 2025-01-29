@@ -16,7 +16,7 @@ const Navbar = () => {
     const location = useLocation();
     const [isLoading, setIsLoading] = useState(false)
     const { openSearchBox, setOpenSearchBox, search, setSearch, getCartCount,
-        token, role, loggedInUser, setloggedInUser, setToken } = useShopContext();
+        token, role, loggedInUser, setloggedInUser, setToken, selectedProduct, setSelectedProduct } = useShopContext();
     const [visable, setVisable] = useState(false)
     const navigate = useNavigate()
     const toggleMenu = () => {
@@ -25,7 +25,7 @@ const Navbar = () => {
     useEffect(() => {
     }, [token, role, loggedInUser]);
 
-
+    useEffect(() => { }, [selectedProduct])
     const signoutAsync = async () => {
         try {
             const token = Cookies.get('accessToken');
@@ -175,9 +175,6 @@ const Navbar = () => {
                             group-hover:visible group-hover:opacity-100 transform 
                             group-hover:translate-y-2 transition-all duration-500 ease-in-out">
                                 <div className="dropdown-menu flex flex-col">
-                                    {role === "Admin" && <Link to={"/admin-panel"} className="py-2 px-8 tracking-wider border-b transition-colors duration-150 hover:bg-gray-100">
-                                        Admin Panel
-                                    </Link>}
                                     <Link to={"/profile"} className="py-2 px-8 tracking-wider border-b transition-colors duration-150 hover:bg-gray-100">
                                         Profile
                                     </Link>
@@ -234,16 +231,15 @@ const Navbar = () => {
                                             group-hover:translate-y-2 transition-all duration-500 ease-in-out'>
                                 <div className='flex flex-col md:flex-row justify-around'>
                                     <div className='flex flex-col justify-start gap-3 p-2 capitalize'>
-                                        <p className='text-xs w-full  text-gray-400 hover:text-black duration-200'>Caps</p>
-                                        <p className='text-xs w-full text-gray-400 hover:text-black duration-200'>Key Chains</p>
-                                        <p className='text-xs w-full text-gray-400 hover:text-black duration-200'>Jewellary</p>
-                                        <p className='text-xs w-full text-gray-400 hover:text-black duration-200'>Socks</p>
-                                        <p className='text-xs w-full text-gray-400 hover:text-black duration-200'>Sunglasses</p>
-                                        <p className='text-xs w-full text-gray-400 hover:text-black duration-200'>Belts</p>
-                                        <p className='text-xs w-full text-gray-400 hover:text-black duration-200'>Wallets</p>
-                                        <p className='text-xs w-full text-gray-400 hover:text-black duration-200'>Perfumes</p>
+                                        <NavLink onClick={(e) => setSelectedProduct("HEADWEAR")} to={"/products"} className='text-xs w-full  text-gray-400 hover:text-black duration-200'>Caps</NavLink>
+                                        <NavLink onClick={(e) => setSelectedProduct("KEYCHAINS")} to={"/products"} className='text-xs w-full text-gray-400 hover:text-black duration-200 '>Key Chains</NavLink>
+                                        <NavLink onClick={(e) => setSelectedProduct("Jewellary")} to={"/products"} className='text-xs w-full text-gray-400 hover:text-black duration-200 '>Jewellary</NavLink>
+                                        <NavLink onClick={(e) => setSelectedProduct("SOCKS")} to={"/products"} className='text-xs w-full text-gray-400 hover:text-black duration-200 '>Socks</NavLink>
+                                        <NavLink onClick={(e) => setSelectedProduct("SUN GLASSES")} to={"/products"} className='text-xs w-full text-gray-400 hover:text-black duration-200 '>Sun glasses</NavLink>
+                                        <NavLink onClick={(e) => setSelectedProduct("BELTS")} to={"/products"} className='text-xs w-full text-gray-400 hover:text-black duration-200 '>Belts</NavLink>
+                                        <NavLink onClick={(e) => setSelectedProduct("WALLETS")} to={"/products"} className='text-xs w-full text-gray-400 hover:text-black duration-200 '>Wallets</NavLink>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -260,25 +256,25 @@ const Navbar = () => {
                                 <div className='flex flex-col md:flex-row justify-around'>
                                     <div className='flex flex-col justify-start gap-3 p-2 capitalize'>
                                         <p className='text-sm border-b-2'>TOP</p>
-                                        <p className='text-xs p-1 hover:bg-gray-200'>Causal Shirts</p>
-                                        <p className='text-xs p-1 hover:bg-gray-200'>T-Shirts</p>
-                                        <p className='text-xs p-1 hover:bg-gray-200'>Polo Shirts</p>
+                                        <NavLink onClick={(e) => setSelectedProduct("Causal Shirts")} to={"/products"} className='text-xs p-1 hover:bg-gray-200'>Causal Shirts</NavLink>
+                                        <NavLink onClick={(e) => setSelectedProduct("SHIRTS" )} to={"/products"} className='text-xs p-1 hover:bg-gray-200'>Shirts</NavLink>
+                                        <NavLink onClick={(e) => setSelectedProduct("T-Shirts")} to={"/products"} className='text-xs p-1 hover:bg-gray-200'>T-Shirts</NavLink>
+                                        <NavLink onClick={(e) => setSelectedProduct("Polo Shirts")} to={"/products"} className='text-xs p-1 hover:bg-gray-200'>Polo Shirts</NavLink>
                                     </div>
                                     <div className='flex flex-col justify-start gap-3 p-2 capitalize'>
                                         <p className='text-sm border-b-2'>Bottom</p>
-                                        <p className='text-xs p-1 hover:bg-gray-200'>Cotton Jeans</p>
-                                        <p className='text-xs p-1 hover:bg-gray-200'>Dress Pants</p>
-                                        <p className='text-xs p-1 hover:bg-gray-200'>Shorts</p>
-                                        <p className='text-xs p-1 hover:bg-gray-200'>Shirts</p>
-                                        <p className='text-xs p-1 hover:bg-gray-200'>Shirts</p>
+                                        <NavLink onClick={(e) => setSelectedProduct("COTTON JEANS")} to={"/products"} className='text-xs p-1 hover:bg-gray-200'>Cotton Jeans</NavLink>
+                                        <NavLink onClick={(e) => setSelectedProduct("DRESS PANTS")} to={"/products"} className='text-xs p-1 hover:bg-gray-200'>Dress Pants</NavLink>
+                                        <NavLink onClick={(e) => setSelectedProduct("SHORTS")} to={"/products"} className='text-xs p-1 hover:bg-gray-200'>Shorts</NavLink>
+                                        <NavLink onClick={(e) => setSelectedProduct("BOTTOMWEAR")} to={"/products"} className='text-xs p-1 hover:bg-gray-200'>Pajamas</NavLink>
+                                        <NavLink onClick={(e) => setSelectedProduct("TROUSER")} to={"/products"} className='text-xs p-1 hover:bg-gray-200'>trousers</NavLink>
                                     </div>
                                     <div className='flex flex-col justify-start p-2 capitalize gap-3'>
                                         <p className='text-sm border-b-2'>Winterwear</p>
-                                        <p className='text-xs p-1 hover:bg-gray-200'>Jackets</p>
-                                        <p className='text-xs p-1 hover:bg-gray-200'>Hoodies</p>
-                                        <p className='text-xs p-1 hover:bg-gray-200'>Polo Shirts</p>
-                                        <p className='text-xs p-1 hover:bg-gray-200'>Swartshirt</p>
-                                        <p className='text-xs p-1 hover:bg-gray-200'>Sweaters</p>
+                                        <NavLink onClick={(e) => setSelectedProduct("JACKETS")} to={"/products"} className='text-xs p-1 hover:bg-gray-200'>Jackets</NavLink>
+                                        <NavLink onClick={(e) => setSelectedProduct("HOODIES")} to={"/products"} className='text-xs p-1 hover:bg-gray-200'>Hoodies</NavLink>
+                                        <NavLink onClick={(e) => setSelectedProduct("SWEAT-SHIRTS")} to={"/products"} className='text-xs p-1 hover:bg-gray-200'>Swartshirt</NavLink>
+                                        <NavLink onClick={(e) => setSelectedProduct("SWEATERS")} to={"/products"} className='text-xs p-1 hover:bg-gray-200'>Sweaters</NavLink>
                                     </div>
                                 </div>
                             </div>

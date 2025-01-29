@@ -9,7 +9,7 @@ const PlaceOrder = () => {
   const navigate = useNavigate();
   return (
     <div className="h-full w-full px-3 md:px-6 mt-4">
-      <div className="px-4 sm:px-[5vw] md:px-[7cw] gl:px=[9vw]">
+      <div className="px-4 sm:px-[5vw] md:px-[7cw] lg:px-[9vw]">
         <div className='fa-1x md:text-2xl  mt-10 font-Aclonica flex justify-start'>
           <PageTitle title1={"Place"} title2={"order"} />
         </div>

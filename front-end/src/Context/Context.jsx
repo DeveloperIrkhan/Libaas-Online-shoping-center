@@ -12,6 +12,7 @@ export const ShopProvider = ({ children }) => {
   const [IsModelOpen, setIsModelOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [token, setToken] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState("");
   const [loggedInUser, setloggedInUser] = useState(null);
   const [products, setProduct] = useState([]);
   const [getCategory, setCategory] = useState([]);
@@ -29,7 +30,7 @@ export const ShopProvider = ({ children }) => {
     } catch (error) {
       console.log("Error while getting products", error);
       toast.error("Failed to load products");
-    } 
+    }
   };
 
   const getCategories = async () => {
@@ -186,6 +187,7 @@ export const ShopProvider = ({ children }) => {
     delivery_Fee,
     products,
     isLoading, setIsLoading,
+    selectedProduct, setSelectedProduct,
     getCategory, setCategory,
     getSubCategory, setSubCategory,
     openSearchBox, setOpenSearchBox,

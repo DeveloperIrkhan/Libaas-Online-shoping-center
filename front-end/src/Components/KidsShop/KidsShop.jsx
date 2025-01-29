@@ -86,7 +86,7 @@ const KidsShop = () => {
                 </div>
             </div>
             <div className="flex justify-center relative overflow-hidden">
-                <section className='px-4 sm:px-[5vw] md:px-[7cw] gl:px=[9vw]'>
+                <section className='px-4 sm:px-[5vw] md:px-[7cw] lg:px-[9vw]'>
                     <div className='py2 md:py-6 '>
                         <div className="flex flex-wrap justify-center">
                             <div className="flex flex-col md:flex-row md:columns-2  transition-transform duration-700 ease-in-out">
