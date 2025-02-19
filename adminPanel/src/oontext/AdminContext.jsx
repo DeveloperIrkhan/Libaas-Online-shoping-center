@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import axios from 'axios'
 import Cookies from 'js-cookie';
 import { API_URL } from "../App.jsx";
+import { getCagetories, getProducts, getSubCategoriesAsync } from "../utils/APIUtils.js";
 
 
 
@@ -74,20 +75,24 @@ export const AdminProvider = ({ children }) => {
     const getProductAsync = async () => {
         setIsLoading(true)
         try {
-            const getProductResponse = await axios.get(`${API_URL}/product/get-products`);
-            setProduct(getProductResponse.data.products ? getProductResponse.data.products : []);
-            setIsLoading(false)
+            // const getProductResponse = await axios.get(`${API_URL}/product/get-products`);
+            // setProduct(getProductResponse.data.products ? getProductResponse.data.products : []);
+            const data = await getProducts()
+            setProduct(data.products ? data.products : []);
         } catch (error) {
             console.log("Error while getting products", error);
             toast.error("Failed to load products");
+        }
+        finally {
+            setIsLoading(false)
         }
     };
 
     const getCategories = async () => {
         try {
-            const getCategoriesResponse = await axios.get(`${API_URL}/category/get-categorys`);
-            if (getCategoriesResponse.data.success) {
-                setCategory(getCategoriesResponse.data.categories ? getCategoriesResponse.data.categories : []);
+            const getCategoriesResponse = await getCagetories();
+            if (getCategoriesResponse.success) {
+                setCategory(getCategoriesResponse.categories ? getCategoriesResponse.categories : []);
             }
         } catch (error) {
             console.log("Error while getting categories", error);
@@ -96,9 +101,9 @@ export const AdminProvider = ({ children }) => {
 
     const getSubCategories = async () => {
         try {
-            const response = await axios.get(`${API_URL}/subcategory/get-all-subcategory`);
-            if (response.data.success) {
-                const { subcategories } = response.data;
+            const response = await getSubCategoriesAsync();
+            if (response.success) {
+                const { subcategories } = response;
                 setSubCategory(subcategories ? subcategories : []);
             }
         } catch (error) {

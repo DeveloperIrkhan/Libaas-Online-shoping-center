@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { GoChevronRight, GoChevronLeft } from "react-icons/go";
 import NewArrivalsCard from '../Cards/NewArrivalsCard';
 import { useShopContext } from '../../Context/Context';
-
+import { NavLink } from 'react-router-dom'
 const HeadGares = () => {
     const { products, getProductAsync } = useShopContext();
     const [headgear, setHeadgare] = useState([])
@@ -10,12 +10,15 @@ const HeadGares = () => {
     const [imageIndex, setImageIndex] = useState(headgear.map(() => 0));
     const [direction, setDirection] = useState('');
     const cardsToShow = 4;
+    const { selectedProduct, setSelectedProduct } = useShopContext();
 
-   
-    
+
     useEffect(() => {
         getProductAsync();
     }, [getProductAsync]);
+
+    useEffect(() => {
+    }, [selectedProduct]);
 
     useEffect(() => {
         // Filter and set headgear when products update
@@ -33,12 +36,14 @@ const HeadGares = () => {
         if (currentIndex + cardsToShow < headgear.length) {
             setDirection('next');
             setCurrentIndex(currentIndex + 1)
+            setTimeout(() => setDirection(''), 2000);
         }
     }
     const handlePrev = (e) => {
         if (currentIndex > 0) {
             setDirection('prev');
             setCurrentIndex(currentIndex - 1)
+            setTimeout(() => setDirection(''), 2000);
         }
     }
 
@@ -54,24 +59,22 @@ const HeadGares = () => {
             prev.map((index, i) => (i === itemIndex ? (index - 1 + headgear[itemIndex].productImage.length) % headgear[itemIndex].productImage.length : index))
         );
     };
-
+    useEffect(() => {
+        console.log(imageIndex)
+    }, [])
     return (
-        <section className='px-4 sm:px-[5vw] md:px-[7cw] lg:px-[9vw] '>
+        <section className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] '>
             <div className='py2 md:py-6'>
                 <div className="row-auto">
                     <div className="text-center">
-                        <div className="flex flex-row items-center justify-center text-darkColor mb-0">
-                            <span>
-                                <GoChevronLeft style={{ cursor: "pointer" }} onClick={handlePrev} className={`${currentIndex === 0 ? "hidden" : ""}`}
-                                />
-                            </span>
-                            <p className="p-3 text-middum text-center wonderland-fonts mt-4 md:mt-10">Our New headGears</p>
-                            <span>
-                                <GoChevronRight style={{ cursor: "pointer" }} onClick={handleNext} className={`${currentIndex + cardsToShow >= headgear.length ? "hidden" : ""}`}
-                                />
-                            </span>
+                        <div className="flex flex-row relative items-center justify-center text-darkColor mb-0">
+                            <GoChevronLeft size={18} style={{ cursor: "pointer" }} onClick={handlePrev} className={`${currentIndex === 0 ? "hidden" : ""}`} />
+                            <p className="p-3 text-middum text-center font-semibold align-baseline tracking-widest uppercase leading-[33px] text-[15px] md:text-[18px]">Our New headGears</p>
+                            <GoChevronRight size={18} style={{ cursor: "pointer" }} onClick={handleNext} className={`${currentIndex + cardsToShow >= headgear.length ? "hidden" : ""}`} />
                         </div>
-                        <p className='text-center text-darkColor mt-0 mb-2 underline cursor-pointer hover:text-yellow-300 transition-colors duration-200 '> View All</p>
+                        <div className="my-5">
+                            <NavLink onClick={(e) => setSelectedProduct("HEADWEAR")} to={"/products"} className='text-center text-darkColor underline cursor-pointer hover:text-yellow-300 transition-colors duration-200 '>View All</NavLink>
+                        </div>
                     </div>
                 </div>
 

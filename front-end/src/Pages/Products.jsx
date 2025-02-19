@@ -7,17 +7,38 @@ const Products = () => {
     const { selectedProduct, products } = useShopContext()
     const [selectedItems, setSelectedItems] = useState([])
 
-    useEffect(() => {
-        let productCopy = products.slice()
-        console.log(selectedProduct)
-        setSelectedItems(productCopy.filter(product => product.Category === selectedProduct.toUpperCase() || product.subCategory === selectedProduct.toUpperCase()))
-    }, [products, selectedProduct])
+    // useEffect(() => {
+    //     let productCopy = products.slice()
+    //     setSelectedItems(productCopy.filter(product => product.Category === selectedProduct.toUpperCase() || product.subCategory === selectedProduct.toUpperCase()))
+    //     console.log(`selected Items ${selectedProduct}`, selectedItems)
+    // }, [products, selectedProduct])
+
+    // useEffect(() => {
+    //     console.log("selectedProduct", selectedProduct)
+    // }, [selectedItems])
 
     useEffect(() => {
-        console.log("selectedItems", selectedItems)
-    }, [selectedItems])
+        let productCopy = products.slice();
+        setSelectedItems(
+            productCopy.filter(
+                (product) =>
+                    product.category === selectedProduct.toUpperCase() ||
+                    product.subCategory === selectedProduct.toUpperCase()
+            )
+        );
+    }, [selectedProduct]);
+
+    useEffect(() => {
+        // console.log("selected Items", selectedItems); // Logs when `selectedItems` is updated
+    }, [selectedItems, setSelectedItems]);
+
+    useEffect(() => {
+        // console.log("selectedProduct", selectedProduct); // Logs when `selectedProduct` is updated
+    }, [selectedProduct]);
+
+
     return (
-        <div className="flex w-full justify-between bg-gray-50 shadow-md py-3 rounded-mdP">
+        <div className="flex w-full justify-between py-3 rounded-md">
             <div className="px-4 sm:px-[5vw] md:px-[7cw] lg:px-[9vw]">
                 <div className="m-4">
                     {selectedItems.length != 0 ?
@@ -43,7 +64,7 @@ const Products = () => {
                         </> :
                         // 
                         <div className='h-screen flex-row justify-center w-full'>
-                            <p className='flex justify-center items-center gap-4 font-Aclonica font-bold text-2xl'>These Items are coming Soon <FaFaceSmile  className='text-yellow-400' /></p>
+                            <p className='flex justify-center items-center gap-4 font-Aclonica font-bold text-2xl'>These Items are coming Soon <FaFaceSmile className='text-yellow-400' /></p>
                         </div>
                     }
                 </div>

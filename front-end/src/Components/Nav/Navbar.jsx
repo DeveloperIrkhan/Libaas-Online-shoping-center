@@ -257,7 +257,7 @@ const Navbar = () => {
                                     <div className='flex flex-col justify-start gap-3 p-2 capitalize'>
                                         <p className='text-sm border-b-2'>TOP</p>
                                         <NavLink onClick={(e) => setSelectedProduct("Causal Shirts")} to={"/products"} className='text-xs p-1 hover:bg-gray-200'>Causal Shirts</NavLink>
-                                        <NavLink onClick={(e) => setSelectedProduct("SHIRTS" )} to={"/products"} className='text-xs p-1 hover:bg-gray-200'>Shirts</NavLink>
+                                        <NavLink onClick={(e) => setSelectedProduct("SHIRTS")} to={"/products"} className='text-xs p-1 hover:bg-gray-200'>Shirts</NavLink>
                                         <NavLink onClick={(e) => setSelectedProduct("T-Shirts")} to={"/products"} className='text-xs p-1 hover:bg-gray-200'>T-Shirts</NavLink>
                                         <NavLink onClick={(e) => setSelectedProduct("Polo Shirts")} to={"/products"} className='text-xs p-1 hover:bg-gray-200'>Polo Shirts</NavLink>
                                     </div>

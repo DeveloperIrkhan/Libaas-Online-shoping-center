@@ -50,18 +50,18 @@ const Navbar = () => {
         }
     };
     return (
-        <div className="">
+        <div className="bg-slate-700 m-0 p-0">
             <div className="shadow-md">
-                <div className='px-4 sm:px-[5vw] md:px-[7cw] lg:px=[9vw] flex justify-between py-5 font-medium border-2 border-hoverColor'>
+                <div className='px-4 sm:px-[5vw] md:px-[7cw] lg:px-[9vw] flex justify-between py-5 font-medium'>
                     {/* logo */}
                     <div>
                         <img className='h-[10vmin] w-[12vmin] cursor-pointer hidden md:block'
                             onClick={() => navigate("/")}
-                            src={images.Logo} alt="" />
+                            src={images.WhiteLogo} alt="" />
                         <p className='main-heading mt-2  items-center text-small text-blackColor uppercase block md:hidden'>Libaas</p>
                     </div>
                     {/* admin panel text */}
-                    <div className="flex main-heading  items-center text-small text-blackColor uppercase">
+                    <div className="flex main-heading  items-center text-small text-white uppercase">
                         <p>Admin Panel</p>
                     </div>
 
@@ -69,18 +69,21 @@ const Navbar = () => {
                     <div className='flex items-center gap-2 text-small text-blackColor uppercase relative'>
                         <div className="relative group flex items-center gap-1">
                             <div className='w-10 h-10 border-2 rounded-full overflow-hidden flex justify-center items-center'>
-                                <img className='block' src={images.AccountIcon} style={{ width: "25px" }} alt="Account Icon" />
+                                {/* <img className='block' src={images.AccountIcon} style={{ width: "25px" }} alt="Account Icon" /> */}
                                 {/* when user is logged in show user name and when user is not logged in show login button */}
-                                {/* <img className='w-9 h-9 rounded-full' src={loggedInUser.avator} alt="" /> */}
+                                 <img className='w-9 h-9 rounded-full' src={loggedInUser.avator} alt="" />
                             </div>
 
                             {/* Dropdown menu */}
-                            {loggedInUser && <div className="absolute dropwonn z-50 border top-10 right-0 bg-white 
-                            rounded-t-none rounded-lg shadow-lg opacity-0 invisible 
+                            {loggedInUser && <div className="absolute z-50 border top-10 right-0 bg-white 
+                             rounded-lg shadow-lg opacity-0 invisible 
                             group-hover:visible group-hover:opacity-100 transform 
                             group-hover:translate-y-2 transition-all duration-500 ease-in-out">
-                                <div className="dropdown-menu flex flex-col">
+                                <div className=" flex flex-col text-[12px]">
                                     <Link onClick={signoutAsync} className="py-2 px-8 tracking-wider border-b transition-colors duration-150 hover:bg-gray-100">
+                                        Profile
+                                    </Link>
+                                    <Link  className="py-2 px-8 tracking-wider border-b transition-colors duration-150 hover:bg-gray-100">
                                         SignOut
                                     </Link>
                                 </div>

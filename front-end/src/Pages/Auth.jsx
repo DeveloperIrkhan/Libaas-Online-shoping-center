@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CustomBtn from '../Components/CustomBtn'
 import Spinner from '../Components/Cards/Spinner/Spinner'
 import { images } from '../assets/Images'
@@ -19,6 +19,12 @@ const Auth = () => {
     const [confirmPassword, setConfirmPassword] = useState("")
     const { token, setToken, role, setRole, setWithExpiry, setloggedInUser } = useShopContext()
     const navigate = useNavigate()
+    useEffect(() => {
+        if (token) {
+            navigate("/")
+        }
+    }, [token])
+
     const onSubmitFormHandler = async (event) => {
         event.preventDefault()
         setLoading(true)
@@ -184,7 +190,6 @@ const Auth = () => {
                             <div className="w-full flex justify-between text-gray-600 mt-3">
                                 {currentState === "Login" && <p className='text-sm pb-1 cursor-pointer transition-colors duration-200 hover:text-gray-300'>Forgot password?</p>}
                                 {currentState === "Login" ?
-
                                     <p onClick={() => setCurrentState("Signup")} className='text-sm pb-1 cursor-pointer transition-colors duration-200 hover:text-gray-300'>can't have account</p>
                                     :
                                     <p onClick={() => setCurrentState("Login")} className='text-sm pb-1 cursor-pointer transition-colors duration-200 hover:text-gray-300'>I have account</p>}

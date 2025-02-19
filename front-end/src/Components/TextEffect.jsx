@@ -8,17 +8,16 @@ const TextEffect = () => {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const imagesArray = [
-    images.Cap,
+    images.SunGlassess,
     images.TankTop,
+    images.Cap,
     images.Bracelet,
-    images.SunGlasses,
-    images.Striped_Curved_Hem_T_Shirt_2,
+    images.Striped_Shirt,
   ];
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imagesArray.length);
     }, 3000); // Change image every 3 seconds
-
     return () => clearInterval(intervalId);
   }, [imagesArray.length]);
 

@@ -61,7 +61,7 @@ const ProductDetails = () => {
                                 </div>
                                 {/* Large Image */}
                                 <div className="flex justify-center rounded-lg order-1 md:order-2">
-                                    <img className="w-full max-w-[600px] h-auto" src={productImage} alt="Selected Product Image" />
+                                    <img className="w-full max-w-2xl md:max-w-fit h-auto" src={productImage} alt="Selected Product Image" />
                                 </div>
                             </div>
                         </div>

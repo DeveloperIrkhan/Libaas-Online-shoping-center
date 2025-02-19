@@ -1,17 +1,29 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-const NavButton = ({ redirectTo, img, buttonText }) => {
+const NavButton = ({ redirectTo, img, hoverImg, buttonText, isExpanded }) => {
     return (
-        <NavLink to={redirectTo}>
-            <div className="bg-white mx-3 rounded-lg shadow-md hover:shadow-xl
-                             hover:bg-gray-100 transition-colors duration-200">
-                <div className="flex justify-center gap-3 items-center p-2 md:p-4">
-                    <img src={img} alt="" className='w-[30px]' />
-                    <p className="text-blackColor tracking-widest hidden md:block">{buttonText}</p>
+
+        <NavLink to={redirectTo} className={({ isActive }) => isActive ? 'bg-gray-200' : '' + "hover:bg-gray-200 duration-300"}>
+            {({ isActive }) => (
+                <div className={`flex justify-center gap-3 items-center p-2 ${isExpanded && "p-4"} group`}>
+                    <img
+                        src={img}
+                        alt=""
+                        className="w-[30px] group-hover:hidden"
+                    />
+                    <img
+                        src={hoverImg}
+                        alt=""
+                        className="w-[30px] hidden group-hover:block"
+                    />
+                    <p className={`tracking-widest group-hover:text-black ${isExpanded ? 'flex' : 'hidden'} ${isActive ? 'text-black' : 'text-white'}`}>
+                        {buttonText}
+                    </p>
                 </div>
-            </div>
+            )}
         </NavLink>
+
     )
 }
 

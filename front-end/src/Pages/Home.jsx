@@ -24,18 +24,11 @@ const Home = () => {
   const bestSeller = products.filter(product => product.NewArrival === true && (
     product.subCategory === "T-SHIRTS"
     || product.subCategory === "POLO SHIRTS"
-    || product.subCategory === "COTTON JEANS"
+    || product.subCategory === "SHIRTS"
   ))
   const top8BestSeller = bestSeller.slice(0, 7)
 
-  const handleNext = (e) => {
-    e.preventDefault();
-    if (currentIndex + cardsToShow < top8BestSeller.length) {
-      setDirection('next');
-      setCurrentIndex(currentIndex + 1);
-      setTimeout(() => setDirection(''), 500); // Reset direction after animation
-    }
-  };
+
   useEffect(() => {
     const updateCardsToShow = () => {
       if (window.innerWidth < 768) {
@@ -51,12 +44,20 @@ const Home = () => {
       window.removeEventListener('resize', updateCardsToShow);
     };
   }, [window.innerWidth]);
+  const handleNext = (e) => {
+    e.preventDefault();
+    if (currentIndex + cardsToShow < top8BestSeller.length) {
+      setDirection('next');
+      setCurrentIndex(currentIndex + 1);
+      setTimeout(() => setDirection(''), 1000); // Reset direction after animation
+    }
+  };
   const handlePrev = (e) => {
     e.preventDefault();
     if (currentIndex > 0) {
       setDirection('prev');
       setCurrentIndex(currentIndex - 1);
-      setTimeout(() => setDirection(''), 500); // Reset direction after animation
+      setTimeout(() => setDirection(''), 1000); // Reset direction after animation
     }
   };
 
@@ -77,7 +78,7 @@ const Home = () => {
                   className={`${currentIndex === 0 ? "hidden" : ""}`}
                 />
               </span>
-              <p className='text-center m-4 text-2xl'>Our Top Categories</p>
+              <p className="p-3 text-middum text-center fot-semibold align-baseline tracking-widest uppercase leading-[33px] text-[15px] md:text-[18px]">Our Top Categories</p>
               <span>
                 <GoChevronRight
                   style={{ cursor: "pointer" }}

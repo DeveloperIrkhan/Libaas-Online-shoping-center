@@ -4,10 +4,9 @@ const HorizantialCard = ({ item }) => {
     const { currency } = useAdminContext();
 
     return (
-
         <div
             key={item._id}
-            className="p-4 border cursor-pointer border-gray-200 rounded-md text-gray-700 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white shadow-sm duration-300 hover:shadow-lg transition-shadow"
+            className="p-4 border cursor-pointer border-gray-200 rounded-md text-gray-700 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white shadow-sm duration-300 hover:shadow-lg hover:bg-gray-50 transition-shadow"
         >
             {/* Left Section: Product Image and Details */}
             <div className="w-full md:w-44 h-48 md:border rounded-md md:shadow-md">

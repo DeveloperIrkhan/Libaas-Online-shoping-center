@@ -34,7 +34,7 @@ const Cart = () => {
 
     }
     setCartData(tempraryData)
-  }, [cartItems,setCartItems])
+  }, [cartItems, setCartItems])
 
 
   return (
@@ -59,7 +59,7 @@ const Cart = () => {
                       <div className="">
                         <p className='text-sm sm:text-lg font-medium'>{cartProducts?.name}</p>
                         <div className="flex items-center gap-5 mt-3">
-                          <p>{currency}{cartProducts.price}</p>
+                          <p>{currency}{cartProducts.discountPrice ? cartProducts.discountPrice : cartProducts.originalPrice}</p>
                           <p className='px-2 sm:px-3 sm:py-2 border rounded-sm bg-slate-50'>{item.size}</p>
                         </div>
                       </div>

@@ -9,6 +9,7 @@ import { RiDeleteBin5Fill } from "react-icons/ri";
 import Cookies from 'js-cookie'
 import { useAdminContext } from '../../oontext/AdminContext'
 import EditModel from '../../Components/Modals/EditModel'
+import { addCategoryAsync, deleteCategoryAsync, getCagetories } from '../../utils/APIUtils'
 const AddCategory = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [category, setCategory] = useState("")
@@ -17,20 +18,22 @@ const AddCategory = () => {
 
     const inputStyles = "bg-white border-2 mt-3 w-full border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight tracking-tighter focus:outline-none focus:bg-white focus:border-blackColor";
     const getCategories = async () => {
-        const response = await axios.get(`${API_URL}/category/get-categorys`)
-        if (response.data.success) {
-            setCategories(response.data.categories)
+        const response = await getCagetories()
+        if (response.success) {
+            setCategories(response.categories)
         }
     }
     useEffect(() => {
         getCategories();
-    }, [categories, setCategories])
+    }, [setCategories])
     const onSubmitHandler = async (e) => {
         setIsLoading(true)
         e.preventDefault();
+        console.log("category from page", category)
         try {
-            const response = await axios.post(`${API_URL}/category/create-category`, { category })
-            const { message, success } = response.data
+            const response = await addCategoryAsync(category)
+            console.log(response)
+            const { message, success } = response
             if (success) {
                 toast.success(message)
             }
@@ -42,25 +45,17 @@ const AddCategory = () => {
 
         }
         finally {
-            getCategories()
             setIsLoading(false)
             setCategory("")
+            getCategories()
         }
     }
 
     const deleteCategory = async (id) => {
-        // console.log(id)
         setIsLoading(true)
         try {
-            const token = Cookies.get('accessToken');
-            const response = await axios.delete(`${API_URL}/category/remove-category/${id}`, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                    "Authorization": `Bearer ${token}`,
-                }
-            })
-            // console.log(response)
-            const { success, message } = response.data
+            const response = await deleteCategoryAsync(id)
+            const { message } = response
             toast.success(message ? message : "Category deleted successfully")
         } catch (error) {
             console.log(error)
@@ -98,19 +93,19 @@ const AddCategory = () => {
                                     Add Item
                                 </button>
                             </div>
-                            <div className="flex flex-col items-start p-4 w-full border shadow-sm rounded-md">
-                                <div className="font-Aclonica text-sm my-4 capitalize">
+                            <div className="flex flex-col items-start py-3 p-0 md:p-4 w-full border shadow-sm rounded-md">
+                                <div className="font-Aclonica text-sm p-4 capitalize">
                                     <PageTitle title1="Saved" title2={"Categories"} fontsize='text-sm' />
                                 </div>
                                 <table className="table-auto w-full">
                                     <thead className='uppercase space-y-2'>
                                         <tr>
-                                            <th className="px-4 py-2">Serial No</th>
-                                            <th className="px-4 py-2">Category Name</th>
-                                            <th className="px-4 py-2">Operations</th>
+                                            <th className="px-4 py-2 text-[10px] md:text-[15px]">Serial No</th>
+                                            <th className="px-4 py-2 text-[10px] md:text-[15px]">Category Name</th>
+                                            <th className="px-4 py-2 text-[10px] md:text-[15px]">Operations</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody className='text-[10px] md:text-[15px]'>
                                         {categories && categories.map((category, index) => (
                                             <tr key={category._id} className="bg-gray-100">
                                                 <td className="border px-4 py-2">{index + 1}</td>

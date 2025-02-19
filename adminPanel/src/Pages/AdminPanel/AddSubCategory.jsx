@@ -80,22 +80,22 @@ const AddSubCategory = () => {
                                     Add Item
                                 </button>
                             </div>
-                            <div className="flex flex-col items-start p-4 w-full border shadow-sm rounded-md">
-                                <div className="font-Aclonica text-sm my-4 capitalize">
+                            <div className="flex flex-col items-start  py-3 p-0 md:p-4 w-full border shadow-sm rounded-md">
+                                <div className="font-Aclonica text-sm p-4 capitalize">
                                     <PageTitle title1="Saved" title2={"sub Category"} fontsize='text-sm' />
                                 </div>
                                 <table className="table-auto w-full">
                                     <thead className='uppercase space-y-2'>
                                         <tr>
-                                            <th className="px-4 py-2 w-7">Serial No</th>
-                                            <th className="px-4 py-2">Category Name</th>
-                                            <th className="px-4 py-2">Operations</th>
+                                            <th className="px-4 py-2 text-[10px] md:text-[15px]">Serial No</th>
+                                            <th className="px-4 py-2 text-[10px] md:text-[15px]">Category Name</th>
+                                            <th className="px-4 py-2 text-[10px] md:text-[15px]">Operations</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody className='text-[10px] md:text-[15px]'>
                                         {subcategories && subcategories.map((subcategory, index) => (
                                             <tr key={subcategory._id} className="bg-gray-100">
-                                                <td className="border px-4 py-2  w-7">{index + 1}</td>
+                                                <td className="border px-4 py-2">{index + 1}</td>
                                                 <td className="border px-4 py-2">{subcategory.subCategory}</td>
                                                 <td className="border px-4 py-2">
                                                     <div className="flex justify-center items-center gap-4">

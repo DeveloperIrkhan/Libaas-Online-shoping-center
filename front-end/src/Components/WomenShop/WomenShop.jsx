@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import WomenShopCard from '../Cards/WomenShopCard'
-import CustomBtn from '../CustomBtn'
-import { images } from '../../assets/Images'
 import { useShopContext } from '../../Context/Context'
+import { NavLink } from 'react-router-dom'
 const WomenShop = () => {
-  const { products } = useShopContext()
+  const { products, setSelectedProduct } = useShopContext()
   const collection = products.filter(product => product.NewArrival === true && (product.category === "WOMEN" || product.category === "Unisex"))
   const [WomenCollection, setWomenCollection] = useState([])
   useEffect(() => {
-    console.log("collections",collection)
     setWomenCollection(collection.slice(0, 8))
-  }, []);
+  }, [products]);
   document.addEventListener('scroll', function () {
     const sections = document.querySelectorAll('.scroll-item');
     const triggerOffset = window.innerHeight / 2 * 4; // Adjust the trigger point
@@ -98,19 +96,19 @@ const WomenShop = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4" >
               {WomenCollection.map((item, index) => (
                 <div key={index} className="">
-                  <WomenShopCard classes={"gap-x-4 my-5"} 
-                  to={`product-details/${item._id}`}
-                  image={item.productImage[0]} 
-                  onmouseEnter={item.productImage[1]} 
-                  onmouseOut={item.productImage[0]} 
-                  title={item.name} 
-                  discountPrice={item.discountPrice} 
-                  originalPrice={item.originalPrice} />
+                  <WomenShopCard classes={"gap-x-4 my-5"}
+                    to={`product-details/${item._id}`}
+                    image={item.productImage[0]}
+                    onmouseEnter={item.productImage[1]}
+                    onmouseOut={item.productImage[0]}
+                    title={item.name}
+                    discountPrice={item.discountPrice}
+                    originalPrice={item.originalPrice} />
                 </div>))}
             </div>
           </div>
           <div className="row text-center my-5">
-            <CustomBtn  className={"btn-dark"} onClickFun={() => { }} text={"View All"} />
+            <NavLink onClick={(e) => setSelectedProduct("WOMEN")} to={"/products"} className={"btn-dark p-2 rounded-lg"}>View All</NavLink>
           </div>
         </div>
       </div>

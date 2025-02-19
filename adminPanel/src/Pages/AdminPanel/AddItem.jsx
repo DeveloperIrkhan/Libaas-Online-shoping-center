@@ -9,12 +9,13 @@ import Spinner from '../../Components/Spinner/Spinner';
 import { toast } from 'react-toastify'
 import { API_URL } from '../../App';
 import { useAdminContext } from '../../oontext/AdminContext';
+import { addItemAsync } from '../../utils/APIUtils';
 const AddItem = () => {
   const { categories, subCategories } = useAdminContext()
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [category, setCategory] = useState("MEN")
-  const [subCategory, setSubCategory] = useState("INNER WEAR")
+  const [subCategory, setSubCategory] = useState("HEADWEAR")
   const [originalPrice, setOriginalPrice] = useState(0)
   const [discountPrice, setDiscountPrice] = useState(0)
   const [productImage0, setProductImage0] = useState(null)
@@ -28,11 +29,10 @@ const AddItem = () => {
   const [sizes, setSizes] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const inputStyles = "bg-white appearance-none border-2 mt-3 border-gray-200 rounded max-w-md py-2 px-4 text-gray-700 leading-tight tracking-tighter focus:outline-none focus:bg-white focus:border-blackColor";
-  // useEffect(() => {
-  //   console.log("NewArrival", NewArrival)
-  //   console.log("SaleOnProduct", SaleOnProduct)
-  //   console.log("bestSeller", bestSeller)
-  // }, [NewArrival, SaleOnProduct, bestSeller])
+  useEffect(() => {
+    console.log("category", category)
+    console.log("subCategory", subCategory)
+  }, [category, subCategory])
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     const formdata = new FormData();
@@ -54,16 +54,8 @@ const AddItem = () => {
 
     try {
       setIsLoading(true)
-      const token = Cookies.get('accessToken');
-
-      const asyncResponse = await axios.post(`${API_URL}/product/create-product`, formdata, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          "Authorization": `Bearer ${token}`,
-        },
-      })
-      console.log(asyncResponse)
-      const { success, message } = asyncResponse.data
+      const asyncResponse = await addItemAsync(formdata)
+      const { success, message } = asyncResponse
       if (success) {
         toast.success(message)
       }
@@ -186,7 +178,7 @@ const AddItem = () => {
                 id="">
                 {subCategories && subCategories.map((item) => {
                   return (
-                    <option key={item._id} value={item.value}>
+                    <option className='w-full' key={item._id} value={item.value}>
                       {item.subCategory}
                     </option>
                   )

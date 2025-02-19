@@ -10,7 +10,7 @@ const ExtraSection = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 m-3 justify-center mx-auto">
                     <ExtraCard img={images.SunGlassess} textOnImage={"sun glasses"} callFun={() => { }} />
                     <ExtraCard img={images.Activeware} textOnImage={"Activeware Shirts"} callFun={() => { }} />
-                    <ExtraCard img={images.Fragrances} textOnImage={"Fragrances"} callFun={() => { navigate("/perfumes") }} />
+                    <ExtraCard img={images.Perfume_Allure} textOnImage={"Fragrances"} callFun={() => { navigate("/perfumes") }} />
                     <ExtraCard img={images.CubanShirt} textOnImage={"Caban Shirt"} callFun={() => { }} />
                 </div>
             </div>
